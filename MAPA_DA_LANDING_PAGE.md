@@ -1,39 +1,39 @@
 # Mapa da landing page DRATOS
 
-| Ordem | Seção | Conteúdo / asset principal |
+| Camada | Seção | Conteúdo principal |
 |---:|---|---|
-| 1 | Header | Logo, navegação, tema e menu mobile |
-| 2 | Hero | `hero-helena-dratos.webp`, mockup executivo e apresentação completa |
-| 3 | O caos invisível | Diagrama “Quatro rupturas críticas” |
-| 4 | Resposta DRATOS | Comparação antes/depois |
-| 5 | Fontes de dados | Fontes, usuários e fluxo de normalização |
-| 6 | Plataforma | Explorador de 15 módulos e vídeos contextuais |
-| 7 | Performance | Critérios, indicadores e vídeo real |
-| 8 | Dossiê Auditável | Evidências, decisões, obrigações e histórico |
-| 9 | Dashboard | Visões, filtros, KPIs e vídeo real |
-| 10 | Integrações | Ecossistema e TOTVS RM |
-| 11 | Demonstrações por funcionalidade | Dez cards com thumbnail, título, descrição, duração e play |
-| 12 | Perfis e acesso | Oito perfis e contextos |
-| 13 | Segurança | Controles e arquitetura técnica |
-| 14 | Setor público | Fiscalização e prestação de contas |
-| 15 | Planos | Cinco opções sem preço inventado |
-| 16 | Founding Clients | Etapas do programa |
-| 17 | FAQ | Perguntas e respostas |
-| 18 | CTA final | Demonstração, apresentação completa e diagnóstico |
-| 19 | Formulário | Endpoint configurável e fallback por e-mail |
-| 20 | Footer | Contato oficial, links e privacidade |
+| 01 | Hero cinematográfico | Helena, proposta central, três CTAs e painel tecnológico |
+| 02 | A dor | Quatro rupturas e cadeia de consequência |
+| 03 | A transformação | Jornada integrada em onze etapas |
+| 04 | Fontes e conectores | ERP, TOTVS RM, Compras, planilhas, APIs e cadastros |
+| 05 | Requisição | Demanda estruturada antes da minuta |
+| 06 | Autoria e matrizes | Dados → Matriz → Parametrização → Minuta |
+| 07 | Biblioteca e playbooks | Cláusulas e padrões institucionais |
+| 08 | RiskAI | Insights, checks, explicabilidade e governança humana |
+| 09 | Sala Jurídica | Documento, comentários, versões e decisões |
+| 10 | Due Diligence | Tipo 1, Tipo 2, monitoramento e evidências |
+| 11 | Aprovação e assinatura | Workflow, versão final, signatários e conclusão |
+| 12 | Obrigações | Prazos, alertas, responsáveis, SLA e evidências |
+| 13 | Performance | Critérios, escalas, métricas e ciclos configuráveis |
+| 14 | Consulta rápida | Perguntas em linguagem natural e respostas demonstrativas |
+| 15 | Dossiê Auditável | Convergência de decisões, documentos, eventos e logs |
+| 16 | Dashboard Executivo | KPIs, dimensões e insight demonstrativo do RiskAI |
+| 17 | Segurança | Acesso, evidência e resiliência |
+| 18 | Integrações | TOTVS RM, TAE, Compras, SMTP, APIs e ecossistema |
+| 19 | Vídeo institucional | Único player da apresentação completa |
+| 20 | CTA final | Demonstração, diagnóstico e contato |
 
 ## Mídias
 
-- `assets/images/hero-helena-dratos.webp`: frame oficial do Hero.
-- `assets/video/dratos-apresentacao-completa.mp4`: sequência institucional completa.
-- `assets/video/posters/dratos-apresentacao-completa.webp`: poster do vídeo completo.
-- `assets/video/01-*.mp4` a `16-*.mp4`: cenas individuais preservadas.
+- `assets/images/video-frames/`: onze imagens WebP extraídas do vídeo completo;
+- `assets/video/dratos-apresentacao-completa.mp4`: único MP4 utilizado no runtime;
+- `assets/video/posters/dratos-apresentacao-completa.webp`: poster do player;
+- vídeos individuais: preservados, não carregados e não incluídos no artefato do Pages.
 
 ## Código
 
-- `content/pt.js`: fonte única de conteúdo público.
-- `js/content-loader.js`: SEO e tema.
-- `js/main.js`: renderização, player e formulário.
-- `css/style.css`: design system, layout e responsividade.
+- `content/pt.js`: conteúdo PT-BR, mídia e configurações;
+- `js/content-loader.js`: SEO e tema;
+- `js/main.js`: componentes e interações;
+- `css/style.css`: tokens, composição, motion e responsividade;
 - `.github/workflows/deploy-pages.yml`: validação e publicação.

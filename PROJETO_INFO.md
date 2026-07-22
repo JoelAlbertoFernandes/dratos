@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Apresentar a DRATOS como plataforma de governança contratual para empresas privadas, governo, estatais e operações reguladas. TOTVS RM permanece como integração inicial prioritária, sem limitar o posicionamento da plataforma.
+Apresentar a DRATOS como uma jornada de governança contratual para organizações privadas, públicas e reguladas. TOTVS RM aparece como integração existente e relevante, sem limitar o posicionamento da plataforma.
 
 ## Arquitetura
 
@@ -16,42 +16,62 @@ index.html
 └── css/style.css
 ```
 
-`content-loader.js` aplica PT-BR, metadados e tema. `main.js` renderiza os componentes. Os caminhos relativos funcionam no subdiretório do GitHub Pages.
+Os caminhos relativos são compatíveis com `/dratos/` no GitHub Pages.
+
+## Design System aplicado
+
+Fonte oficial: `DesignsystemDratos.txt`.
+
+| Token | Valor | Uso |
+|---|---|---|
+| Deep Void | `#0B0D10` | fundos premium e camadas escuras |
+| Surface Tech | `#161A22` | painéis, modais e cards técnicos |
+| Dratos Cyan | `#3A96DD` | ação primária e conexão |
+| Electric Glow | `#60B2FA` | realce, foco e motion luminoso |
+| Success Emerald | `#10B981` | conformidade e conclusão |
+| Slate Gray | `#94A3B8` | texto secundário |
+
+Tipografia: Plus Jakarta Sans 600–800 para títulos; Inter 400–700 para corpo e interface.
+
+## Extensões coerentes
+
+Itens não definidos no arquivo oficial foram derivados para acessibilidade e alternância de tema:
+
+- fundo claro `#F6F9FC`;
+- texto claro `#0B1628`;
+- atenção `#FBBF24`;
+- risco `#F97373`;
+- raios de 12, 20 e 32 px;
+- sombras suaves e profundas baseadas em azul-marinho/preto;
+- grid técnico com baixa opacidade;
+- movimento contínuo entre 12 e 30 segundos, limitado a escala 1.035 e deslocamentos inferiores a 12 px.
 
 ## Componentes
 
-- header fixo e menu responsivo;
-- Hero cinematográfico com Helena e mockup executivo;
-- diagrama “Quatro rupturas críticas”;
-- comparação antes/depois;
-- fontes de dados e conectores;
-- explorador de 15 módulos;
-- Performance, Dossiê e Dashboard;
-- integrações e caso TOTVS RM;
-- dez demonstrações por funcionalidade;
-- perfis, segurança, setor público, planos, Founding Clients, FAQ e CTA;
-- modal limpo de vídeo e modal de formulário.
+- header transformável e menu responsivo;
+- 20 camadas narrativas com atmosferas distintas;
+- Hero cinematográfico e frames extraídos do vídeo;
+- RiskAI com checks explicáveis;
+- consulta rápida simulada com SVG, barras e listas geradas pelo frontend;
+- Performance parametrizável, Dossiê Auditável e Dashboard Executivo;
+- modal de vídeo, formulário e tema claro/escuro acessíveis.
 
-## Tema
+## Mídia e performance
 
-O modo claro é predominante e o escuro opcional. A preferência fica em `localStorage`. Apenas o botão dedicado chama `toggleTheme()`; os demais cliques não renderizam nem alteram o tema.
+O runtime referencia apenas `dratos-apresentacao-completa.mp4`, com `preload="none"`. Onze frames WebP 1280×720 usam lazy loading, exceto o Hero. Os 16 MP4s individuais permanecem no repositório e são removidos apenas do artefato publicado.
 
-## Vídeos
+As animações usam transform/opacity e são desativadas em `prefers-reduced-motion`. Não há canvas ou biblioteca de animação.
 
-Os 16 MP4s individuais permanecem preservados. O vídeo `dratos-apresentacao-completa.mp4` reúne as cenas na ordem oficial. Os players são 16:9, usam controles nativos, não iniciam automaticamente e não carregam `<track>`, VTT ou transcript visual.
+## Limitações de frontend
 
-## Formulário e contato
-
-O contato oficial é `contato@dratos.com.br`. Sem endpoint, o formulário abre um `mailto:` e o visitante confirma o envio. Com endpoint, o payload é JSON via `POST`.
-
-## Acessibilidade
-
-- link de salto e foco visível;
-- menu e controles nomeados;
-- diálogos com foco, contenção de Tab, `Esc`, clique externo e restauração de foco;
-- scroll lock durante modal;
-- suporte a movimento reduzido.
+- RiskAI e consulta rápida são demonstrações visuais com dados fictícios;
+- envio direto do formulário depende de endpoint;
+- gráficos não consultam dados reais;
+- integrações, checks e alertas dependem das APIs e regras da plataforma;
+- nenhuma certificação de segurança é declarada.
 
 ## Publicação
 
-`.github/workflows/deploy-pages.yml` valida o código e publica um artefato estático. A URL preparada é `https://joelalbertofernandes.github.io/dratos/`. O repositório oficial é `https://github.com/JoelAlbertoFernandes/dratos`.
+Repositório oficial: `https://github.com/JoelAlbertoFernandes/dratos`.
+
+GitHub Pages: `https://joelalbertofernandes.github.io/dratos/`.

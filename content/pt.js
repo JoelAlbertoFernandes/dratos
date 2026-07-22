@@ -3,13 +3,12 @@ window.DRATOS_CONTENT = window.DRATOS_CONTENT || {};
 window.DRATOS_CONTENT.pt = {
   meta: {
     lang: "pt-BR",
-    label: "PT",
     title: "DRATOS | Governança Contratual Inteligente",
-    description: "Conecte dados, pessoas, documentos, aprovações, assinaturas, obrigações, performance e evidências em uma jornada contratual governada.",
+    description: "A DRATOS conecta requisições, contratos, cláusulas, aprovações, assinaturas, obrigações, performance e evidências em uma única jornada contratual.",
     canonical: "https://joelalbertofernandes.github.io/dratos/",
-    socialImage: "assets/images/hero-helena-dratos.webp",
+    socialImage: "https://joelalbertofernandes.github.io/dratos/assets/images/video-frames/hero-helena.webp",
     organization: {
-      name: "DRATOS — Contratos Inteligentes",
+      name: "DRATOS — Governança Contratual Inteligente",
       description: "Plataforma de governança do ciclo de vida contratual.",
       email: "contato@dratos.com.br"
     }
@@ -17,296 +16,304 @@ window.DRATOS_CONTENT.pt = {
   assets: {
     logo: "assets/brand/dratos-logo.png",
     element: "assets/brand/dratos-elemento.png",
-    videoPoster: "assets/images/video-poster.svg",
-    hero: "assets/images/hero-helena-dratos.webp"
+    frames: {
+      hero: "assets/images/video-frames/hero-helena.webp",
+      journey: "assets/images/video-frames/jornada-dratos.webp",
+      requisition: "assets/images/video-frames/requisicao.webp",
+      authoring: "assets/images/video-frames/autoria.webp",
+      library: "assets/images/video-frames/biblioteca.webp",
+      legalRoom: "assets/images/video-frames/sala-juridica.webp",
+      diligence: "assets/images/video-frames/due-diligence.webp",
+      performance: "assets/images/video-frames/performance.webp",
+      dossier: "assets/images/video-frames/dossie.webp",
+      dashboard: "assets/images/video-frames/dashboard.webp",
+      closing: "assets/images/video-frames/encerramento.webp"
+    }
   },
   settings: {
     formEndpoint: "",
     mailtoFallback: "contato@dratos.com.br",
-    privacyUrl: "#privacidade",
-    social: []
+    privacyUrl: "#privacidade"
   },
   accessibility: {
     skip: "Pular para o conteúdo",
     openMenu: "Abrir menu",
     closeMenu: "Fechar menu",
-    changeLanguage: "Alterar idioma",
     toggleTheme: "Alternar tema",
     closeModal: "Fechar janela",
-    previous: "Anterior",
-    next: "Próximo",
-    primaryNavigation: "Navegação principal"
+    primaryNavigation: "Navegação principal",
+    layerNavigation: "Progresso da jornada",
+    playVideo: "Assistir à apresentação institucional"
   },
   visual: {
     brand: "DRATOS",
-    productLabel: "DRATOS / EXECUTIVO",
-    live: "AO VIVO",
-    presenterInitial: "H",
-    accessCore: "RBAC",
-    totvsSource: "TOTVS RM"
+    descriptor: "Governança Contratual Inteligente",
+    demoLabel: "Dados demonstrativos",
+    stageLabel: "Jornada contratual",
+    riskLabel: "RiskAI"
+  },
+  ui: {
+    assistedAnalysis: "Análise assistida",
+    contractLabel: "Contrato",
+    stepLabel: "Etapa",
+    queryLabel: "Consulta",
+    layerLabel: "Camada",
+    dossierLabel: "Dossiê",
+    auditableLabel: "Auditável",
+    riskDetail: {
+      rule: "Regra relacionada",
+      reason: "Motivo do alerta",
+      action: "Ação recomendada",
+      owner: "Responsável"
+    }
   },
   nav: [
-    ["Visão geral", "visao-geral"],
     ["Plataforma", "plataforma"],
+    ["Jornada", "jornada"],
+    ["RiskAI", "riskai"],
     ["Performance", "performance"],
     ["Integrações", "integracoes"],
     ["Segurança", "seguranca"],
-    ["Demonstrações", "videos"],
-    ["Planos", "planos"]
+    ["Vídeo", "video"],
+    ["Contato", "contato"]
   ],
   actions: {
-    demo: "Agendar demonstração",
     platform: "Conhecer a plataforma",
-    fullPresentation: "Assistir à apresentação completa",
-    watch: "Assistir ao vídeo",
+    presentation: "Assistir à apresentação",
+    demo: "Agendar demonstração",
     diagnose: "Solicitar diagnóstico",
-    program: "Participar do programa",
-    details: "Ver detalhes",
-    technical: "Explorar arquitetura",
-    send: "Gerar solicitação",
-    back: "Voltar",
-    close: "Fechar",
-    play: "Reproduzir"
-  },
-  header: {
-    descriptor: "Governança Contratual Inteligente"
+    contact: "Entrar em contato",
+    send: "Preparar solicitação",
+    explore: "Explorar a jornada"
   },
   hero: {
-    eyebrow: "Contratos Inteligentes · Governança Contratual",
+    layer: "01",
+    eyebrow: "DRATOS · Governança Contratual Inteligente",
     title: "Do dado disperso à decisão governada.",
-    text: "A DRATOS conecta requisições, contratos, aprovações, assinaturas, obrigações, performance e evidências em uma única jornada contratual.",
-    note: "A DRATOS não substitui o ERP. Ela conecta e governa a jornada a partir dos dados que sua organização já possui.",
-    stageLabel: "Jornada contratual em tempo real",
-    stages: ["Dados", "Requisição", "Autoria", "Aprovação", "Assinatura", "Gestão", "Performance"],
-    metrics: [
-      { label: "SLA demonstrativo", value: "94%", trend: "+6,2%" },
-      { label: "Entregas realizadas", value: "98%", trend: "+4,8%" },
-      { label: "Avaliação geral", value: "4,8", trend: "★★★★★" }
-    ],
-    status: ["Fluxo rastreável", "Evidências conectadas", "Acesso por contexto"],
-    trust: ["Empresas privadas", "Governo e estatais", "Organizações reguladas", "Operações multiempresa"]
-  },
-  completeVideo: {
-    title: "Apresentação completa da DRATOS",
-    duration: "02:42",
-    video: "assets/video/dratos-apresentacao-completa.mp4",
-    poster: "assets/video/posters/dratos-apresentacao-completa.webp"
+    text: "A DRATOS conecta dados, pessoas, documentos, inteligência, aprovações, obrigações e performance em uma única jornada contratual.",
+    statement: "Contratos deixam de ser arquivos isolados e passam a gerar governança, inteligência, transparência e performance.",
+    signals: ["Contexto preservado", "Decisões rastreáveis", "Performance mensurável"],
+    panel: {
+      label: "Operação conectada",
+      stages: ["Requisição", "Autoria", "RiskAI", "Decisão", "Execução"],
+      metrics: [
+        { label: "SLA demonstrativo", value: "94%" },
+        { label: "Entregas", value: "98%" },
+        { label: "Avaliação", value: "4,8" }
+      ]
+    }
   },
   problem: {
-    eyebrow: "O caos invisível",
-    title: "Os dados estão nos sistemas. O contrato ainda está espalhado.",
-    text: "E-mails, planilhas, versões paralelas e aprovações fora do fluxo reduzem visibilidade e tornam a auditoria mais difícil.",
-    diagramTitle: "Quatro rupturas críticas",
-    diagramNote: "Quando informação, decisão, prazo e indicador se separam, o risco percorre toda a jornada contratual.",
-    items: [
-      { number: "01", title: "Versões paralelas", text: "A minuta correta se perde entre anexos e cópias locais." },
-      { number: "02", title: "Decisões sem contexto", text: "Aprovações e ressalvas ficam separadas do documento." },
-      { number: "03", title: "Prazos esquecidos", text: "Obrigações começam depois da assinatura, mas o acompanhamento não." },
-      { number: "04", title: "Indicadores tardios", text: "O desempenho do contrato chega quando já é difícil agir." }
-    ]
+    layer: "02",
+    eyebrow: "A dor",
+    title: "Contratos ainda operam fora dos sistemas.",
+    text: "Mesmo quando dados corporativos estão organizados, decisões, versões e evidências continuam fragmentadas em canais paralelos.",
+    ruptures: [
+      { title: "Versões paralelas", text: "A minuta correta se perde entre anexos, cópias e alterações sem contexto." },
+      { title: "Aprovações sem contexto", text: "Decisões ficam separadas do trecho, da regra e do responsável." },
+      { title: "Prazos esquecidos", text: "Obrigações e renovações aparecem tarde demais para uma ação preventiva." },
+      { title: "Indicadores tardios", text: "A diretoria enxerga o efeito depois que o risco já percorreu a operação." }
+    ],
+    chain: ["Dados fragmentados", "Decisões desconectadas", "Risco operacional", "Baixa visibilidade"]
   },
-  promise: {
-    eyebrow: "A resposta DRATOS",
-    title: "Um contrato vivo, da requisição à performance.",
-    text: "A plataforma transforma arquivos isolados em uma operação conectada, parametrizável e verificável.",
-    before: { label: "Antes", title: "Arquivo estático", items: ["Dados duplicados", "Histórico fragmentado", "Gestão reativa"] },
-    after: { label: "Com DRATOS", title: "Jornada governada", items: ["Contexto único", "Regras configuráveis", "Evidências e indicadores"] }
-  },
-  journey: {
-    eyebrow: "Demonstração guiada",
-    title: "Uma história completa em 16 cenas.",
-    text: "Helena, apresentadora oficial da DRATOS, conduz a narrativa com identidade, ambiente e linguagem cinematográfica consistentes.",
-    presenter: "Helena · Apresentadora oficial",
-    presenterNote: "Mesmo rosto, cabelo castanho-escuro, figurino executivo, ambiente premium e tom consultivo em todas as cenas.",
-    scenes: [
-      { id: "abertura", number: "01", title: "Abertura", duration: "00:08", line: "Imagine transformar dados, contratos, aprovações e evidências em uma única jornada inteligente e totalmente rastreável.", screen: "ERP → Contrato → Aprovação → Assinatura → Governança", movement: "Dolly lento da esquerda para a direita.", video: "assets/video/01-abertura.mp4", status: "Em produção" },
-      { id: "caos", number: "02", title: "O caos invisível", duration: "00:08", line: "Em muitas empresas, os dados estão nos sistemas, mas os contratos continuam espalhados entre e-mails, planilhas e documentos.", screen: "Dados organizados. Contratos dispersos.", movement: "Aproximação cinematográfica e linhas quebradas.", video: "assets/video/02-caos-invisivel.mp4", status: "Em produção" },
-      { id: "custo", number: "03", title: "O custo oculto", duration: "00:08", line: "Versões paralelas, aprovações perdidas, prazos esquecidos e riscos difíceis de rastrear.", screen: "Retrabalho · Perda de visibilidade · Risco operacional", movement: "Órbita suave com alertas de atenção.", video: "assets/video/03-custo-oculto.mp4", status: "Em produção" },
-      { id: "nasce", number: "04", title: "Nasce a DRATOS", duration: "00:08", line: "Foi para transformar essa complexidade em uma jornada estruturada que nasceu a DRATOS.", screen: "Governança Contratual Inteligente", movement: "Travelling em direção ao hub conectado.", video: "assets/video/04-nasce-dratos.mp4", status: "Em produção" },
-      { id: "hub", number: "05", title: "O hub central", duration: "00:08", line: "A DRATOS conecta os dados que sua empresa já possui e transforma essas informações em uma jornada contratual integrada.", screen: "Conecte · Governe · Evolua", movement: "Abertura ampla do ecossistema.", video: "assets/video/05-hub-central.mp4", status: "Em produção" },
-      { id: "requisicao", number: "06", title: "Requisição contratual", duration: "00:08", line: "Tudo começa com uma requisição estruturada, reunindo informações, documentos e responsáveis.", screen: "Dados completos · Processo organizado · Menos retrabalho", movement: "Campos recebem validações progressivas.", video: "assets/video/06-requisicao.mp4", status: "Em produção" },
-      { id: "autoria", number: "07", title: "Autoria contratual", duration: "00:08", line: "Com os dados aprovados, a DRATOS gera uma minuta baseada em matrizes, cláusulas padronizadas e regras jurídicas.", screen: "Padronização · Velocidade · Governança", movement: "A requisição se transforma em contrato.", video: "assets/video/07-autoria.mp4", status: "Em produção" },
-      { id: "biblioteca", number: "08", title: "Biblioteca e playbooks", duration: "00:08", line: "O jurídico mantém o controle através de cláusulas aprovadas, playbooks e versões governadas.", screen: "Biblioteca Jurídica", movement: "Cláusulas são incorporadas à minuta.", video: "assets/video/08-biblioteca.mp4", status: "Em produção" },
-      { id: "sala", number: "09", title: "Sala Jurídica", duration: "00:08", line: "Todas as interações permanecem centralizadas em um ambiente colaborativo e rastreável.", screen: "Negociação · Colaboração · Rastreabilidade", movement: "Travelling entre comentários e versões.", video: "assets/video/09-sala-juridica.mp4", status: "Em produção" },
-      { id: "diligence", number: "10", title: "Due Diligence", duration: "00:08", line: "Informações relevantes da contraparte e evidências apoiam decisões mais seguras e documentadas.", screen: "Evidências · Contexto · Governança", movement: "Aproximação do painel de validação.", video: "assets/video/10-due-diligence.mp4", status: "Em produção" },
-      { id: "assinatura", number: "11", title: "Aprovações e assinatura", duration: "00:08", line: "A versão correta segue para assinatura após as aprovações, com total rastreabilidade.", screen: "APROVADO → CONCLUÍDO", movement: "Aproximação sem cortes bruscos.", video: "assets/video/11-aprovacoes-assinatura.mp4", status: "Em produção" },
-      { id: "contrato-vivo", number: "12", title: "Obrigações e monitoramento", duration: "00:08", line: "A assinatura é o início da gestão contínua de obrigações, prazos e compromissos.", screen: "Contrato Vivo", movement: "Calendário, alertas e obrigações orbitam o contrato.", video: "assets/video/12-contrato-vivo.mp4", status: "Em produção" },
-      { id: "performance", number: "13", title: "Performance contratual", duration: "00:08", line: "Cada contrato possui seu próprio modelo de avaliação, acompanhando entregas, níveis de serviço e resultados.", screen: "4,8 estrelas · 94% SLA · 98% entregas", movement: "Foco cinematográfico nos indicadores.", video: "assets/video/13-performance.mp4", status: "Em produção" },
-      { id: "dossie", number: "14", title: "Dossiê auditável", duration: "00:08", line: "Cada decisão, documento, aprovação e evidência permanece registrada em um único histórico auditável.", screen: "Histórico · Evidências · Rastreabilidade", movement: "Convergência dos elementos para o dossiê.", video: "assets/video/14-dossie.mp4", status: "Em produção" },
-      { id: "dashboard", number: "15", title: "Dashboard executivo", duration: "00:08", line: "Informações conectadas oferecem uma visão executiva da operação contratual em tempo real.", screen: "Governança · Transparência · Eficiência · Performance", movement: "Movimento lateral pelos indicadores.", video: "assets/video/15-dashboard.mp4", status: "Em produção" },
-      { id: "encerramento", number: "16", title: "Encerramento", duration: "00:08", line: "A DRATOS transforma contratos em governança, performance, transparência e decisões mais seguras.", screen: "Da requisição ao desempenho contratual", movement: "Travelling lento com o ecossistema conectado.", video: "assets/video/16-encerramento.mp4", status: "Em produção" }
-    ]
+  transformation: {
+    layer: "03",
+    eyebrow: "A transformação",
+    title: "Uma única jornada. Do pedido à performance.",
+    text: "Cada etapa recebe contexto da anterior e devolve evidências para a próxima, formando uma operação contratual contínua.",
+    stages: ["Solicitação", "Autoria", "Biblioteca", "Sala Jurídica", "Due Diligence", "Aprovação", "Assinatura", "Obrigações", "Performance", "Dossiê", "Dashboard"]
   },
   sources: {
+    layer: "04",
     eyebrow: "Fontes de dados e conectores",
-    title: "Comece com os dados que sua organização já possui.",
-    text: "Integrações progressivas reduzem redigitação e dependência de planilhas paralelas sem substituir os sistemas corporativos.",
-    flow: ["Fontes de dados", "Normalização", "Requisição", "Jornada contratual"],
-    items: ["ERP", "TOTVS RM", "Sistema de compras", "Planilhas", "CSV", "APIs", "Formulários", "Cadastro manual", "Bases externas"],
-    users: ["TI", "Compras", "Jurídico", "Financeiro", "Controladoria"]
+    title: "Comece com os dados que a organização já possui.",
+    text: "A DRATOS conecta fontes existentes de forma progressiva. TOTVS é uma integração importante, não o posicionamento central da plataforma.",
+    items: ["ERP", "TOTVS RM", "Sistema de compras", "Planilhas", "APIs", "Formulários", "Cadastros internos", "Bases externas"],
+    outcome: ["Normalizar", "Contextualizar", "Governar"]
   },
-  platform: {
-    eyebrow: "Plataforma completa",
-    title: "Cada etapa preserva o contexto da anterior.",
-    text: "Explore os módulos da jornada. Recursos dependentes de fornecedores ou integrações são apresentados com seu status configurável.",
-    modules: [
-      { id: "solicitacoes", number: "01", title: "Solicitações de contrato", tagline: "O contrato começa com uma demanda completa, e não com um arquivo vazio.", summary: "Filtros, busca, paginação e status organizam solicitações originadas em Compras ou na Plataforma.", features: ["Fornecedor, centro de custo e período", "Dados bancários e financeiros", "Representantes e testemunhas", "Anexos PDF/DOCX", "Homologação e rejeição com motivo", "Arquivamento com motivo", "Itens dinâmicos e autocomplete", "CNPJ, vigência, objeto e pagamento"], status: "Disponível conforme configuração" },
-      { id: "kanban", number: "02", title: "Kanban de contratos", tagline: "A jornada inteira visível em um único quadro.", summary: "Cards conectam Autoria, Sala Jurídica, Assinatura e Concluído.", features: ["Fornecedor, número, valor e data", "Colunas retráteis", "Acesso direto à etapa", "Atualização em tempo real conforme integração"], status: "Configurável" },
-      { id: "autoria", number: "03", title: "Autoria contratual", tagline: "Transforme uma requisição aprovada em uma minuta governada, sem começar do zero.", summary: "Requisição → Matriz → Parametrização → Minuta.", features: ["Minuta interna ou do fornecedor", "Editor e versionamento", "Campos parametrizados", "Anexos e PDF final", "Bypass jurídico configurável", "Rejeição com motivo", "Documento original preservado"], status: "Configurável" },
-      { id: "biblioteca", number: "04", title: "Matrizes, cláusulas e playbooks", tagline: "O Jurídico mantém o padrão sem travar a operação.", summary: "Bibliotecas reutilizáveis com textos aprovados e parâmetros controlados.", features: ["Drag-and-drop", "Rascunho, revisão e aprovado", "Versões descontinuadas", "Histórico e trilha de auditoria", "Playbooks LGPD e SLA", "Confidencialidade e anticorrupção", "Due Diligence e fornecedor crítico"], status: "Configurável" },
-      { id: "sala-juridica", number: "05", title: "Sala Jurídica", tagline: "Negociação, revisão e decisão em um ambiente colaborativo e auditável.", summary: "Documento, mensagens e decisões permanecem no mesmo contexto.", features: ["Visualizador e mensagens", "Comentários por cláusula", "Histórico e versões", "Aprovação ou retorno à autoria", "Observações e pendências", "Rastreabilidade"], status: "Disponível conforme configuração" },
-      { id: "due-diligence", number: "06", title: "Due Diligence", tagline: "Informações estruturadas para apoiar decisões mais seguras e documentadas.", summary: "Análises Tipo 1, Tipo 2 e monitoramento reúnem contexto sem substituir a decisão humana.", features: ["Dados cadastrais e estrutura societária", "Certidões e informações públicas", "Evidências e relatórios", "Pendências e mitigação", "Histórico e monitoramento"], status: "Disponível conforme integração" },
-      { id: "ressalvas", number: "07", title: "Ressalvas contratuais", tagline: "Pontos de atenção formais, vinculados ao contrato.", summary: "Registro controlado de ressalvas ativas e históricas.", features: ["Título e descrição", "Classificação e prioridade", "Anexo", "Ativa ou inativa", "Histórico", "Exclusão lógica"], status: "Configurável" },
-      { id: "assinatura", number: "08", title: "Aprovações e assinatura", tagline: "A versão correta chega às pessoas certas, na ordem definida.", summary: "Workflow conecta aprovadores, signatários e documento final.", features: ["Jurídico, Financeiro e Gestor", "Ordem de aprovação", "Representantes e testemunhas", "Suspensão e retorno à Sala Jurídica", "Reenvio e sincronização", "Webhooks e contingência por consulta", "Documento assinado", "Assinatura avulsa de PDF"], status: "Disponível conforme integração" },
-      { id: "concluido", number: "09", title: "Contrato concluído", tagline: "O documento final é apenas uma parte do histórico completo.", summary: "Um stepper preserva solicitações, signatários, parcelas, visualizações e o histórico final.", features: ["Solicitações vinculadas", "Signatários", "Parcelas financeiras", "Documento assinado", "Auditoria de visualização", "Histórico final"], status: "Disponível conforme configuração" },
-      { id: "obrigacoes", number: "10", title: "Obrigações e monitoramento", tagline: "A assinatura não encerra a jornada. Ela inicia a execução governada.", summary: "Prazos, responsáveis e evidências transformam o contrato em rotina acompanhável.", features: ["Calendário e alertas", "Reajustes e vencimentos", "Entregas e SLA", "Renovações e compromissos", "Evidências", "Monitoramento da contraparte"], status: "Em evolução" },
-      { id: "performance-modulo", number: "11", title: "Performance contratual", tagline: "Cada contrato pode ser avaliado pelo que realmente importa.", summary: "Critérios, pesos, escalas e ciclos configuráveis por contrato.", features: ["Modelos próprios ou existentes", "Justificativas e evidências", "Comparação entre ciclos", "Consolidação por fornecedor", "Estrelas, nota, percentual e SLA", "Checklist e critérios ponderados"], status: "Em evolução" },
-      { id: "dossie", number: "12", title: "Dossiê auditável", tagline: "Da requisição à performance, cada decisão permanece em um histórico verificável.", summary: "Solicitações, versões, aprovações, documentos, evidências e logs convergem em uma linha do tempo.", features: ["Matriz e cláusulas", "Sala Jurídica e Due Diligence", "Ressalvas e aprovações", "Assinatura e obrigações", "Performance e evidências", "Trilha append-only"], status: "Configurável" },
-      { id: "juridico", number: "13", title: "Central e Consulta Jurídica", tagline: "O Jurídico centraliza contratos e demandas consultivas sem perder contexto.", summary: "Consultas e contratos compartilham urgência, histórico e acesso por perfil.", features: ["Assunto, descrição e urgência", "Anexo e chat", "Histórico e finalização", "Demandas consolidadas", "Volume e acesso rápido"], status: "Disponível conforme configuração" },
-      { id: "notificacoes", number: "14", title: "Notificações", tagline: "Cada pessoa recebe o que é relevante para seu contexto.", summary: "E-mail e notificações in-app mantêm pessoas informadas sem perder o vínculo com o evento.", features: ["SMTP e templates", "Perfis e contexto", "Logs e teste", "Sino e badge", "Lida ou não lida", "Link direto e eventos automáticos"], status: "Configurável" },
-      { id: "configuracoes", number: "15", title: "Central de configurações", tagline: "Regras operacionais administradas em um único lugar.", summary: "Matrizes, usuários, notificações, tarefas e integrações podem ser governadas por perfis autorizados.", features: ["Matrizes de contrato", "Usuários e perfis", "SMTP e notificações", "Tarefas agendadas", "Integração TOTVS RM", "Dados de teste em ambientes controlados"], status: "Disponível conforme perfil" }
+  requisition: {
+    layer: "05",
+    eyebrow: "Requisição contratual",
+    title: "O contrato começa antes da minuta.",
+    text: "A demanda nasce estruturada, com as informações que sustentam autoria, aprovação, execução e análise futura.",
+    fields: ["Contratante", "Contratada", "Objeto", "Valor", "Prazo", "Centro de custo", "Anexos", "Responsáveis", "Origem da solicitação"],
+    proof: "Demanda completa · menos redigitação · contexto desde a origem"
+  },
+  authoring: {
+    layer: "06",
+    eyebrow: "Autoria e matrizes",
+    title: "Da requisição aprovada à minuta governada.",
+    text: "Matrizes, parâmetros e regras de encaminhamento transformam dados aprovados em documentos consistentes.",
+    flow: ["Dados", "Matriz", "Parametrização", "Minuta"],
+    items: ["Matrizes contratuais", "Campos automáticos", "Minuta interna", "Minuta do fornecedor", "Versões", "Anexos", "PDF final", "Regras de encaminhamento"]
+  },
+  library: {
+    layer: "07",
+    eyebrow: "Biblioteca e playbooks",
+    title: "O conhecimento jurídico se transforma em padrão institucional.",
+    text: "Cláusulas aprovadas e variantes controladas entram na minuta com rastreabilidade, sem bloquear a adaptação ao contexto.",
+    items: ["Cláusulas aprovadas", "Versões", "Parâmetros controlados", "Drag-and-drop"],
+    clauses: ["LGPD", "SLA", "Anticorrupção", "Confidencialidade", "Fornecedor Crítico", "Compliance"]
+  },
+  riskAI: {
+    layer: "08",
+    eyebrow: "Inteligência contratual explicável",
+    title: "RiskAI · inteligência aplicada à análise contratual.",
+    text: "Uma camada de inteligência que ajuda a identificar pontos de atenção, conferir cláusulas, organizar evidências e responder perguntas sobre contratos e portfólios.",
+    insights: ["Pontos de atenção", "Divergências", "Obrigações relevantes", "Datas críticas", "Valores", "Riscos contextuais", "Dependências", "Sugestões de revisão"],
+    governance: "O RiskAI apoia a análise. A decisão permanece com os responsáveis autorizados.",
+    checks: [
+      { name: "Cláusula obrigatória", state: "Presente", severity: "Conforme", excerpt: "Proteção de dados e deveres das partes definidos na cláusula 14.", rule: "Playbook LGPD · versão 3", reason: "O texto obrigatório foi localizado e corresponde à variante aprovada.", action: "Manter para revisão final.", owner: "Jurídico" },
+      { name: "Índice de reajuste", state: "Ausente", severity: "Alto", excerpt: "O contrato prevê reajuste anual, mas não informa índice de referência.", rule: "Política de reajuste · regra 08", reason: "Há periodicidade sem critério objetivo de cálculo.", action: "Definir índice e data-base antes da aprovação.", owner: "Compras + Jurídico" },
+      { name: "Prazo de renovação", state: "Conflitante", severity: "Médio", excerpt: "Renovação automática com aviso de 15 dias.", rule: "Playbook de vigência · antecedência mínima de 30 dias", reason: "A antecedência está abaixo do padrão institucional.", action: "Revisar a antecedência ou registrar exceção justificada.", owner: "Gestor do contrato" },
+      { name: "Responsável pela obrigação", state: "Não definido", severity: "Médio", excerpt: "Relatório mensal deverá ser entregue até o quinto dia útil.", rule: "Checklist de obrigações", reason: "A entrega foi identificada sem responsável interno associado.", action: "Atribuir responsável e evidência esperada.", owner: "Área demandante" },
+      { name: "SLA", state: "Incompleto", severity: "Atenção", excerpt: "Atendimento em prazo razoável conforme criticidade.", rule: "Playbook SLA · matriz de serviços", reason: "Não há meta, escala de criticidade nem consequência mensurável.", action: "Parametrizar tempos por severidade.", owner: "Operação" }
     ]
+  },
+  legalRoom: {
+    layer: "09",
+    eyebrow: "Sala Jurídica",
+    title: "Revisão, negociação e decisão em um único ambiente.",
+    text: "Documento, comentários por cláusula, versões e decisões permanecem no mesmo contexto, com checks discretos do RiskAI.",
+    participants: ["Financeiro", "Compras", "Jurídico", "Gestor", "Fornecedor"],
+    events: ["Comentário vinculado à cláusula", "Versão comparada", "Ressalva registrada", "Aprovação documentada", "Trilha preservada"]
+  },
+  dueDiligence: {
+    layer: "10",
+    eyebrow: "Due Diligence",
+    title: "Evidências para conhecer melhor a contraparte.",
+    text: "Dados cadastrais, estrutura societária, certidões e histórico apoiam uma decisão documentada — nunca uma conclusão automática.",
+    modes: [
+      { name: "Tipo 1 · Leve", text: "Validação cadastral e evidências essenciais para cenários de menor complexidade." },
+      { name: "Tipo 2 · Padrão", text: "Análise ampliada, pendências, histórico e medidas de mitigação." },
+      { name: "Monitoramento", text: "Atualizações periódicas e registro de mudanças relevantes." }
+    ],
+    items: ["Dados cadastrais", "Estrutura societária", "Certidões", "Evidências", "Histórico", "Pendências", "Mitigação"],
+    disclaimer: "O RiskAI pode resumir achados; a decisão permanece humana e autorizada."
+  },
+  approval: {
+    layer: "11",
+    eyebrow: "Aprovação e assinatura",
+    title: "A versão correta chega às pessoas certas.",
+    text: "Workflow, aprovadores e signatários compartilham a mesma versão final, com status e evidências de cada decisão.",
+    flow: ["Jurídico", "Financeiro", "Gestor", "Signatários", "Documento concluído"],
+    items: ["Ordem definida", "Versão final", "Assinatura eletrônica", "Status por pessoa", "Evidência de conclusão"]
+  },
+  obligations: {
+    layer: "12",
+    eyebrow: "Obrigações",
+    title: "A assinatura inicia a execução governada.",
+    text: "Compromissos deixam o PDF e passam a ter responsáveis, prazos, alertas e evidências de cumprimento.",
+    items: ["Obrigações", "Prazos", "Alertas", "Reajustes", "Vencimentos", "Responsáveis", "Entregas", "Evidências", "Renovações", "SLA"],
+    timeline: ["Hoje · contrato ativo", "D+15 · primeira entrega", "D+30 · evidência mensal", "D+90 · ciclo de performance"]
   },
   performance: {
+    layer: "13",
     eyebrow: "Performance contratual",
-    title: "Cada contrato pode ser avaliado pelo que realmente importa.",
-    text: "Selecione um modelo, defina critérios, pesos, escala, periodicidade e responsáveis. Exija justificativas, anexe evidências e acompanhe a evolução por ciclo e fornecedor.",
-    disclaimer: "Valores meramente demonstrativos.",
-    flow: ["Obrigações", "Evidências", "Performance", "Decisão"],
-    publicValue: "Fiscalização objetiva, transparência, acompanhamento de fornecedores e prestação de contas para operações públicas e reguladas.",
-    videoScene: 12,
-    score: { label: "Avaliação geral", value: "4,8", scale: "de 5", stars: "★★★★★" },
-    indicators: [
-      { label: "SLA cumprido", value: "94%", progress: 94 },
-      { label: "Entregas realizadas", value: "98%", progress: 98 },
-      { label: "Ocorrências", value: "2", progress: 18 }
+    title: "Cada contrato pode ser medido pelo que realmente importa.",
+    text: "Critérios, pesos, metas, periodicidade e responsáveis são parametrizados por contrato, com justificativas, evidências e histórico.",
+    metrics: [
+      { label: "Avaliação geral", value: "4,8", unit: "de 5", progress: 96 },
+      { label: "SLA", value: "94%", unit: "cumprido", progress: 94 },
+      { label: "Entregas", value: "98%", unit: "realizadas", progress: 98 },
+      { label: "Ocorrências", value: "2", unit: "no ciclo", progress: 18 }
     ],
-    models: ["1 a 5 estrelas", "Nota de 0 a 10", "Percentual", "SLA cumprido, parcial ou não cumprido", "Excelente a crítico", "Checklist", "Critérios ponderados", "Avaliação qualitativa", "Indicadores próprios"],
-    examples: [
-      { title: "Segurança", items: ["Cobertura de postos", "Tempo de resposta", "Ocorrências", "Qualidade da equipe", "SLA"] },
-      { title: "Limpeza", items: ["Qualidade", "Frequência", "Reclamações", "Conformidade", "Auditorias"] },
-      { title: "Tecnologia", items: ["Disponibilidade", "Incidentes", "Tempo de resolução", "Experiência", "SLA"] },
-      { title: "Governo e regulados", items: ["Metas", "Entregas", "Indicadores", "Fiscalização", "Evidências"] }
+    models: ["Estrelas de 1 a 5", "Nota de 0 a 10", "Percentual", "SLA", "Checklist", "Excelente a crítico", "Modelo personalizado"],
+    values: ["Fiscalização", "Prestação de contas", "Transparência", "Acompanhamento de fornecedores", "Melhoria contínua"],
+    disclaimer: "Valores meramente demonstrativos."
+  },
+  quickAI: {
+    layer: "14",
+    eyebrow: "Consulta rápida à IA",
+    title: "Pergunte à DRATOS. Visualize a resposta.",
+    text: "Uma simulação visual mostra como perguntas em linguagem natural podem ser transformadas em respostas executivas.",
+    disclaimer: "Dados demonstrativos · experiência frontend sem conexão com modelo real.",
+    questions: [
+      "Mostre a performance dos contratos de limpeza dos últimos seis meses.",
+      "Compare os fornecedores por SLA e qualidade.",
+      "Quais contratos possuem obrigações vencidas?",
+      "Mostre contratos com avaliação inferior a três estrelas.",
+      "Liste cláusulas de reajuste divergentes do playbook.",
+      "Crie um gráfico com os contratos próximos do vencimento.",
+      "Mostre a evolução da performance do fornecedor por trimestre."
+    ],
+    results: [
+      { type: "line", title: "Performance · contratos de limpeza", summary: "Evolução consistente, com queda pontual no quarto mês.", values: [{ label: "Jan", value: 74 }, { label: "Fev", value: 79 }, { label: "Mar", value: 83 }, { label: "Abr", value: 76 }, { label: "Mai", value: 88 }, { label: "Jun", value: 94 }] },
+      { type: "bars", title: "Comparativo de fornecedores", summary: "Fornecedor Aurora lidera o índice combinado de SLA e qualidade.", values: [{ label: "Aurora", value: 94 }, { label: "Nexa", value: 87 }, { label: "Vértice", value: 81 }, { label: "Atlas", value: 73 }] },
+      { type: "list", title: "Obrigações vencidas", summary: "Quatro obrigações exigem ação dos responsáveis.", values: [{ label: "CTR-1048 · relatório mensal", value: 4 }, { label: "CTR-1182 · certidão", value: 3 }, { label: "CTR-0921 · evidência SLA", value: 2 }, { label: "CTR-1204 · reajuste", value: 1 }] },
+      { type: "ranking", title: "Contratos abaixo de três estrelas", summary: "Três contratos estão abaixo do limite configurado.", values: [{ label: "CTR-0914", value: 28 }, { label: "CTR-1102", value: 24 }, { label: "CTR-0837", value: 19 }] },
+      { type: "checklist", title: "Reajustes fora do playbook", summary: "Divergências agrupadas por índice, periodicidade e antecedência.", values: [{ label: "Índice ausente", value: 6 }, { label: "Periodicidade divergente", value: 4 }, { label: "Data-base conflitante", value: 3 }] },
+      { type: "bars", title: "Contratos próximos do vencimento", summary: "A concentração aumenta nos próximos 60 dias.", values: [{ label: "0–30 dias", value: 38 }, { label: "31–60 dias", value: 72 }, { label: "61–90 dias", value: 49 }, { label: "91–120 dias", value: 27 }] },
+      { type: "line", title: "Evolução trimestral do fornecedor", summary: "O índice consolidado avançou 18 pontos em quatro ciclos.", values: [{ label: "T1", value: 68 }, { label: "T2", value: 74 }, { label: "T3", value: 81 }, { label: "T4", value: 86 }] }
     ]
   },
-  dossierSpotlight: {
+  dossier: {
+    layer: "15",
     eyebrow: "Dossiê Auditável",
-    title: "A performance também vira evidência.",
-    text: "Solicitação, matriz, versões, decisões, Due Diligence, ressalvas, assinatura, obrigações e ciclos de avaliação convergem em um histórico verificável.",
-    items: ["Decisões e aprovações", "Documentos e versões", "Obrigações e prazos", "Performance e evidências", "Logs append-only"],
-    proof: "Da requisição à execução: contexto preservado para auditoria, fiscalização e prestação de contas.",
-    videoScene: 13
+    title: "Da requisição à performance, cada etapa permanece registrada.",
+    text: "Documentos, decisões e evidências convergem em uma linha do tempo verificável para auditoria e prestação de contas.",
+    items: ["Solicitação", "Matriz", "Contrato", "Versões", "Comentários", "Checks", "RiskAI", "Due Diligence", "Aprovações", "Assinatura", "Obrigações", "Performance", "Evidências", "Logs"]
   },
   dashboard: {
-    eyebrow: "Visão executiva",
-    title: "Da operação ao indicador, sem perder o detalhe.",
-    text: "Seis perspectivas conectam contratos, fornecedores, custos, vencimentos e dados para apoiar decisões.",
-    views: ["Menu Executivo", "Fornecedores", "Centro de Custo", "Categoria e Natureza", "Vencimentos", "Base de Dados"],
-    filters: ["Coligada", "Filial", "Múltiplas filiais", "Centro de custo", "Período", "Drilldown", "Exportação"],
+    layer: "16",
+    eyebrow: "Dashboard executivo",
+    title: "A operação contratual em uma visão executiva.",
+    text: "Indicadores conectados permitem navegar do portfólio ao contrato sem perder origem, contexto ou evidência.",
     kpis: [
       { label: "Contratos ativos", value: "1.248", delta: "+8,4%" },
       { label: "Valor total", value: "R$ 84,2 mi", delta: "+3,1%" },
       { label: "Em negociação", value: "86", delta: "12 críticos" },
-      { label: "Performance média", value: "4,6", delta: "de 5" },
       { label: "Obrigações abertas", value: "142", delta: "18 próximas" },
+      { label: "Performance média", value: "4,6", delta: "de 5" },
       { label: "SLA crítico", value: "7", delta: "requer atenção" }
     ],
-    disclaimer: "Dados fictícios para demonstração visual.",
-    videoScene: 14
-  },
-  integrations: {
-    eyebrow: "Ecossistema conectado",
-    title: "Integre progressivamente, sem limitar a plataforma a um fornecedor.",
-    text: "TOTVS RM é uma integração inicial prioritária e uma prova concreta da capacidade de conexão — não uma limitação da DRATOS.",
-    items: [
-      { name: "TOTVS RM", type: "ERP prioritário", status: "Disponível conforme projeto" },
-      { name: "TOTVS Assinatura Eletrônica", type: "Assinador inicial", status: "Disponível conforme integração" },
-      { name: "Sistema de Compras", type: "Origem de demandas", status: "Configurável" },
-      { name: "APIs REST", type: "Integração", status: "Configurável" },
-      { name: "Webhooks", type: "Eventos", status: "Configurável" },
-      { name: "SMTP", type: "Comunicação", status: "Configurável" },
-      { name: "Planilhas e CSV", type: "Importação", status: "Configurável" },
-      { name: "Outros ERPs e assinadores", type: "Ecossistema", status: "Planejado conforme projeto" }
-    ],
-    totvs: {
-      title: "Integração inicial com TOTVS RM",
-      text: "Consultas e sincronizações podem conectar fornecedores, produtos e serviços, coligadas, filiais, centros de custo, usuários, contratos e status.",
-      features: ["Transporte de contratos", "Sincronização de status", "Webhooks quando disponíveis", "Consulta como contingência", "Rastreabilidade da integração"]
-    }
-  },
-  videoLibrary: {
-    eyebrow: "Demonstrações por funcionalidade",
-    title: "Veja as funcionalidades essenciais em ação.",
-    text: "Demonstrações objetivas mostram como cada etapa preserva contexto, decisão e evidência — sem painéis editoriais ou textos sobre o vídeo.",
-    sceneIndexes: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-  },
-  access: {
-    eyebrow: "Perfis e controle de acesso",
-    title: "A pessoa certa, no contexto certo, com a permissão certa.",
-    text: "RBAC e segregação contextual controlam acesso no frontend e backend, sem expor detalhes sensíveis da implementação.",
-    profiles: ["ADMIN", "ESPECIALISTA", "JURÍDICO", "GESTOR", "ASSINANTE", "INDICADORES", "AUDITORIA", "COMPRAS"],
-    contexts: ["Coligada", "Filial", "Centro de custo", "Múltiplos centros", "Acesso interno e externo"]
+    dimensions: ["Fornecedores", "Vencimentos", "Due Diligence", "Centros de custo", "Filiais", "Categorias", "Performance", "Assinaturas"],
+    riskPrompt: "RiskAI: mostre as três maiores variações de performance deste mês.",
+    riskAnswer: ["Limpeza · −8,2%", "Tecnologia · +6,4%", "Segurança · −4,1%"],
+    disclaimer: "Dados fictícios para demonstração visual."
   },
   security: {
-    eyebrow: "Segurança e arquitetura",
+    layer: "17",
+    eyebrow: "Segurança e governança",
     title: "Controles enterprise em toda a jornada.",
-    text: "A arquitetura combina autenticação, segregação, auditoria e resiliência. O desenho final depende do ambiente e das integrações de cada organização.",
-    items: ["JWT", "RBAC", "Segregação por contexto", "Trilha append-only", "Logs e auditoria", "Idempotência e hash", "Webhooks e retries", "Polling de contingência", "Timeouts e cache", "Rotas protegidas", "Armazenamento documental", "Multiempresa e multifilial"],
-    stackTitle: "Stack técnica",
-    stackText: "Área técnica secundária",
-    stack: ["React", "Tailwind CSS", "React Router", "TinyMCE", "Node.js", "Express", "SQL Server", "Sequelize", "JWT", "SMTP", "Integrações REST"],
-    stackNote: "Stack da plataforma DRATOS. Esta landing page usa HTML, CSS e JavaScript puros para publicação estática."
-  },
-  publicSector: {
-    eyebrow: "Setor público e organizações reguladas",
-    title: "Governança, transparência e performance para operações que exigem prestação de contas.",
-    text: "Estruture contratos de serviços contínuos, metas, fiscalização, SLA, evidências e desempenho com múltiplas unidades e centros de custo.",
-    items: ["Fornecedores e serviços contínuos", "Metas e entregas", "Fiscalização e SLA", "Evidências e auditoria", "Múltiplas unidades", "Histórico e prestação de contas"]
-  },
-  plans: {
-    eyebrow: "Planos",
-    title: "Uma configuração para cada estágio de maturidade.",
-    text: "Volumes, módulos, integrações e serviços são definidos após o diagnóstico.",
-    items: [
-      { name: "Sandbox", price: "Teste orientado", description: "Conheça a jornada com um cenário demonstrativo.", features: ["Ambiente guiado", "Dados demonstrativos", "Sessão de diagnóstico"] },
-      { name: "Essential", price: "A partir de", description: "Organize solicitações, autoria e documentos.", features: ["Requisições", "Matrizes básicas", "Planilhas e CSV"] },
-      { name: "Professional", price: "Sob consulta", description: "Amplie a governança jurídica e pós-assinatura.", features: ["Sala Jurídica", "Playbooks", "Obrigações", "Due Diligence"] },
-      { name: "Business Integrado", price: "Sob consulta", description: "Conecte a jornada aos sistemas corporativos.", features: ["Conector assistido", "APIs e monitoramento", "Dossiê avançado"], featured: true },
-      { name: "Enterprise", price: "Projeto personalizado", description: "Arquitetura para operações complexas.", features: ["Multiempresa", "Perfis avançados", "Integrações e SLA"] }
+    text: "A arquitetura combina identidade, segregação, rastreabilidade e resiliência sem prometer certificações ainda não comprovadas.",
+    groups: [
+      { title: "Acesso", items: ["RBAC", "Coligada", "Filial", "Centro de custo", "Segregação", "Proteção de rotas"] },
+      { title: "Evidência", items: ["Trilha append-only", "Auditoria", "Logs", "Versionamento", "Evidências"] },
+      { title: "Resiliência", items: ["Idempotência", "HTTPS", "Webhooks", "Retries", "Controle de acesso"] }
     ]
   },
-  founding: {
-    eyebrow: "Programa de lançamento",
-    title: "DRATOS Founding Clients",
-    text: "Construa um caso aplicado com diagnóstico, implantação orientada e acompanhamento dos primeiros resultados.",
-    items: ["Diagnóstico do fluxo contratual", "Matriz e playbook inicial", "Integração e importação de dados", "Treinamento", "Acompanhamento", "Construção de caso", "Avaliação de resultados"]
-  },
-  faq: {
-    eyebrow: "Perguntas frequentes",
-    title: "Comece com clareza.",
+  integrations: {
+    layer: "18",
+    eyebrow: "Integrações",
+    title: "Um ecossistema contratual conectado.",
+    text: "A DRATOS integra fontes, assinadores e serviços corporativos conforme o contexto da organização.",
     items: [
-      ["A DRATOS substitui o ERP?", "Não. A DRATOS conecta e governa a jornada contratual usando dados que a organização já possui."],
-      ["Preciso ter TOTVS para usar?", "Não. TOTVS RM é uma integração inicial prioritária, mas a plataforma aceita outras fontes e integrações."],
-      ["É possível começar com planilha?", "Sim. Planilhas e CSV podem apoiar uma implantação progressiva."],
-      ["Como os dados entram na plataforma?", "Por formulários, cadastro manual, importações, APIs ou conectores configurados para o cenário."],
-      ["O Jurídico controla matrizes e cláusulas?", "Sim. Matrizes, versões, status e playbooks mantêm a governança jurídica."],
-      ["Como funciona a Sala Jurídica?", "Ela centraliza documento, comentários, versões, pendências e decisões em um ambiente rastreável."],
-      ["A plataforma possui assinatura eletrônica?", "A jornada integra assinatura eletrônica conforme o assinador e o projeto de integração."],
-      ["Como funciona a Due Diligence?", "Reúne dados, evidências e pendências para apoiar análise e decisão humana documentada."],
-      ["O que é Performance Contratual?", "É a avaliação recorrente de entregas, níveis de serviço, critérios e resultados de cada contrato."],
-      ["Cada contrato pode ter indicadores próprios?", "Sim. Modelos, critérios, pesos, escalas e periodicidades podem ser parametrizados."],
-      ["O que é o Dossiê Auditável?", "É o histórico verificável de documentos, versões, decisões, aprovações, evidências e eventos."],
-      ["Como funcionam as permissões?", "Perfis e contextos como empresa, filial e centro de custo delimitam o acesso."],
-      ["A DRATOS atende governo?", "A plataforma pode apoiar operações públicas e reguladas que demandam evidências, fiscalização e prestação de contas."],
-      ["É possível integrar outros ERPs?", "Sim. O desenho prevê APIs, webhooks, importações e conectores conforme cada projeto."],
-      ["Como funciona o piloto?", "O piloto começa com diagnóstico, cenário priorizado, configuração orientada e critérios de avaliação definidos em conjunto."]
+      { name: "TOTVS RM", type: "ERP · integração existente" },
+      { name: "TOTVS Assinatura Eletrônica", type: "Assinatura" },
+      { name: "Compras", type: "Origem de demandas" },
+      { name: "SMTP", type: "Comunicação" },
+      { name: "APIs", type: "Integração" },
+      { name: "Webhooks", type: "Eventos" },
+      { name: "Planilhas", type: "Importação" },
+      { name: "Outros ERPs e assinadores", type: "Ecossistema" }
     ]
+  },
+  institutional: {
+    layer: "19",
+    eyebrow: "Vídeo institucional",
+    title: "Veja a jornada completa da DRATOS.",
+    text: "Conheça a jornada DRATOS em uma apresentação cinematográfica que percorre problema, plataforma, execução e visão executiva.",
+    duration: "02:42",
+    video: "assets/video/dratos-apresentacao-completa.mp4",
+    poster: "assets/video/posters/dratos-apresentacao-completa.webp"
   },
   finalCta: {
+    layer: "20",
     eyebrow: "Demonstração aplicada",
-    title: "Vamos apresentar a DRATOS aplicada à realidade da sua organização?",
-    text: "Mostramos a jornada completa utilizando seus contratos, fontes de dados, áreas, critérios de aprovação, obrigações e indicadores de performance.",
-    signature: "Da requisição à performance contratual."
+    title: "Vamos aplicar a DRATOS à realidade da sua organização?",
+    text: "Apresentamos a jornada usando seus contratos, fluxos, áreas, critérios de aprovação, obrigações e indicadores de performance.",
+    signature: "Governança contratual que conecta contexto, decisão e resultado."
   },
   form: {
     title: "Agende uma demonstração aplicada",
@@ -320,7 +327,7 @@ window.DRATOS_CONTENT.pt = {
       erp: { label: "ERP atual", placeholder: "Selecione", required: true, options: ["TOTVS RM", "SAP", "Oracle", "Outro ERP", "Planilhas / sem ERP"] },
       volume: { label: "Volume aproximado de contratos", placeholder: "Selecione", required: true, options: ["Até 100", "101 a 500", "501 a 2.000", "2.001 a 10.000", "Mais de 10.000"] },
       challenge: { label: "Principal desafio", placeholder: "Descreva brevemente o cenário", required: true },
-      interest: { label: "Interesse", placeholder: "Selecione", required: true, options: ["Demonstração", "Diagnóstico", "Programa Founding Clients", "Integração", "Parceria"] },
+      interest: { label: "Interesse", placeholder: "Selecione", required: true, options: ["Demonstração", "Diagnóstico", "RiskAI", "Performance", "Integração", "Parceria"] },
       privacy: { label: "Concordo com o uso destes dados para retorno sobre esta solicitação.", required: true }
     },
     demoSuccess: "Seu cliente de e-mail foi aberto com a solicitação endereçada a contato@dratos.com.br. Revise a mensagem antes de enviar.",
@@ -329,45 +336,16 @@ window.DRATOS_CONTENT.pt = {
     validation: "Preencha os campos obrigatórios e aceite a declaração de privacidade."
   },
   footer: {
-    descriptor: "Governança Contratual Inteligente",
     text: "Dados, decisões e performance em uma jornada verificável.",
     contactLabel: "Contato",
     contact: "contato@dratos.com.br",
-    links: [["Demonstrações", "#videos"], ["Plataforma", "#plataforma"], ["Segurança", "#seguranca"], ["FAQ", "#faq"]],
+    links: [["Plataforma", "#plataforma"], ["RiskAI", "#riskai"], ["Segurança", "#seguranca"], ["Vídeo", "#video"]],
     copyright: "© 2026 DRATOS. Todos os direitos reservados.",
     privacy: "Privacidade",
     privacyNote: "Nesta demonstração, sem endpoint configurado, o formulário apenas prepara uma mensagem no cliente de e-mail do visitante. O envio só ocorre após confirmação da própria pessoa."
   },
-  videoModal: {
-    production: "Vídeo em produção",
-    productionText: "Este vídeo ainda não está disponível."
-  },
   toast: {
     theme: "Tema atualizado.",
-    copied: "Conteúdo copiado.",
-    plan: "Plano selecionado para a conversa."
+    query: "Consulta demonstrativa atualizada."
   }
 };
-
-window.DRATOS_CONTENT.pt.journey.scenes.forEach((scene) => {
-  scene.duration = "00:10";
-  scene.status = "Disponível";
-  scene.poster = scene.video.replace("assets/video/", "assets/video/posters/").replace(".mp4", ".jpg");
-});
-
-const DRATOS_PT_MODULE_VIDEO = {
-  solicitacoes: 5,
-  autoria: 6,
-  biblioteca: 7,
-  "sala-juridica": 8,
-  "due-diligence": 9,
-  assinatura: 10,
-  concluido: 11,
-  obrigacoes: 11,
-  "performance-modulo": 12,
-  dossie: 13
-};
-
-window.DRATOS_CONTENT.pt.platform.modules.forEach((module) => {
-  module.videoScene = DRATOS_PT_MODULE_VIDEO[module.id] ?? null;
-});

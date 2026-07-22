@@ -1,47 +1,45 @@
 # Como editar a landing page DRATOS
 
-Todo conteúdo público está em `content/pt.js`. A landing page é exclusivamente PT-BR.
+Todo conteúdo público permanece em `content/pt.js`. A landing é exclusivamente PT-BR.
 
-## Conteúdo
+## Conteúdo por camada
 
-- Hero: `hero` e `completeVideo`.
-- Menu: `nav`.
-- Botões: `actions`.
-- Problema: `problem`.
-- Módulos: `platform.modules`.
-- Performance: `performance`.
-- Dossiê: `dossierSpotlight`.
-- Vídeos funcionais: `videoLibrary.sceneIndexes`.
-- Formulário e fallback: `form` e `settings`.
-- Rodapé e contato: `footer`.
+As chaves seguem a jornada: `hero`, `problem`, `transformation`, `sources`, `requisition`, `authoring`, `library`, `riskAI`, `legalRoom`, `dueDiligence`, `approval`, `obligations`, `performance`, `quickAI`, `dossier`, `dashboard`, `security`, `integrations`, `institutional` e `finalCta`.
 
-Não coloque textos comerciais diretamente em `js/main.js`.
+Não insira textos comerciais em `index.html` ou `js/main.js`.
 
-## Marca e Hero
+## RiskAI
+
+- `riskAI.insights`: temas de análise;
+- `riskAI.checks`: nome, estado, severidade, trecho, regra, motivo, ação e responsável;
+- `riskAI.governance`: aviso obrigatório de decisão humana;
+- `quickAI.questions` e `quickAI.results`: simulação visual com dados fictícios.
+
+Não descreva o RiskAI como substituto do Jurídico ou como decisão automática.
+
+## Marca e tipografia
 
 - logo: `assets/brand/dratos-logo.png`;
 - elemento: `assets/brand/dratos-elemento.png`;
-- Hero: `assets/images/hero-helena-dratos.webp`.
+- tokens oficiais: `DesignsystemDratos.txt`;
+- títulos: Plus Jakarta Sans;
+- corpo: Inter.
 
-Preserve proporção, nomes e dimensões. O Hero deve permanecer editorial, claro e integrado ao mockup executivo.
+## Frames e vídeo
 
-## Vídeos
+Os caminhos editáveis ficam em `assets.frames` e `institutional`. Use somente imagens extraídas do vídeo completo.
 
-As 16 cenas continuam em `journey.scenes` como catálogo técnico. Cada cena usa `title`, `duration`, `line`, `video`, `poster` e `status`.
+O runtime deve manter somente:
 
-Não adicione `<track>`, VTT, transcript ou direção de cena ao modal. O player deve continuar 16:9, sob demanda e sem autoplay.
-
-Os destaques públicos são definidos por `videoLibrary.sceneIndexes`. Mantenha somente Requisição, Autoria, Biblioteca, Sala Jurídica, Due Diligence, Aprovações e Assinatura, Obrigações, Performance, Dossiê e Dashboard.
-
-Para regenerar o vídeo completo:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts\gerar-video-completo.ps1
+```text
+assets/video/dratos-apresentacao-completa.mp4
 ```
 
-## Tema
+Não recoloque cenas individuais, `<track>`, VTT, transcript, autoplay ou preload de vídeo. Os MP4s individuais são apenas preservados como material-fonte.
 
-O tema é controlado por `DratosContent.toggleTheme()` e persistido em `localStorage` sob `dratos-theme`. Somente `[data-theme-toggle]` pode chamar essa função.
+## Tema e movimento
+
+O tema é persistido em `localStorage` sob `dratos-theme`; somente `[data-theme-toggle]` chama `toggleTheme()`. Movimentos devem usar transform/opacity e sempre respeitar `prefers-reduced-motion`.
 
 ## Formulário
 
@@ -53,8 +51,8 @@ settings: {
 }
 ```
 
-Sem endpoint, o formulário apenas prepara um `mailto:`; não informe ao visitante que houve envio automático.
+Sem endpoint, o envio permanece sob confirmação do visitante no cliente de e-mail.
 
 ## Publicação
 
-Canonical, robots e sitemap estão preparados para `https://joelalbertofernandes.github.io/dratos/`. O repositório oficial é `https://github.com/JoelAlbertoFernandes/dratos`.
+Canonical, robots e sitemap usam `https://joelalbertofernandes.github.io/dratos/`. Todos os caminhos de runtime devem continuar relativos.
