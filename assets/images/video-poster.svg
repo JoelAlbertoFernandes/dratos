@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">DRATOS — Governança Contratual Inteligente</title>
+  <desc id="desc">Composição tecnológica em azul-marinho, prata e ciano.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#091426"/><stop offset="1" stop-color="#142f50"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#22d3ee" stop-opacity=".3"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></radialGradient>
+    <pattern id="grid" width="70" height="70" patternUnits="userSpaceOnUse"><path d="M70 0H0V70" fill="none" stroke="#38bdf8" stroke-opacity=".08"/></pattern>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/><rect width="1600" height="900" fill="url(#grid)"/><circle cx="1110" cy="430" r="470" fill="url(#glow)"/>
+  <g fill="none" stroke="#38bdf8" stroke-opacity=".3"><ellipse cx="1120" cy="440" rx="360" ry="220"/><ellipse cx="1120" cy="440" rx="275" ry="165" stroke-dasharray="8 12"/></g>
+  <g transform="translate(1120 440) rotate(45)"><rect x="-92" y="-92" width="184" height="184" rx="34" fill="#e7faff" fill-opacity=".92" stroke="#82d9ec"/><rect x="-54" y="-54" width="108" height="108" rx="20" fill="none" stroke="#2563eb" stroke-width="10"/><rect x="-16" y="-16" width="32" height="32" rx="6" fill="#111e3a"/></g>
+  <text x="150" y="420" fill="#ffffff" font-family="Arial, sans-serif" font-size="118" font-weight="700" letter-spacing="-5">DRATOS</text>
+  <text x="156" y="490" fill="#91a9c3" font-family="Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="7">GOVERNANÇA CONTRATUAL INTELIGENTE</text>
+  <text x="157" y="555" fill="#c9d8e8" font-family="Arial, sans-serif" font-size="28">Da requisição à performance contratual.</text>
+</svg>

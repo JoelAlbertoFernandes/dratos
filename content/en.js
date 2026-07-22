@@ -1,30 +1,144 @@
-window.DRATOS_CONTENT = window.DRATOS_CONTENT || {};
-window.DRATOS_CONTENT.en = Object.assign({}, window.DRATOS_CONTENT.pt, {
-  meta: Object.assign({}, window.DRATOS_CONTENT.pt.meta, {
-    lang: "en",
-    label: "EN",
-    title: "DRATOS | Contract Governance in One Intelligent Journey",
-    description: "Explore the DRATOS journey: data sources, intake, authoring, negotiation, due diligence, signature, obligations and auditable dossiers."
-  }),
-  nav: [["Overview", "visao-geral"], ["Journey", "jornada"], ["Modules", "modulos"], ["Connectors", "conectores"], ["Security", "seguranca"], ["Plans", "planos"], ["Videos", "videos"], ["FAQ", "faq"]],
-  actions: Object.assign({}, window.DRATOS_CONTENT.pt.actions, {
-    demo: "Book a demo",
-    journey: "Explore the DRATOS journey",
-    addVideo: "Add module video",
-    watch: "Watch demo",
-    plan: "Explore this plan",
-    send: "Send request",
-    close: "Close"
-  }),
-  hero: Object.assign({}, window.DRATOS_CONTENT.pt.hero, {
-    eyebrow: "A narrative contract governance demo",
-    title: "Present, govern and monitor contracts in one intelligent journey.",
-    text: "DRATOS transforms data from ERPs, spreadsheets, APIs and forms into requests, contracts, approvals, signatures, obligations and auditable dossiers.",
-    note: "Without replacing your ERP. Without parallel spreadsheets. Without losing history in emails.",
-    meeting: "In a demo meeting, we show how your company moves from scattered documents to an end-to-end governed contract journey."
-  }),
-  finalCta: Object.assign({}, window.DRATOS_CONTENT.pt.finalCta, {
-    title: "Shall we present DRATOS applied to your reality?",
-    text: "We demonstrate the complete journey using your contract types, workflows, data sources and governance criteria."
-  })
-});
+(function () {
+  const base = window.DRATOS_CONTENT.pt;
+  const merge = (target, source) => {
+    Object.keys(source).forEach((key) => {
+      if (source[key] && typeof source[key] === "object" && !Array.isArray(source[key])) {
+        target[key] = merge({ ...(target[key] || {}) }, source[key]);
+      } else target[key] = source[key];
+    });
+    return target;
+  };
+
+  window.DRATOS_CONTENT.en = merge(structuredClone(base), {
+    meta: {
+      lang: "en",
+      label: "EN",
+      title: "DRATOS | Intelligent Contract Governance",
+      description: "Connect data, people, documents, approvals, signatures, obligations, performance and evidence in one governed contract journey.",
+      organization: { name: "DRATOS — Intelligent Contracts", description: "Contract lifecycle governance platform." }
+    },
+    accessibility: {
+      skip: "Skip to content", openMenu: "Open menu", closeMenu: "Close menu", changeLanguage: "Change language",
+      toggleTheme: "Toggle theme", closeModal: "Close dialog", previous: "Previous", next: "Next", primaryNavigation: "Primary navigation"
+    },
+    visual: { brand: "DRATOS", productLabel: "DRATOS / EXECUTIVE", live: "LIVE", presenterInitial: "H", fragments: ["PDF", "DOCX", "XLSX", "EMAIL", "CHAT", "V1.2", "APPROVAL", "DEADLINE"], accessCore: "RBAC", totvsSource: "TOTVS RM" },
+    nav: [["Overview", "visao-geral"], ["Journey", "jornada"], ["Platform", "plataforma"], ["Performance", "performance"], ["Integrations", "integracoes"], ["Security", "seguranca"], ["Videos", "videos"], ["Plans", "planos"]],
+    actions: { demo: "Book a demo", journey: "Explore the journey", watch: "Watch video", diagnose: "Request an assessment", program: "Join the program", details: "View details", technical: "Explore architecture", send: "Generate request", back: "Back", close: "Close", play: "Play" },
+    header: { descriptor: "Intelligent Contract Governance" },
+    hero: {
+      eyebrow: "Intelligent Contracts · Contract Governance", title: "From scattered data to governed decisions.",
+      text: "DRATOS connects data, people, documents, clauses, approvals, signatures, obligations, performance and evidence in a single contract journey.",
+      note: "DRATOS does not replace your ERP. It connects and governs the journey using the data your organization already has.",
+      stageLabel: "Contract journey in real time", stages: ["Data", "Request", "Authoring", "Approval", "Signature", "Management", "Performance"],
+      metrics: [{ label: "Illustrative SLA", value: "94%", trend: "+6.2%" }, { label: "Deliveries completed", value: "98%", trend: "+4.8%" }, { label: "Overall rating", value: "4.8", trend: "★★★★★" }],
+      status: ["Traceable workflow", "Connected evidence", "Context-based access"], trust: ["Private companies", "Government and state-owned companies", "Regulated organizations", "Multi-company operations"]
+    },
+    problem: {
+      eyebrow: "The invisible chaos", title: "Data lives in systems. Contracts remain scattered.",
+      text: "Emails, spreadsheets, parallel versions and off-flow approvals reduce visibility and make audits harder.", evidenceLabel: "Fragments per contract", evidenceValue: "12+",
+      evidenceNote: "Illustrative scenario: disconnected files, messages, spreadsheets, approvals and evidence.",
+      items: [{ number: "01", title: "Parallel versions", text: "The correct draft gets lost among attachments and local copies." }, { number: "02", title: "Decisions without context", text: "Approvals and reservations become detached from the document." }, { number: "03", title: "Missed deadlines", text: "Obligations begin after signature, but monitoring often does not." }, { number: "04", title: "Late indicators", text: "Contract performance arrives when it is already difficult to act." }]
+    },
+    promise: {
+      eyebrow: "The DRATOS answer", title: "A living contract, from request to performance.", text: "The platform turns isolated files into a connected, configurable and verifiable operation.",
+      before: { label: "Before", title: "Static file", items: ["Duplicate data", "Fragmented history", "Reactive management"] }, after: { label: "With DRATOS", title: "Governed journey", items: ["Single context", "Configurable rules", "Evidence and indicators"] }
+    },
+    journey: {
+      eyebrow: "Guided demonstration", title: "A complete story in 16 scenes.", text: "Helena, the official DRATOS presenter, guides the narrative with consistent identity, setting and cinematic language.",
+      presenter: "Helena · Official presenter", presenterNote: "The same face, dark-brown hair, executive outfit, premium environment and consultative tone in every scene.",
+      scenes: [
+        { id: "abertura", number: "01", title: "Opening", duration: "00:08", line: "Imagine turning data, contracts, approvals and evidence into one intelligent and fully traceable journey.", screen: "ERP → Contract → Approval → Signature → Governance", movement: "Slow left-to-right dolly.", status: "In production" },
+        { id: "caos", number: "02", title: "The invisible chaos", duration: "00:08", line: "In many companies, data is in systems while contracts remain scattered across emails, spreadsheets and documents.", screen: "Organized data. Scattered contracts.", movement: "Cinematic push-in and broken lines.", status: "In production" },
+        { id: "custo", number: "03", title: "The hidden cost", duration: "00:08", line: "Parallel versions, lost approvals, missed deadlines and risks that are hard to trace.", screen: "Rework · Lost visibility · Operational risk", movement: "Soft orbit with attention alerts.", status: "In production" },
+        { id: "nasce", number: "04", title: "DRATOS is born", duration: "00:08", line: "DRATOS was created to turn this complexity into a structured journey.", screen: "Intelligent Contract Governance", movement: "Travel toward the connected hub.", status: "In production" },
+        { id: "hub", number: "05", title: "The central hub", duration: "00:08", line: "DRATOS connects the data your company already has and turns it into an integrated contract journey.", screen: "Connect · Govern · Evolve", movement: "Wide reveal of the ecosystem.", status: "In production" },
+        { id: "requisicao", number: "06", title: "Contract request", duration: "00:08", line: "It begins with a structured request that brings together information, documents and owners.", screen: "Complete data · Organized process · Less rework", movement: "Fields receive progressive validation.", status: "In production" },
+        { id: "autoria", number: "07", title: "Contract authoring", duration: "00:08", line: "Approved data becomes a draft based on matrices, standardized clauses and legal rules.", screen: "Standardization · Speed · Governance", movement: "The request becomes a contract.", status: "In production" },
+        { id: "biblioteca", number: "08", title: "Library and playbooks", duration: "00:08", line: "Legal stays in control through approved clauses, playbooks and governed versions.", screen: "Legal Library", movement: "Clauses flow into the draft.", status: "In production" },
+        { id: "sala", number: "09", title: "Legal Room", duration: "00:08", line: "Every interaction stays centralized in one collaborative and traceable environment.", screen: "Negotiation · Collaboration · Traceability", movement: "Travel across comments and versions.", status: "In production" },
+        { id: "diligence", number: "10", title: "Due Diligence", duration: "00:08", line: "Relevant counterparty information and evidence support safer, documented decisions.", screen: "Evidence · Context · Governance", movement: "Push-in on the validation panel.", status: "In production" },
+        { id: "assinatura", number: "11", title: "Approvals and signature", duration: "00:08", line: "The correct version moves to signature after approvals, with complete traceability.", screen: "APPROVED → COMPLETED", movement: "Smooth push-in without abrupt cuts.", status: "In production" },
+        { id: "contrato-vivo", number: "12", title: "The contract becomes management", duration: "00:08", line: "Signature begins the ongoing management of obligations, deadlines and commitments.", screen: "Living Contract", movement: "Calendar, alerts and obligations orbit the contract.", status: "In production" },
+        { id: "performance", number: "13", title: "Contract performance", duration: "00:08", line: "Each contract has its own evaluation model to track deliveries, service levels and results.", screen: "4.8 stars · 94% SLA · 98% deliveries", movement: "Cinematic focus on indicators.", status: "In production" },
+        { id: "dossie", number: "14", title: "Auditable dossier", duration: "00:08", line: "Every decision, document, approval and piece of evidence remains in a single auditable history.", screen: "History · Evidence · Traceability", movement: "Elements converge into the dossier.", status: "In production" },
+        { id: "dashboard", number: "15", title: "Executive dashboard", duration: "00:08", line: "Connected information provides an executive view of contract operations in real time.", screen: "Governance · Transparency · Efficiency · Performance", movement: "Lateral movement across indicators.", status: "In production" },
+        { id: "encerramento", number: "16", title: "Closing", duration: "00:08", line: "DRATOS turns contracts into governance, performance, transparency and safer decisions.", screen: "From request to contract performance", movement: "Slow travel through the connected ecosystem.", status: "In production" }
+      ]
+    },
+    sources: { eyebrow: "Data sources and connectors", title: "Start with the data your organization already has.", text: "Progressive integrations reduce re-entry and dependence on parallel spreadsheets without replacing corporate systems.", flow: ["Data sources", "Normalization", "Request", "Contract journey"], items: ["ERP", "TOTVS RM", "Procurement system", "Spreadsheets", "CSV", "APIs", "Forms", "Manual records", "External sources"], users: ["IT", "Procurement", "Legal", "Finance", "Controllership"] },
+    platform: {
+      eyebrow: "Complete platform", title: "Each stage preserves the context of the previous one.", text: "Explore the journey modules. Features that depend on vendors or integrations show a configurable status.",
+      modules: [
+        { id: "solicitacoes", number: "01", title: "Contract requests", tagline: "A contract starts with a complete demand, not an empty file.", summary: "Filters, search, pagination and status organize requests from Procurement or the Platform.", features: ["Supplier, cost center and period", "Banking and financial data", "Representatives and witnesses", "PDF/DOCX attachments", "Approval and reasoned rejection", "Reasoned archiving", "Dynamic items and autocomplete", "Tax ID, term, scope and payment"], status: "Available according to configuration" },
+        { id: "kanban", number: "02", title: "Contract Kanban", tagline: "The entire journey visible on one board.", summary: "Cards connect Authoring, Legal Room, Signature and Completed.", features: ["Supplier, number, value and date", "Collapsible columns", "Direct stage access", "Real-time updates according to integration"], status: "Configurable" },
+        { id: "autoria", number: "03", title: "Contract authoring", tagline: "Turn an approved request into a governed draft without starting from scratch.", summary: "Request → Matrix → Parameters → Draft.", features: ["Internal or supplier draft", "Editor and versioning", "Parameterized fields", "Attachments and final PDF", "Configurable legal bypass", "Reasoned rejection", "Original document preserved"], status: "Configurable" },
+        { id: "biblioteca", number: "04", title: "Matrices, clauses and playbooks", tagline: "Legal maintains standards without blocking the operation.", summary: "Reusable libraries with approved text and controlled parameters.", features: ["Drag and drop", "Draft, review and approved", "Retired versions", "History and audit trail", "Privacy and SLA playbooks", "Confidentiality and anti-corruption", "Due Diligence and critical suppliers"], status: "Configurable" },
+        { id: "sala-juridica", number: "05", title: "Legal Room", tagline: "Negotiation, review and decisions in a collaborative, auditable environment.", summary: "Document, messages and decisions remain in the same context.", features: ["Viewer and messages", "Clause comments", "History and versions", "Approval or return to authoring", "Notes and pending issues", "Traceability"], status: "Available according to configuration" },
+        { id: "due-diligence", number: "06", title: "Due Diligence", tagline: "Structured information to support safer, documented decisions.", summary: "Type 1, Type 2 and monitoring analyses gather context without replacing human decisions.", features: ["Registration data and ownership structure", "Certificates and public information", "Evidence and reports", "Pending issues and mitigation", "History and monitoring"], status: "Available according to integration" },
+        { id: "ressalvas", number: "07", title: "Contract reservations", tagline: "Formal points of attention linked to the contract.", summary: "Controlled record of active and historical reservations.", features: ["Title and description", "Classification and priority", "Attachment", "Active or inactive", "History", "Soft delete"], status: "Configurable" },
+        { id: "assinatura", number: "08", title: "Approvals and signature", tagline: "The correct version reaches the right people in the defined order.", summary: "Workflow connects approvers, signatories and the final document.", features: ["Legal, Finance and Manager", "Approval order", "Representatives and witnesses", "Suspension and Legal Room return", "Resend and synchronization", "Webhooks and polling fallback", "Signed document", "Standalone PDF signature"], status: "Available according to integration" },
+        { id: "concluido", number: "09", title: "Completed contract", tagline: "The final document is only one part of the full history.", summary: "A stepper preserves requests, signatories, installments, views and final history.", features: ["Linked requests", "Signatories", "Financial installments", "Signed document", "Viewing audit", "Final history"], status: "Available according to configuration" },
+        { id: "obrigacoes", number: "10", title: "Obligations and monitoring", tagline: "Signature does not end the journey. It begins governed execution.", summary: "Deadlines, owners and evidence turn the contract into a manageable routine.", features: ["Calendar and alerts", "Adjustments and expirations", "Deliveries and SLA", "Renewals and commitments", "Evidence", "Counterparty monitoring"], status: "Evolving" },
+        { id: "performance-modulo", number: "11", title: "Contract performance", tagline: "Each contract can be evaluated by what truly matters.", summary: "Criteria, weights, scales and cycles configurable per contract.", features: ["Existing or custom models", "Rationales and evidence", "Cycle comparison", "Supplier consolidation", "Stars, score, percentage and SLA", "Checklists and weighted criteria"], status: "Evolving" },
+        { id: "dossie", number: "12", title: "Auditable dossier", tagline: "From request to performance, every decision remains in a verifiable history.", summary: "Requests, versions, approvals, documents, evidence and logs converge on one timeline.", features: ["Matrix and clauses", "Legal Room and Due Diligence", "Reservations and approvals", "Signature and obligations", "Performance and evidence", "Append-only trail"], status: "Configurable" },
+        { id: "juridico", number: "13", title: "Legal Center and Consultation", tagline: "Legal centralizes contracts and advisory work without losing context.", summary: "Consultations and contracts share urgency, history and profile-based access.", features: ["Subject, description and urgency", "Attachment and chat", "History and completion", "Consolidated demands", "Volume and quick access"], status: "Available according to configuration" },
+        { id: "notificacoes", number: "14", title: "Notifications", tagline: "Each person receives what is relevant to their context.", summary: "Email and in-app notifications keep people informed and linked to each event.", features: ["SMTP and templates", "Profiles and context", "Logs and tests", "Bell and badge", "Read or unread", "Deep links and automatic events"], status: "Configurable" },
+        { id: "configuracoes", number: "15", title: "Configuration center", tagline: "Operational rules managed in one place.", summary: "Matrices, users, notifications, scheduled tasks and integrations can be governed by authorized profiles.", features: ["Contract matrices", "Users and profiles", "SMTP and notifications", "Scheduled tasks", "TOTVS RM integration", "Test data in controlled environments"], status: "Available by profile" }
+      ]
+    },
+    performance: {
+      eyebrow: "Contract performance", title: "Each contract can be evaluated by what truly matters.", text: "Select a model and define criteria, weights, scale, frequency and owners. Require rationale, attach evidence and track progress by cycle and supplier.", disclaimer: "Values shown are illustrative.", flow: ["Obligations", "Evidence", "Performance", "Decision"], publicValue: "Objective oversight, transparency, supplier monitoring and accountability for public and regulated operations.", videoScene: 12,
+      score: { label: "Overall rating", value: "4.8", scale: "out of 5", stars: "★★★★★" }, indicators: [{ label: "SLA met", value: "94%", progress: 94 }, { label: "Deliveries completed", value: "98%", progress: 98 }, { label: "Incidents", value: "2", progress: 18 }],
+      models: ["1 to 5 stars", "0 to 10 score", "Percentage", "SLA met, partial or unmet", "Excellent to critical", "Checklist", "Weighted criteria", "Qualitative assessment", "Custom indicators"],
+      examples: [{ title: "Security", items: ["Post coverage", "Response time", "Incidents", "Team quality", "SLA"] }, { title: "Cleaning", items: ["Quality", "Frequency", "Complaints", "Compliance", "Audits"] }, { title: "Technology", items: ["Availability", "Incidents", "Resolution time", "Experience", "SLA"] }, { title: "Government and regulated", items: ["Targets", "Deliveries", "Indicators", "Oversight", "Evidence"] }]
+    },
+    dossierSpotlight: { eyebrow: "Auditable Dossier", title: "Performance also becomes evidence.", text: "Request, matrix, versions, decisions, Due Diligence, reservations, signature, obligations and assessment cycles converge into a verifiable history.", items: ["Decisions and approvals", "Documents and versions", "Obligations and deadlines", "Performance and evidence", "Append-only logs"], proof: "From request to execution: context preserved for audit, oversight and accountability.", videoScene: 13 },
+    dashboard: {
+      eyebrow: "Executive view", title: "From operations to indicators without losing detail.", text: "Six perspectives connect contracts, suppliers, costs, expirations and data to support decisions.", views: ["Executive Menu", "Suppliers", "Cost Center", "Category and Nature", "Expirations", "Database"], filters: ["Company", "Branch", "Multiple branches", "Cost center", "Period", "Drilldown", "Export"],
+      kpis: [{ label: "Active contracts", value: "1,248", delta: "+8.4%" }, { label: "Total value", value: "$16.2m", delta: "+3.1%" }, { label: "In negotiation", value: "86", delta: "12 critical" }, { label: "Average performance", value: "4.6", delta: "out of 5" }, { label: "Open obligations", value: "142", delta: "18 upcoming" }, { label: "Critical SLA", value: "7", delta: "requires attention" }], disclaimer: "Fictional data for visual demonstration.", videoScene: 14
+    },
+    integrations: {
+      eyebrow: "Connected ecosystem", title: "Integrate progressively without tying the platform to one vendor.", text: "TOTVS RM is a priority initial integration and concrete proof of connectivity—not a DRATOS limitation.",
+      items: [{ name: "TOTVS RM", type: "Priority ERP", status: "Available by project" }, { name: "TOTVS Electronic Signature", type: "Initial signer", status: "Available by integration" }, { name: "Procurement System", type: "Demand source", status: "Configurable" }, { name: "REST APIs", type: "Integration", status: "Configurable" }, { name: "Webhooks", type: "Events", status: "Configurable" }, { name: "SMTP", type: "Communication", status: "Configurable" }, { name: "Spreadsheets and CSV", type: "Import", status: "Configurable" }, { name: "Other ERPs and signers", type: "Ecosystem", status: "Planned by project" }],
+      totvs: { title: "Initial integration with TOTVS RM", text: "Queries and synchronizations can connect suppliers, products and services, companies, branches, cost centers, users, contracts and statuses.", features: ["Contract transport", "Status synchronization", "Webhooks when available", "Polling fallback", "Integration traceability"] }
+    },
+    videoLibrary: { eyebrow: "Feature demonstrations", title: "See the journey in action, step by step.", text: "Short videos presented by Helena show the platform from overview to executive dashboard.", sceneIndexes: [0, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] },
+    access: { eyebrow: "Profiles and access control", title: "The right person, in the right context, with the right permission.", text: "RBAC and contextual segregation control access on frontend and backend without exposing sensitive implementation details.", profiles: ["ADMIN", "SPECIALIST", "LEGAL", "MANAGER", "SIGNATORY", "INDICATORS", "AUDIT", "PROCUREMENT"], contexts: ["Company", "Branch", "Cost center", "Multiple centers", "Internal and external access"] },
+    security: { eyebrow: "Security and architecture", title: "Enterprise controls throughout the journey.", text: "The architecture combines authentication, segregation, auditing and resilience. The final design depends on each organization's environment and integrations.", items: ["JWT", "RBAC", "Context segregation", "Append-only trail", "Logs and audit", "Idempotency and hashing", "Webhooks and retries", "Polling fallback", "Timeouts and cache", "Protected routes", "Document storage", "Multi-company and multi-branch"], stackTitle: "Technical stack", stackText: "Secondary technical area", stackNote: "DRATOS platform stack. This landing page uses plain HTML, CSS and JavaScript for static publishing." },
+    publicSector: { eyebrow: "Public sector and regulated organizations", title: "Governance, transparency and performance for operations that require accountability.", text: "Structure continuous-service contracts, targets, oversight, SLAs, evidence and performance across multiple units and cost centers.", items: ["Suppliers and ongoing services", "Targets and deliveries", "Oversight and SLA", "Evidence and audit", "Multiple units", "History and accountability"] },
+    plans: {
+      eyebrow: "Plans", title: "A configuration for every maturity stage.", text: "Volumes, modules, integrations and services are defined after assessment.",
+      items: [{ name: "Sandbox", price: "Guided trial", description: "Explore the journey with a demonstration scenario.", features: ["Guided environment", "Demo data", "Assessment session"] }, { name: "Essential", price: "Starting at", description: "Organize requests, authoring and documents.", features: ["Requests", "Basic matrices", "Spreadsheets and CSV"] }, { name: "Professional", price: "Contact us", description: "Expand legal and post-signature governance.", features: ["Legal Room", "Playbooks", "Obligations", "Due Diligence"] }, { name: "Integrated Business", price: "Contact us", description: "Connect the journey to corporate systems.", features: ["Assisted connector", "APIs and monitoring", "Advanced dossier"], featured: true }, { name: "Enterprise", price: "Custom project", description: "Architecture for complex operations.", features: ["Multi-company", "Advanced profiles", "Integrations and SLA"] }]
+    },
+    founding: { eyebrow: "Launch program", title: "DRATOS Founding Clients", text: "Build an applied case through assessment, guided implementation and follow-up on early results.", items: ["Contract workflow assessment", "Initial matrix and playbook", "Integration and data import", "Training", "Follow-up", "Case building", "Results evaluation"] },
+    faq: {
+      eyebrow: "Frequently asked questions", title: "Start with clarity.",
+      items: [["Does DRATOS replace the ERP?", "No. DRATOS connects and governs the contract journey using data the organization already has."], ["Do I need TOTVS?", "No. TOTVS RM is a priority initial integration, while the platform supports other sources."], ["Can we start with spreadsheets?", "Yes. Spreadsheets and CSV can support a progressive implementation."], ["How does data enter the platform?", "Through forms, manual entry, imports, APIs or configured connectors."], ["Does Legal control matrices and clauses?", "Yes. Matrices, versions, statuses and playbooks maintain legal governance."], ["How does the Legal Room work?", "It centralizes documents, comments, versions, pending issues and decisions."], ["Does the platform include electronic signature?", "The journey integrates electronic signature according to the signer and integration project."], ["How does Due Diligence work?", "It gathers data, evidence and pending issues to support documented human analysis."], ["What is Contract Performance?", "It is the recurring evaluation of deliveries, service levels, criteria and results."], ["Can each contract have its own indicators?", "Yes. Models, criteria, weights, scales and frequency can be configured."], ["What is an Auditable Dossier?", "A verifiable history of documents, versions, decisions, approvals, evidence and events."], ["How do permissions work?", "Profiles and contexts such as company, branch and cost center delimit access."], ["Does DRATOS serve government?", "It can support public and regulated operations that require evidence and accountability."], ["Can other ERPs be integrated?", "Yes. The design supports APIs, webhooks, imports and project-specific connectors."], ["How does the pilot work?", "It starts with an assessment, a priority scenario, guided setup and agreed evaluation criteria."]]
+    },
+    finalCta: { eyebrow: "Applied demonstration", title: "Shall we present DRATOS applied to your organization?", text: "We demonstrate the complete journey using your contracts, data sources, areas, approval criteria, obligations and performance indicators.", signature: "From request to contract performance." },
+    form: {
+      title: "Book an applied demonstration", text: "Tell us about your operation. Without a configured endpoint, confirmation opens your email client addressed to contato@dratos.com.br.",
+      fields: {
+        name: { label: "Name", placeholder: "Your name", required: true }, company: { label: "Company", placeholder: "Organization name", required: true }, role: { label: "Role", placeholder: "Your role", required: true }, email: { label: "Corporate email", placeholder: "name@company.com", required: true }, phone: { label: "Phone (optional)", placeholder: "+1 000 000 0000", required: false },
+        erp: { label: "Current ERP", placeholder: "Select", required: true, options: ["TOTVS RM", "SAP", "Oracle", "Other ERP", "Spreadsheets / no ERP"] }, volume: { label: "Approximate contract volume", placeholder: "Select", required: true, options: ["Up to 100", "101 to 500", "501 to 2,000", "2,001 to 10,000", "More than 10,000"] }, challenge: { label: "Main challenge", placeholder: "Briefly describe the scenario", required: true }, interest: { label: "Interest", placeholder: "Select", required: true, options: ["Demonstration", "Assessment", "Founding Clients Program", "Integration", "Partnership"] }, privacy: { label: "I agree to the use of this data to respond to this request.", required: true }
+      },
+      demoSuccess: "Your email client was opened with the request addressed to contato@dratos.com.br. Review the message before sending.", sendSuccess: "Request sent successfully.", error: "Unable to send now. Review the data or try again.", validation: "Complete required fields and accept the privacy statement."
+    },
+    footer: { descriptor: "Intelligent Contract Governance", text: "Data, decisions and performance in a verifiable journey.", contactLabel: "Contact", links: [["Journey", "#jornada"], ["Platform", "#plataforma"], ["Security", "#seguranca"], ["FAQ", "#faq"]], copyright: "© 2026 DRATOS. All rights reserved.", privacy: "Privacy", privacyNote: "In this demonstration, without a configured endpoint, the form only prepares a message in the visitor's email client. Sending occurs only after the person confirms it." },
+    videoModal: { production: "Video in production", productionText: "This space is ready for the scene video, poster, captions and transcript.", transcript: "Transcript", sceneDirection: "Scene direction" },
+    toast: { theme: "Theme updated.", language: "Language updated.", copied: "Content copied.", plan: "Plan selected for the conversation." }
+  });
+
+  window.DRATOS_CONTENT.en.journey.scenes.forEach((scene, index) => {
+    scene.video = base.journey.scenes[index].video;
+    scene.captions = base.journey.scenes[index].captions;
+    scene.poster = base.journey.scenes[index].poster;
+    scene.duration = "00:10";
+    scene.status = "Available";
+  });
+
+  window.DRATOS_CONTENT.en.platform.modules.forEach((module) => {
+    const source = base.platform.modules.find((item) => item.id === module.id);
+    module.videoScene = source?.videoScene ?? null;
+  });
+})();

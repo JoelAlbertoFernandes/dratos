@@ -1,12 +1,5 @@
 # Documentos comerciais
 
-Placeholders sugeridos:
+Pasta reservada para materiais aprovados, como apresentação institucional, guia de integração, checklist de maturidade contratual e material do programa Founding Clients.
 
-- `one-page-dratos.pdf`
-- `pitch-dratos-totvs.pdf`
-- `guia-integracao-totvs.pdf`
-- `checklist-maturidade-contratual.pdf`
-- `modelo-piloto-founding-clients.pdf`
-
-Adicione somente versões aprovadas para distribuição comercial.
-
+Adicione somente versões autorizadas para distribuição. Registre título, idioma, caminho e status nos arquivos em `content/` antes de criar links públicos.

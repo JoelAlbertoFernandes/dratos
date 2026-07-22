@@ -1,67 +1,87 @@
-# Informações do projeto - V3
+# Informações do projeto DRATOS
 
 ## Objetivo
 
-Apresentar a DRATOS como uma demonstração comercial guiada da plataforma, conduzindo clientes e parceiros do problema inicial até cada módulo da jornada contratual.
-
-## Posicionamento
-
-A DRATOS não é apresentada como produto para TOTVS. Ela se conecta aos dados atuais da organização, incluindo ERPs, TOTVS, planilhas, APIs, formulários e bases externas.
-
-## Estrutura narrativa
-
-1. Apresentação da plataforma.
-2. Problemas anteriores à DRATOS.
-3. Jornada contratual clicável.
-4. Demonstração dos nove módulos.
-5. Segurança e governança.
-6. Conectores e integrações.
-7. Planos e vídeos por módulo.
-8. FAQ e convite para demonstração aplicada.
+Apresentar a DRATOS como plataforma universal de governança contratual para empresas privadas, governo, estatais e operações reguladas. TOTVS RM aparece como integração inicial prioritária, sem dominar o posicionamento da marca.
 
 ## Arquitetura
 
-O projeto utiliza HTML, CSS e JavaScript puros, sem dependências externas obrigatórias.
+A landing page é uma aplicação estática, sem build ou dependências externas:
 
-- `index.html` contém apenas metadados, pontos de montagem e referências aos arquivos.
-- `content/*.js` contém os textos editáveis.
-- `js/content-loader.js` controla idioma e persistência local.
-- `js/main.js` renderiza componentes e controla as interações.
-- `css/style.css` contém tokens, componentes, responsividade e temas.
+```text
+index.html
+├── content/*.js
+├── js/content-loader.js
+├── js/main.js
+└── css/style.css
+```
 
-## Padrão visual
+`content-loader.js` seleciona idioma e tema, persiste preferências e atualiza metadados. `main.js` transforma o conteúdo em componentes sem manter textos comerciais próprios. A renderização é integral no cliente e usa âncoras, por isso não exige fallback de rotas no GitHub Pages.
 
-A versão V3 preserva a linguagem enterprise futurista predominantemente clara:
+## Componentes
 
-- Objetos 3D recriados em CSS.
-- Vidro fosco, metal leve, azul, prata e ciano.
-- Diagramas com hubs, órbitas, conexões e fluxos.
-- Seções amplas inspiradas em apresentações premium SaaS e Legal Tech.
-- Uma narrativa visual dominante por seção, evitando grids genéricos repetitivos.
-- Logo oficial utilizado como arquivo original em todas as aparições institucionais.
-- Capítulos amplos com explicação, mockup, vídeo e resultados de cada módulo.
+- header fixo e menu responsivo;
+- hero com mockup executivo;
+- problema e transformação antes/depois;
+- carrossel narrativo das 16 cenas;
+- mapa de fontes de dados;
+- explorador de 15 módulos;
+- painel e vídeo destacado de Performance;
+- Dossiê Auditável entre Performance e Dashboard;
+- dashboard executivo;
+- integrações e caso TOTVS RM;
+- perfis, segurança e arquitetura;
+- setor público e regulados;
+- planos, Founding Clients, FAQ e CTA final;
+- biblioteca de demonstrações por funcionalidade;
+- modal de vídeo e formulário de demonstração.
 
-## Interações implementadas
+## Conteúdo e idiomas
 
-- Navegação por âncoras.
-- Menu responsivo.
-- Alternância light/dark.
-- Alternância PT/EN/ES.
-- FAQ expansível.
-- Modal de demonstração.
-- Seleção de plano.
-- Formulário mockado.
-- Feedback por toast.
-- Animações de entrada.
-- Jornada clicável.
-- Diretório de módulos.
-- Placeholders individuais para vídeos explicativos.
-- Biblioteca de vídeos por módulo.
+PT-BR é o idioma padrão. Inglês e espanhol possuem conteúdo completo para todas as áreas visíveis. Ativos, configurações técnicas e dados que não requerem tradução são herdados da configuração-base. A preferência é salva em `localStorage`.
 
-## Manutenção
+## Temas
 
-O conteúdo textual deve permanecer em `content/`. Elementos estruturais e composições visuais ficam em `js/main.js`; tokens e estilos ficam em `css/style.css`. Ao adicionar uma nova seção, inclua o conteúdo nos três idiomas e mantenha os caminhos relativos para compatibilidade com GitHub Pages.
+O modo claro é predominante. O modo escuro é opcional e usa tokens CSS próprios. A preferência é persistida. A folha respeita `prefers-reduced-motion`.
 
-## Publicação
+## Vídeos
 
-Todos os caminhos são relativos, permitindo abrir `index.html` localmente e publicar a pasta em serviços estáticos como GitHub Pages, Cloudflare Pages e Netlify.
+Os 16 vídeos reais possuem MP4, VTT, poster individual, título, duração, transcript, direção e status. O player usa moldura premium, proporção 16:9, `preload="metadata"`, controles nativos e nunca inicia automaticamente com som. Caso um arquivo futuro não exista, o fallback visual permanece disponível.
+
+## Formulário
+
+Campos HTML nativos fornecem validação. Sem endpoint, o formulário abre um `mailto:` endereçado a `contato@dratos.com.br`, e o usuário confirma o envio no próprio cliente de e-mail. Quando configurado, o envio usa `POST` JSON. Segurança, consentimento, rate limiting e retenção devem ser implementados no backend de produção.
+
+## SEO
+
+- title e description localizados;
+- Open Graph e Twitter Card;
+- canonical configurável;
+- JSON-LD `Organization`;
+- `robots.txt`, `sitemap.xml` e manifest;
+- headings semânticos e conteúdo navegável.
+
+## Acessibilidade
+
+- link de salto;
+- foco visível;
+- labels e validação de formulário;
+- diálogos com foco inicial, Escape e contenção de Tab;
+- controles com nomes acessíveis;
+- contraste e tema escuro;
+- movimento reduzido;
+- vídeos preparados para legendas e transcript.
+
+## Performance
+
+- zero bibliotecas de runtime;
+- imagens secundárias com lazy loading;
+- vídeos carregados apenas sob demanda;
+- animações em transform e opacity;
+- dimensões declaradas para assets;
+- CSS e JavaScript locais;
+- compatibilidade com cache estático do GitHub Pages.
+
+## Deploy
+
+Arquivos e links internos usam caminhos relativos. Antes de produção, configure canonical, sitemap, robots, endpoint do formulário, política de privacidade e vídeos definitivos.

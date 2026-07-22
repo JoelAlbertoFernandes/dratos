@@ -1,107 +1,95 @@
-# Como editar a landing page DRATOS V3
+# Como editar a landing page DRATOS
 
-Todo conteúdo textual principal está nos arquivos:
+Todo conteúdo comercial editável fica fora dos componentes:
 
-- `content/pt.js`
-- `content/en.js`
-- `content/es.js`
+- `content/pt.js` — português brasileiro e configuração principal;
+- `content/en.js` — tradução completa em inglês;
+- `content/es.js` — tradução completa em espanhol.
 
-## Alterar textos e CTAs
+Ao mudar a estrutura de uma seção, replique a alteração nos três idiomas.
 
-Abra o arquivo do idioma desejado e edite a propriedade correspondente. Por exemplo:
+## Textos e CTAs
+
+- Hero: `hero`.
+- Menu: `nav`.
+- Rótulos de botões: `actions`.
+- Seções: objetos como `problem`, `sources`, `performance` e `security`.
+- CTA final: `finalCta`.
+- Rodapé e contato: `footer`.
+
+Não escreva texto comercial diretamente em `js/main.js`.
+
+## Logo e elemento gráfico
+
+- Logo oficial: `assets/brand/dratos-logo.png`.
+- Elemento oficial: `assets/brand/dratos-elemento.png`.
+
+Os caminhos ficam em `assets` dentro de cada arquivo de conteúdo. Substitua apenas por versões oficiais, preserve a proporção e mantenha os nomes para evitar ajustes adicionais.
+
+## Imagens
+
+Coloque imagens em `assets/images/`, preferencialmente em AVIF ou WebP. Inclua o caminho no objeto `assets` ou na seção correspondente dos três idiomas. Informe dimensões no HTML gerado para evitar deslocamento de layout.
+
+## Vídeos, poster, legenda e transcript
+
+As 16 cenas ficam em `journey.scenes`. Cada cena contém:
+
+- `title` e `duration`;
+- `line` — transcript curto;
+- `movement` — direção de cena;
+- `screen` — texto de tela;
+- `video` — caminho do MP4;
+- `captions` — caminho do VTT;
+- `status` — “Em produção” ou “Disponível”;
+- `poster` — thumbnail real extraída do vídeo.
+
+Para publicar um vídeo:
+
+1. coloque o MP4 em `assets/video/` e o poster 16:9 em `assets/video/posters/`;
+2. confira `video` e `captions` em `content/pt.js`;
+3. traduza o VTT quando necessário e aponte o idioma correspondente;
+4. altere `status` para “Disponível”, `Available` e `Disponible`;
+5. use `assets/images/video-poster.svg` apenas como fallback global.
+
+Nenhum vídeo inicia automaticamente com som. O player é carregado somente após a interação do visitante.
+
+## Formulário e endpoint
+
+Campos e mensagens ficam em `form`. A configuração fica em `settings`:
 
 ```js
-hero: {
-  title: "Novo título",
-  text: "Nova descrição"
+settings: {
+  formEndpoint: "https://seu-endpoint.example/demos",
+  mailtoFallback: "contato@dratos.com.br",
+  privacyUrl: "https://example.com/privacidade"
 }
 ```
 
-As listas de cards, módulos, benefícios, planos e FAQs também são controladas nesses arquivos.
+Com `formEndpoint` vazio, o formulário prepara um `mailto:` para `contato@dratos.com.br`. O visitante revisa e confirma o envio no próprio cliente de e-mail. Para não usar esse fallback, deixe `mailtoFallback` vazio.
 
-## Alterar links
+## Planos, FAQ, módulos e integrações
 
-Os links internos do menu estão na propriedade `nav`. Cada item possui o texto e o identificador da seção.
+- Planos: `plans.items`.
+- FAQ: `faq.items`.
+- Módulos: `platform.modules`.
+- Integrações: `integrations.items` e `integrations.totvs`.
+- Métricas demonstrativas: `hero.metrics`, `performance` e `dashboard.kpis`.
 
-O e-mail de contato está em `footer.contact`.
+Status recomendados: “Configurável”, “Em evolução”, “Disponível conforme integração” ou “Planejado”. Não transforme funcionalidades planejadas em promessas operacionais.
 
-## Adicionar vídeo
+## Nova integração
 
-Cada módulo possui um caminho de vídeo configurável em `content/pt.js`, dentro de `modules`.
+1. adicione um item em `integrations.items` nos três idiomas;
+2. informe nome, tipo e status real;
+3. se houver detalhes, crie um objeto específico como `integrations.totvs`;
+4. não utilize logotipo de terceiro sem autorização.
 
-Exemplo:
+## Cores, temas e layout
 
-```js
-video: "assets/video/modulo-sala-juridica.mp4"
-```
+Tokens globais estão no início de `css/style.css`. O tema escuro usa `[data-theme="dark"]`. Componentes e breakpoints ficam no mesmo arquivo.
 
-Vídeos previstos:
+## Canonical, sitemap e GitHub Pages
 
-- `modulo-conectores.mp4`
-- `modulo-requisicoes.mp4`
-- `modulo-autoria.mp4`
-- `modulo-biblioteca.mp4`
-- `modulo-sala-juridica.mp4`
-- `modulo-due-diligence.mp4`
-- `modulo-aprovacoes-assinatura.mp4`
-- `modulo-obrigacoes.mp4`
-- `modulo-dossie.mp4`
-
-Enquanto o arquivo não existir, a página exibe um placeholder premium. Para habilitar reprodução real, conecte o caminho a uma tag `<video>` em `js/main.js`.
-
-## Logo oficial
-
-O logo original utilizado em toda a landing page está em:
-
-`assets/logo/dratos-logo.png`
-
-Substitua somente por uma nova versão oficial da marca, preservando o mesmo nome de arquivo. Não recrie o símbolo em CSS.
-
-## Adicionar imagens
-
-Coloque imagens em `assets/images/` e referencie seus caminhos nos arquivos de conteúdo ou em `js/main.js`. Recomenda-se WebP ou PNG otimizado.
-
-Espaços previstos para substituições futuras:
-
-- `hero-dashboard.png`
-- `totvs-integration.png`
-- `workflow-contracts.png`
-- `audit-dossier.png`
-- `sala-juridica.png`
-- `autoria-contratual.png`
-- `biblioteca-clausulas.png`
-
-A versão atual utiliza objetos 3D, interfaces e diagramas construídos em CSS para permanecer leve e funcionar sem dependências externas.
-
-## Alterar planos
-
-Edite `plans.items` em cada arquivo de conteúdo. Preço, descrição, recursos e plano recomendado são editáveis.
-
-## Alterar módulos
-
-Os nove capítulos da demonstração ficam em `modules`, no arquivo de conteúdo. Cada módulo contém:
-
-- título e explicação;
-- funcionalidades;
-- quem usa;
-- problema resolvido;
-- valor gerado;
-- caminho do vídeo;
-- tipo de mockup visual.
-
-## Alterar cores e aparência
-
-As cores principais estão nas variáveis do início de `css/style.css`. Os temas claro e escuro possuem tokens separados. Os objetos 3D, hubs, fluxos, escudo e diagramas também são controlados nesse arquivo.
-
-## Formulário
-
-O formulário de demonstração é mockado e não envia dados. Para produção, conecte o evento de envio em `js/main.js` a um CRM, formulário ou endpoint seguro.
-
-## Publicar no GitHub Pages
-
-1. Envie todo o conteúdo da pasta `landing-page` para um repositório.
-2. Acesse `Settings > Pages`.
-3. Escolha a branch e a pasta raiz.
-4. Salve e aguarde a URL pública.
-
-Não são necessários build, backend ou instalação de pacotes.
+1. defina `meta.canonical` nos três idiomas;
+2. substitua a URL de exemplo em `sitemap.xml` e `robots.txt`;
+3. publique a raiz do repositório em **Settings → Pages**.

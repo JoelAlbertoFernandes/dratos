@@ -1,18 +1,14 @@
-# Vídeo demonstrativo
+# Vídeos demonstrativos
 
-Arquivos previstos para a demonstração:
+Esta pasta contém os 16 vídeos reais da narrativa conduzida por Helena, de `01-abertura.mp4` a `16-encerramento.mp4`.
 
-- `dratos-demo-placeholder.mp4`
-- `modulo-conectores.mp4`
-- `modulo-requisicoes.mp4`
-- `modulo-autoria.mp4`
-- `modulo-biblioteca.mp4`
-- `modulo-sala-juridica.mp4`
-- `modulo-due-diligence.mp4`
-- `modulo-aprovacoes-assinatura.mp4`
-- `modulo-obrigacoes.mp4`
-- `modulo-dossie.mp4`
+Cada cena possui:
 
-Formato recomendado: MP4 H.264, proporção 16:9, resolução 1920x1080 ou 1280x720, tamanho otimizado para web.
+- MP4 configurável;
+- legenda VTT já criada;
+- poster individual em `assets/video/posters/` e fallback em `assets/images/video-poster.svg`;
+- título, duração, transcript, direção e status nos arquivos de conteúdo.
 
-Os caminhos são configurados em `content/pt.js`.
+Formato recomendado: MP4 H.264, proporção 16:9, 1920×1080 ou 1280×720, áudio otimizado e arquivo comprimido para web. Nenhum vídeo toca automaticamente com som.
+
+Os vídeos atuais estão marcados como disponíveis nos três idiomas. Ao substituir uma cena, mantenha Helena com identidade visual, figurino, ambiente e tom consistentes e gere um novo poster com o mesmo nome-base.

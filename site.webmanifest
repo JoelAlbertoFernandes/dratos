@@ -1,0 +1,9 @@
+{
+  "name": "DRATOS — Governança Contratual Inteligente",
+  "short_name": "DRATOS",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#111e3a",
+  "icons": [{ "src": "assets/brand/dratos-elemento.png", "sizes": "any", "type": "image/png" }]
+}

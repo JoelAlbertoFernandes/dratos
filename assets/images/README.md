@@ -1,14 +1,13 @@
 # Imagens
 
-Pasta preparada para mockups e imagens institucionais:
+Use esta pasta para posters, mockups aprovados e imagens institucionais. Prefira AVIF ou WebP; use SVG para composições vetoriais simples.
 
-- `hero-dashboard.png`
-- `totvs-integration.png`
-- `workflow-contracts.png`
-- `audit-dossier.png`
-- `clause-library.png`
-- `legal-room.png`
-- `autoria-contratual.png`
-- `biblioteca-clausulas.png`
+`video-poster.svg` é o fallback visual dos vídeos. Os demais mockups da landing page são construídos em HTML e CSS para reduzir peso e facilitar tradução.
 
-A versão atual utiliza mockups construídos em HTML e CSS para manter o projeto leve.
+Ao adicionar uma imagem:
+
+1. otimize o arquivo;
+2. inclua dimensões explícitas;
+3. configure o caminho em `content/`;
+4. escreva texto alternativo quando a imagem transmitir informação;
+5. use `alt=""` quando ela for apenas decorativa.
