@@ -4,7 +4,7 @@
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f8fafc",
-  "theme_color": "#111e3a",
+  "background_color": "#0B0D10",
+  "theme_color": "#0B0D10",
   "icons": [{ "src": "assets/brand/dratos-elemento.png", "sizes": "any", "type": "image/png" }]
 }

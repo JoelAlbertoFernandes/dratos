@@ -25,19 +25,27 @@ jobs:
           node --check content/pt.js
           node --check js/content-loader.js
           node --check js/main.js
+          node -e "JSON.parse(require('fs').readFileSync('site.webmanifest', 'utf8'))"
       - name: Validate publication assets
         run: |
-          test -f assets/images/hero-helena-dratos.webp
+          test -f assets/images/video-frames/hero-helena.webp
+          test -f assets/images/video-frames/jornada-dratos.webp
+          test -f assets/images/video-frames/performance.webp
+          test -f assets/images/video-frames/dashboard.webp
           test -f assets/video/dratos-apresentacao-completa.mp4
           test -f assets/video/posters/dratos-apresentacao-completa.webp
           ! grep -R 'src="/\|href="/' index.html content js css
+          test "$(grep -R '\.mp4' index.html content js css | wc -l)" -eq 1
+          grep -q 'assets/video/dratos-apresentacao-completa.mp4' content/pt.js
+          grep -q 'href="https://joelalbertofernandes.github.io/dratos/"' index.html
+          grep -q '<loc>https://joelalbertofernandes.github.io/dratos/</loc>' sitemap.xml
       - name: Assemble static site
         run: |
           mkdir _site
           cp index.html robots.txt sitemap.xml site.webmanifest Favicon.png Logo_Dratos.png _site/
           cp -R assets content css js _site/
           find _site/assets/video -maxdepth 1 -type f -name '*.vtt' -delete
-          find _site/assets/video -maxdepth 1 -type f -name '*.mp4' ! -name '[0-9][0-9]-*.mp4' ! -name 'dratos-apresentacao-completa.mp4' -delete
+          find _site/assets/video -maxdepth 1 -type f -name '*.mp4' ! -name 'dratos-apresentacao-completa.mp4' -delete
           touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -1,13 +1,11 @@
 (function () {
   const data = window.DRATOS_CONTENT.pt;
   const savedTheme = localStorage.getItem("dratos-theme");
-  let theme = savedTheme === "dark" || savedTheme === "light"
-    ? savedTheme
-    : (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  let theme = savedTheme === "dark" || savedTheme === "light" ? savedTheme : "dark";
 
   function applyTheme() {
     document.documentElement.dataset.theme = theme;
-    document.querySelector('meta[name="theme-color"]').content = theme === "dark" ? "#091326" : "#f8fafc";
+    document.querySelector('meta[name="theme-color"]').content = theme === "dark" ? "#0B0D10" : "#f6f9fc";
   }
 
   function updateDocument() {
@@ -16,9 +14,11 @@
     document.querySelector('meta[name="description"]').content = data.meta.description;
     document.querySelector('meta[property="og:title"]').content = data.meta.title;
     document.querySelector('meta[property="og:description"]').content = data.meta.description;
+    document.querySelector('meta[property="og:url"]').content = data.meta.canonical;
     document.querySelector('meta[property="og:image"]').content = data.meta.socialImage;
     document.querySelector('meta[name="twitter:title"]').content = data.meta.title;
     document.querySelector('meta[name="twitter:description"]').content = data.meta.description;
+    document.querySelector('meta[name="twitter:image"]').content = data.meta.socialImage;
     document.querySelector(".skip-link").textContent = data.accessibility.skip;
     const canonical = document.querySelector("#canonical");
     canonical.href = data.meta.canonical || location.href.split("#")[0];
