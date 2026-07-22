@@ -2,6 +2,7 @@
   "name": "DRATOS — Governança Contratual Inteligente",
   "short_name": "DRATOS",
   "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#f8fafc",
   "theme_color": "#111e3a",

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://fernandesjoel.github.io/Dratos/sitemap.xml
+Sitemap: https://joelalbertofernandes.github.io/dratos/sitemap.xml

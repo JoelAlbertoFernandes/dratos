@@ -54,4 +54,4 @@ O contato oficial é `contato@dratos.com.br`. Sem endpoint, o formulário abre u
 
 ## Publicação
 
-`.github/workflows/deploy-pages.yml` valida o código e publica um artefato estático. A URL preparada é `https://fernandesjoel.github.io/Dratos/`. A ativação depende de remote e conta GitHub oficialmente confirmados.
+`.github/workflows/deploy-pages.yml` valida o código e publica um artefato estático. A URL preparada é `https://joelalbertofernandes.github.io/dratos/`. O repositório oficial é `https://github.com/JoelAlbertoFernandes/dratos`.

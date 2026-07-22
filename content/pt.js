@@ -6,7 +6,7 @@ window.DRATOS_CONTENT.pt = {
     label: "PT",
     title: "DRATOS | Governança Contratual Inteligente",
     description: "Conecte dados, pessoas, documentos, aprovações, assinaturas, obrigações, performance e evidências em uma jornada contratual governada.",
-    canonical: "https://fernandesjoel.github.io/Dratos/",
+    canonical: "https://joelalbertofernandes.github.io/dratos/",
     socialImage: "assets/images/hero-helena-dratos.webp",
     organization: {
       name: "DRATOS — Contratos Inteligentes",

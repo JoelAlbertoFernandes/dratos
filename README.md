@@ -47,9 +47,11 @@ Sem backend, o formulário prepara um e-mail para `contato@dratos.com.br`. O vis
 
 ## GitHub Pages
 
-O workflow `.github/workflows/deploy-pages.yml` valida o JavaScript, monta um artefato estático e publica pelo GitHub Pages. Todos os caminhos de runtime são relativos e compatíveis com o subdiretório `/Dratos/`.
+O workflow `.github/workflows/deploy-pages.yml` valida o JavaScript, monta um artefato estático e publica pelo GitHub Pages. Todos os caminhos de runtime são relativos e compatíveis com o subdiretório `/dratos/`.
 
-Destino previsto: `https://fernandesjoel.github.io/Dratos/`.
+Repositório oficial: `https://github.com/JoelAlbertoFernandes/dratos`.
+
+Destino previsto: `https://joelalbertofernandes.github.io/dratos/`.
 
 ## Estrutura
 

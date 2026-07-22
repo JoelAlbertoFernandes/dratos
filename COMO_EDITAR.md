@@ -57,4 +57,4 @@ Sem endpoint, o formulário apenas prepara um `mailto:`; não informe ao visitan
 
 ## Publicação
 
-Canonical, robots e sitemap estão preparados para `https://fernandesjoel.github.io/Dratos/`. Se o repositório oficial mudar, atualize os três locais antes da publicação.
+Canonical, robots e sitemap estão preparados para `https://joelalbertofernandes.github.io/dratos/`. O repositório oficial é `https://github.com/JoelAlbertoFernandes/dratos`.
