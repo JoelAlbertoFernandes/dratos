@@ -3,7 +3,7 @@
   const modalRoot = document.querySelector("#modal-root");
   const toastRoot = document.querySelector("#toast-root");
   let activeModule = 0;
-  let activeScene = 0;
+  let lastFocusedElement = null;
 
   const icon = (name) => {
     const paths = {
@@ -35,7 +35,7 @@
       <img src="${scene.poster || c.assets.videoPoster}" alt="" loading="lazy" width="960" height="540">
       <span class="video-preview-shade"></span>
       <span class="video-preview-play">${icon("play")}</span>
-      <span class="video-preview-copy"><small>${scene.number} · ${scene.duration}</small><b>${scene.title}</b><em>${scene.status}</em></span>
+      <span class="video-preview-copy"><small>${scene.duration}</small><b>${scene.title}</b><span>${scene.line}</span></span>
     </button>`;
   };
 
@@ -51,10 +51,6 @@
             ${c.nav.map(([label, id]) => `<a href="#${id}">${label}</a>`).join("")}
           </nav>
           <div class="header-tools">
-            <label class="sr-only" for="language-select">${c.accessibility.changeLanguage}</label>
-            <select id="language-select" aria-label="${c.accessibility.changeLanguage}">
-              ${["pt", "en", "es"].map((lang) => `<option value="${lang}" ${DratosContent.getLanguage() === lang ? "selected" : ""}>${window.DRATOS_CONTENT[lang].meta.label}</option>`).join("")}
-            </select>
             <button class="icon-btn" type="button" data-theme-toggle aria-label="${c.accessibility.toggleTheme}">${icon(theme === "dark" ? "sun" : "moon")}</button>
             <button class="btn btn-primary btn-header" type="button" data-demo>${c.actions.demo}</button>
             <button class="icon-btn menu-btn" type="button" data-menu aria-expanded="false" aria-controls="site-nav" aria-label="${c.accessibility.openMenu}">${icon("menu")}</button>
@@ -71,16 +67,19 @@
               <h1>${c.hero.title}</h1>
               <p class="lead">${c.hero.text}</p>
               <div class="actions">
+                ${button(c.actions.platform, "btn btn-primary", "type=\"button\" data-scroll=\"plataforma\"")}
+                <button class="btn btn-secondary" type="button" data-video-complete><span>${icon("play")}${c.actions.fullPresentation}</span></button>
                 ${button(c.actions.demo, "btn btn-primary", "type=\"button\" data-demo")}
-                ${button(c.actions.journey, "btn btn-secondary", "type=\"button\" data-scroll=\"jornada\"")}
               </div>
               <p class="hero-note"><span>${icon("database")}</span>${c.hero.note}</p>
             </div>
             <div class="hero-visual reveal" aria-label="${c.hero.stageLabel}">
               <div class="orb orb-one"></div><div class="orb orb-two"></div>
-              <button type="button" class="hero-cinematic" data-video="0" aria-label="${c.actions.watch}: ${c.journey.scenes[0].title}">
-                <img src="${c.journey.scenes[0].poster}" alt="" width="960" height="540" fetchpriority="high">
-                <span><i>${icon("play")}</i><b>${c.journey.presenter}</b></span>
+              <div class="hero-cinematic" aria-label="${c.hero.stageLabel}">
+                <img src="${c.assets.hero}" alt="Helena apresenta a plataforma DRATOS em um ambiente corporativo contemporâneo" width="1280" height="720" fetchpriority="high">
+              </div>
+              <button type="button" class="hero-presentation" data-video-complete aria-label="${c.actions.fullPresentation}">
+                <i>${icon("play")}</i><span><small>${c.completeVideo.duration}</small><b>${c.actions.fullPresentation}</b></span>
               </button>
               <div class="product-window">
                 <div class="product-bar"><span></span><span></span><span></span><b>${c.visual.productLabel}</b></div>
@@ -103,8 +102,12 @@
         <section class="section problem-section" id="visao-geral">
           <div class="container problem-grid">
             <div class="problem-visual reveal">
-              <div class="fragment-field">${c.visual.fragments.map((text, i) => `<span style="--i:${i}">${text}</span>`).join("")}</div>
-              <div class="fragment-score"><small>${c.problem.evidenceLabel}</small><strong>${c.problem.evidenceValue}</strong><p>${c.problem.evidenceNote}</p></div>
+              <div class="rupture-diagram">
+                <p>${c.problem.diagramTitle}</p>
+                <div class="rupture-nodes">${c.problem.items.map((item, index) => `<article style="--i:${index}"><i>${icon(index === 0 ? "document" : index === 1 ? "shield" : index === 2 ? "spark" : "chart")}</i><span>${item.number}</span><b>${item.title}</b></article>`).join("")}</div>
+                <div class="rupture-flow" aria-hidden="true"><span></span><span></span><span></span></div>
+                <small>${c.problem.diagramNote}</small>
+              </div>
             </div>
             <div>
               ${heading(c.problem)}
@@ -120,26 +123,6 @@
               <article><span>${c.promise.before.label}</span><h3>${c.promise.before.title}</h3><div class="static-doc">${icon("document")}<i></i><i></i></div><ul>${c.promise.before.items.map((x) => `<li>${x}</li>`).join("")}</ul></article>
               <div class="transform-core"><img src="${c.assets.element}" alt="" width="92" height="92"><i></i></div>
               <article class="after"><span>${c.promise.after.label}</span><h3>${c.promise.after.title}</h3><div class="living-hub"><b>${c.visual.brand}</b>${Array.from({ length: 6 }, (_, i) => `<i style="--i:${i}"></i>`).join("")}</div><ul>${c.promise.after.items.map((x) => `<li>${x}</li>`).join("")}</ul></article>
-            </div>
-          </div>
-        </section>
-
-        <section class="section journey-section" id="jornada">
-          <div class="container">
-            <div class="journey-heading">
-              ${heading(c.journey)}
-              <div class="presenter-chip reveal"><span>${c.visual.presenterInitial}</span><div><b>${c.journey.presenter}</b><small>${c.journey.presenterNote}</small></div></div>
-            </div>
-            <div class="scene-shell reveal">
-              <div class="scene-track" data-scene-track>
-                ${c.journey.scenes.map((scene, index) => `<article class="scene-card ${index === activeScene ? "active" : ""}" data-scene-card="${index}">
-                  <div class="scene-top"><span>${scene.number}</span><em>${scene.duration}</em></div>
-                  <div class="scene-screen"><img src="${scene.poster || c.assets.videoPoster}" alt="" loading="lazy" width="640" height="360"><span>${icon("play")}</span><b>${scene.screen}</b><i>${scene.status}</i></div>
-                  <h3>${scene.title}</h3><p>${scene.line}</p>
-                  <button type="button" class="text-link" data-video="${index}">${icon("play")} ${c.actions.watch}</button>
-                </article>`).join("")}
-              </div>
-              <div class="scene-controls"><button type="button" class="icon-btn" data-scene-prev aria-label="${c.accessibility.previous}">${icon("arrow")}</button><span data-scene-count>${String(activeScene + 1).padStart(2, "0")} / 16</span><button type="button" class="icon-btn" data-scene-next aria-label="${c.accessibility.next}">${icon("arrow")}</button></div>
             </div>
           </div>
         </section>
@@ -252,7 +235,7 @@
 
         <section class="section final-section">
           <img class="brand-element final-element" src="${c.assets.element}" alt="" loading="lazy" width="600" height="600">
-          <div class="container final-content reveal"><img src="${c.assets.logo}" alt="${c.visual.brand}" loading="lazy" width="230" height="45"><p class="eyebrow">${c.finalCta.eyebrow}</p><h2>${c.finalCta.title}</h2><p class="lead">${c.finalCta.text}</p><div class="actions">${button(c.actions.demo, "btn btn-light", "type=\"button\" data-demo")}${button(c.actions.watch, "btn btn-outline-light", "type=\"button\" data-video=\"0\"")}${button(c.actions.diagnose, "btn btn-outline-light", "type=\"button\" data-demo")}</div><strong>${c.finalCta.signature}</strong></div>
+          <div class="container final-content reveal"><img src="${c.assets.logo}" alt="${c.visual.brand}" loading="lazy" width="230" height="45"><p class="eyebrow">${c.finalCta.eyebrow}</p><h2>${c.finalCta.title}</h2><p class="lead">${c.finalCta.text}</p><div class="actions">${button(c.actions.demo, "btn btn-light", "type=\"button\" data-demo")}<button class="btn btn-outline-light" type="button" data-video-complete><span>${c.actions.fullPresentation}</span>${icon("play")}</button>${button(c.actions.diagnose, "btn btn-outline-light", "type=\"button\" data-demo")}</div><strong>${c.finalCta.signature}</strong></div>
         </section>
       </main>
 
@@ -263,13 +246,16 @@
 
     bindEvents();
     observeReveals();
-    requestAnimationFrame(() => updateScenePosition(false));
   }
 
   function bindEvents() {
     const c = DratosContent.get();
-    document.querySelector("#language-select")?.addEventListener("change", (event) => DratosContent.setLanguage(event.target.value));
-    document.querySelector("[data-theme-toggle]")?.addEventListener("click", () => { DratosContent.toggleTheme(); showToast(c.toast.theme); });
+    document.querySelector("[data-theme-toggle]")?.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      DratosContent.toggleTheme();
+      showToast(c.toast.theme);
+    });
     document.querySelector("[data-menu]")?.addEventListener("click", (event) => {
       const nav = document.querySelector("#site-nav");
       const open = nav.classList.toggle("open");
@@ -281,32 +267,15 @@
     document.querySelectorAll("[data-demo]").forEach((element) => element.addEventListener("click", openForm));
     document.querySelectorAll("[data-scroll]").forEach((element) => element.addEventListener("click", () => document.querySelector(`#${element.dataset.scroll}`)?.scrollIntoView({ behavior: "smooth" })));
     document.querySelectorAll("[data-video]").forEach((element) => element.addEventListener("click", () => openVideo(Number(element.dataset.video))));
+    document.querySelectorAll("[data-video-complete]").forEach((element) => element.addEventListener("click", openCompleteVideo));
     document.querySelectorAll("[data-module]").forEach((element) => element.addEventListener("click", () => { activeModule = Number(element.dataset.module); render(); document.querySelector("#plataforma")?.scrollIntoView({ block: "start" }); document.querySelector(".module-detail")?.focus({ preventScroll: true }); }));
     document.querySelectorAll("[data-plan]").forEach((element) => element.addEventListener("click", () => { showToast(c.toast.plan); openForm({ currentTarget: element }); }));
-    document.querySelector("[data-scene-prev]")?.addEventListener("click", () => changeScene(-1));
-    document.querySelector("[data-scene-next]")?.addEventListener("click", () => changeScene(1));
-    document.querySelectorAll("[data-scene-card]").forEach((card) => card.addEventListener("click", (event) => { if (event.target.closest("button")) return; activeScene = Number(card.dataset.sceneCard); updateScenePosition(); }));
     document.addEventListener("scroll", updateHeader, { passive: true });
     updateHeader();
   }
 
   function updateHeader() {
     document.querySelector("[data-header]")?.classList.toggle("scrolled", scrollY > 20);
-  }
-
-  function changeScene(delta) {
-    const scenes = DratosContent.get().journey.scenes;
-    activeScene = (activeScene + delta + scenes.length) % scenes.length;
-    updateScenePosition();
-  }
-
-  function updateScenePosition(smooth = true) {
-    const track = document.querySelector("[data-scene-track]");
-    const card = document.querySelector(`[data-scene-card="${activeScene}"]`);
-    if (!track || !card) return;
-    document.querySelectorAll("[data-scene-card]").forEach((item, i) => item.classList.toggle("active", i === activeScene));
-    document.querySelector("[data-scene-count]").textContent = `${String(activeScene + 1).padStart(2, "0")} / ${String(DratosContent.get().journey.scenes.length).padStart(2, "0")}`;
-    track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: smooth ? "smooth" : "auto" });
   }
 
   function observeReveals() {
@@ -320,9 +289,10 @@
     document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
   }
 
-  function modalShell(content, label) {
+  function modalShell(content, label, variant = "") {
     const c = DratosContent.get();
-    modalRoot.innerHTML = `<div class="modal-backdrop" data-modal-backdrop><section class="modal" role="dialog" aria-modal="true" aria-label="${label}"><button type="button" class="modal-close icon-btn" data-modal-close aria-label="${c.accessibility.closeModal}">${icon("close")}</button>${content}</section></div>`;
+    lastFocusedElement = document.activeElement;
+    modalRoot.innerHTML = `<div class="modal-backdrop ${variant}" data-modal-backdrop><section class="modal ${variant}" role="dialog" aria-modal="true" aria-label="${label}"><button type="button" class="modal-close icon-btn" data-modal-close aria-label="${c.accessibility.closeModal}">${icon("close")}</button>${content}</section></div>`;
     document.body.classList.add("modal-open");
     const backdrop = modalRoot.querySelector("[data-modal-backdrop]");
     backdrop.addEventListener("click", (event) => { if (event.target === backdrop) closeModal(); });
@@ -342,9 +312,12 @@
   }
 
   function closeModal() {
+    modalRoot.querySelector("video")?.pause();
     modalRoot.innerHTML = "";
     document.body.classList.remove("modal-open");
     document.removeEventListener("keydown", modalKeydown);
+    if (lastFocusedElement instanceof HTMLElement) lastFocusedElement.focus({ preventScroll: true });
+    lastFocusedElement = null;
   }
 
   function openVideo(index) {
@@ -352,9 +325,15 @@
     const scene = c.journey.scenes[index] || c.journey.scenes[0];
     const available = scene.status.toLowerCase().includes("dispon") || scene.status.toLowerCase().includes("available");
     const media = available && scene.video
-      ? `<div class="premium-player"><video controls playsinline preload="metadata" poster="${scene.poster || c.assets.videoPoster}"><source src="${scene.video}" type="video/mp4"><track kind="captions" src="${scene.captions}" srclang="pt" label="PT" default></video><span class="player-glow"></span></div>`
+      ? `<div class="premium-player"><video controls playsinline preload="metadata" poster="${scene.poster || c.assets.videoPoster}" aria-label="${scene.title}"><source src="${scene.video}" type="video/mp4"></video></div>`
       : `<div class="video-placeholder"><img src="${c.assets.element}" alt="" width="150" height="150"><button type="button" class="play-orb" disabled>${icon("play")}</button><b>${c.videoModal.production}</b><p>${c.videoModal.productionText}</p></div>`;
-    modalShell(`<div class="video-modal">${media}<div class="video-copy"><div><span>${scene.number} · ${scene.duration}</span><em>${scene.status}</em></div><h2>${scene.title}</h2><h3>${c.videoModal.transcript}</h3><p>${scene.line}</p><h3>${c.videoModal.sceneDirection}</h3><p>${scene.movement}</p></div></div>`, scene.title);
+    modalShell(media, scene.title, "video-only-modal");
+  }
+
+  function openCompleteVideo() {
+    const c = DratosContent.get();
+    const video = c.completeVideo;
+    modalShell(`<div class="premium-player"><video controls playsinline preload="metadata" poster="${video.poster}" aria-label="${video.title}"><source src="${video.video}" type="video/mp4"></video></div>`, video.title, "video-only-modal");
   }
 
   function fieldMarkup(name, field) {
@@ -381,7 +360,7 @@
     if (!form.checkValidity()) { status.textContent = c.form.validation; status.className = "form-status error"; form.reportValidity(); return; }
     const payload = Object.fromEntries(new FormData(form).entries());
     payload.privacy = form.elements.privacy.checked;
-    payload.locale = DratosContent.getLanguage();
+    payload.locale = "pt-BR";
     payload.createdAt = new Date().toISOString();
     const submit = form.querySelector("[type=submit]");
     submit.disabled = true;
@@ -415,7 +394,11 @@
     setTimeout(() => toast.remove(), 3200);
   }
 
-  window.addEventListener("dratos:content", () => { activeModule = 0; activeScene = 0; render(); showToast(DratosContent.get().toast.language); });
-  window.addEventListener("dratos:theme", render);
+  function updateThemeControl() {
+    const control = document.querySelector("[data-theme-toggle]");
+    if (control) control.innerHTML = icon(DratosContent.getTheme() === "dark" ? "sun" : "moon");
+  }
+
+  window.addEventListener("dratos:theme", updateThemeControl);
   render();
 })();

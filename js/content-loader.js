@@ -1,18 +1,17 @@
 (function () {
-  const supported = ["pt", "en", "es"];
-  const savedLanguage = localStorage.getItem("dratos-language");
-  const browserLanguage = (navigator.language || "pt").slice(0, 2);
-  let language = supported.includes(savedLanguage) ? savedLanguage : (supported.includes(browserLanguage) ? browserLanguage : "pt");
-  let theme = localStorage.getItem("dratos-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  const data = window.DRATOS_CONTENT.pt;
+  const savedTheme = localStorage.getItem("dratos-theme");
+  let theme = savedTheme === "dark" || savedTheme === "light"
+    ? savedTheme
+    : (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
 
-  function content() {
-    return window.DRATOS_CONTENT[language] || window.DRATOS_CONTENT.pt;
+  function applyTheme() {
+    document.documentElement.dataset.theme = theme;
+    document.querySelector('meta[name="theme-color"]').content = theme === "dark" ? "#091326" : "#f8fafc";
   }
 
   function updateDocument() {
-    const data = content();
-    document.documentElement.lang = data.meta.lang;
-    document.documentElement.dataset.theme = theme;
+    document.documentElement.lang = "pt-BR";
     document.title = data.meta.title;
     document.querySelector('meta[name="description"]').content = data.meta.description;
     document.querySelector('meta[property="og:title"]').content = data.meta.title;
@@ -20,7 +19,6 @@
     document.querySelector('meta[property="og:image"]').content = data.meta.socialImage;
     document.querySelector('meta[name="twitter:title"]').content = data.meta.title;
     document.querySelector('meta[name="twitter:description"]').content = data.meta.description;
-    document.querySelector('meta[name="theme-color"]').content = theme === "dark" ? "#091326" : "#f8fafc";
     document.querySelector(".skip-link").textContent = data.accessibility.skip;
     const canonical = document.querySelector("#canonical");
     canonical.href = data.meta.canonical || location.href.split("#")[0];
@@ -32,24 +30,17 @@
       email: data.meta.organization.email,
       url: data.meta.canonical || location.href.split("#")[0]
     });
+    applyTheme();
   }
 
   window.DratosContent = {
-    get: content,
-    getLanguage: () => language,
+    get: () => data,
     getTheme: () => theme,
-    setLanguage(next) {
-      if (!supported.includes(next)) return;
-      language = next;
-      localStorage.setItem("dratos-language", language);
-      updateDocument();
-      window.dispatchEvent(new CustomEvent("dratos:content"));
-    },
     toggleTheme() {
       theme = theme === "light" ? "dark" : "light";
       localStorage.setItem("dratos-theme", theme);
-      updateDocument();
-      window.dispatchEvent(new CustomEvent("dratos:theme"));
+      applyTheme();
+      window.dispatchEvent(new CustomEvent("dratos:theme", { detail: { theme } }));
     },
     updateDocument
   };

@@ -6,8 +6,8 @@ window.DRATOS_CONTENT.pt = {
     label: "PT",
     title: "DRATOS | Governança Contratual Inteligente",
     description: "Conecte dados, pessoas, documentos, aprovações, assinaturas, obrigações, performance e evidências em uma jornada contratual governada.",
-    canonical: "",
-    socialImage: "assets/brand/dratos-elemento.png",
+    canonical: "https://fernandesjoel.github.io/Dratos/",
+    socialImage: "assets/images/hero-helena-dratos.webp",
     organization: {
       name: "DRATOS — Contratos Inteligentes",
       description: "Plataforma de governança do ciclo de vida contratual.",
@@ -17,7 +17,8 @@ window.DRATOS_CONTENT.pt = {
   assets: {
     logo: "assets/brand/dratos-logo.png",
     element: "assets/brand/dratos-elemento.png",
-    videoPoster: "assets/images/video-poster.svg"
+    videoPoster: "assets/images/video-poster.svg",
+    hero: "assets/images/hero-helena-dratos.webp"
   },
   settings: {
     formEndpoint: "",
@@ -41,23 +42,22 @@ window.DRATOS_CONTENT.pt = {
     productLabel: "DRATOS / EXECUTIVO",
     live: "AO VIVO",
     presenterInitial: "H",
-    fragments: ["PDF", "DOCX", "XLSX", "E-MAIL", "CHAT", "V1.2", "APROVAÇÃO", "PRAZO"],
     accessCore: "RBAC",
     totvsSource: "TOTVS RM"
   },
   nav: [
     ["Visão geral", "visao-geral"],
-    ["Jornada", "jornada"],
     ["Plataforma", "plataforma"],
     ["Performance", "performance"],
     ["Integrações", "integracoes"],
     ["Segurança", "seguranca"],
-    ["Vídeos", "videos"],
+    ["Demonstrações", "videos"],
     ["Planos", "planos"]
   ],
   actions: {
     demo: "Agendar demonstração",
-    journey: "Explorar a jornada",
+    platform: "Conhecer a plataforma",
+    fullPresentation: "Assistir à apresentação completa",
     watch: "Assistir ao vídeo",
     diagnose: "Solicitar diagnóstico",
     program: "Participar do programa",
@@ -74,7 +74,7 @@ window.DRATOS_CONTENT.pt = {
   hero: {
     eyebrow: "Contratos Inteligentes · Governança Contratual",
     title: "Do dado disperso à decisão governada.",
-    text: "A DRATOS conecta dados, pessoas, documentos, cláusulas, aprovações, assinaturas, obrigações, performance e evidências em uma única jornada contratual.",
+    text: "A DRATOS conecta requisições, contratos, aprovações, assinaturas, obrigações, performance e evidências em uma única jornada contratual.",
     note: "A DRATOS não substitui o ERP. Ela conecta e governa a jornada a partir dos dados que sua organização já possui.",
     stageLabel: "Jornada contratual em tempo real",
     stages: ["Dados", "Requisição", "Autoria", "Aprovação", "Assinatura", "Gestão", "Performance"],
@@ -86,13 +86,18 @@ window.DRATOS_CONTENT.pt = {
     status: ["Fluxo rastreável", "Evidências conectadas", "Acesso por contexto"],
     trust: ["Empresas privadas", "Governo e estatais", "Organizações reguladas", "Operações multiempresa"]
   },
+  completeVideo: {
+    title: "Apresentação completa da DRATOS",
+    duration: "02:42",
+    video: "assets/video/dratos-apresentacao-completa.mp4",
+    poster: "assets/video/posters/dratos-apresentacao-completa.webp"
+  },
   problem: {
     eyebrow: "O caos invisível",
     title: "Os dados estão nos sistemas. O contrato ainda está espalhado.",
     text: "E-mails, planilhas, versões paralelas e aprovações fora do fluxo reduzem visibilidade e tornam a auditoria mais difícil.",
-    evidenceLabel: "Fragmentos por contrato",
-    evidenceValue: "12+",
-    evidenceNote: "Cenário ilustrativo: arquivos, mensagens, planilhas, aprovações e evidências desconectadas.",
+    diagramTitle: "Quatro rupturas críticas",
+    diagramNote: "Quando informação, decisão, prazo e indicador se separam, o risco percorre toda a jornada contratual.",
     items: [
       { number: "01", title: "Versões paralelas", text: "A minuta correta se perde entre anexos e cópias locais." },
       { number: "02", title: "Decisões sem contexto", text: "Aprovações e ressalvas ficam separadas do documento." },
@@ -114,22 +119,22 @@ window.DRATOS_CONTENT.pt = {
     presenter: "Helena · Apresentadora oficial",
     presenterNote: "Mesmo rosto, cabelo castanho-escuro, figurino executivo, ambiente premium e tom consultivo em todas as cenas.",
     scenes: [
-      { id: "abertura", number: "01", title: "Abertura", duration: "00:08", line: "Imagine transformar dados, contratos, aprovações e evidências em uma única jornada inteligente e totalmente rastreável.", screen: "ERP → Contrato → Aprovação → Assinatura → Governança", movement: "Dolly lento da esquerda para a direita.", video: "assets/video/01-abertura.mp4", captions: "assets/video/01-abertura.vtt", status: "Em produção" },
-      { id: "caos", number: "02", title: "O caos invisível", duration: "00:08", line: "Em muitas empresas, os dados estão nos sistemas, mas os contratos continuam espalhados entre e-mails, planilhas e documentos.", screen: "Dados organizados. Contratos dispersos.", movement: "Aproximação cinematográfica e linhas quebradas.", video: "assets/video/02-caos-invisivel.mp4", captions: "assets/video/02-caos-invisivel.vtt", status: "Em produção" },
-      { id: "custo", number: "03", title: "O custo oculto", duration: "00:08", line: "Versões paralelas, aprovações perdidas, prazos esquecidos e riscos difíceis de rastrear.", screen: "Retrabalho · Perda de visibilidade · Risco operacional", movement: "Órbita suave com alertas de atenção.", video: "assets/video/03-custo-oculto.mp4", captions: "assets/video/03-custo-oculto.vtt", status: "Em produção" },
-      { id: "nasce", number: "04", title: "Nasce a DRATOS", duration: "00:08", line: "Foi para transformar essa complexidade em uma jornada estruturada que nasceu a DRATOS.", screen: "Governança Contratual Inteligente", movement: "Travelling em direção ao hub conectado.", video: "assets/video/04-nasce-dratos.mp4", captions: "assets/video/04-nasce-dratos.vtt", status: "Em produção" },
-      { id: "hub", number: "05", title: "O hub central", duration: "00:08", line: "A DRATOS conecta os dados que sua empresa já possui e transforma essas informações em uma jornada contratual integrada.", screen: "Conecte · Governe · Evolua", movement: "Abertura ampla do ecossistema.", video: "assets/video/05-hub-central.mp4", captions: "assets/video/05-hub-central.vtt", status: "Em produção" },
-      { id: "requisicao", number: "06", title: "Requisição contratual", duration: "00:08", line: "Tudo começa com uma requisição estruturada, reunindo informações, documentos e responsáveis.", screen: "Dados completos · Processo organizado · Menos retrabalho", movement: "Campos recebem validações progressivas.", video: "assets/video/06-requisicao.mp4", captions: "assets/video/06-requisicao.vtt", status: "Em produção" },
-      { id: "autoria", number: "07", title: "Autoria contratual", duration: "00:08", line: "Com os dados aprovados, a DRATOS gera uma minuta baseada em matrizes, cláusulas padronizadas e regras jurídicas.", screen: "Padronização · Velocidade · Governança", movement: "A requisição se transforma em contrato.", video: "assets/video/07-autoria.mp4", captions: "assets/video/07-autoria.vtt", status: "Em produção" },
-      { id: "biblioteca", number: "08", title: "Biblioteca e playbooks", duration: "00:08", line: "O jurídico mantém o controle através de cláusulas aprovadas, playbooks e versões governadas.", screen: "Biblioteca Jurídica", movement: "Cláusulas são incorporadas à minuta.", video: "assets/video/08-biblioteca.mp4", captions: "assets/video/08-biblioteca.vtt", status: "Em produção" },
-      { id: "sala", number: "09", title: "Sala Jurídica", duration: "00:08", line: "Todas as interações permanecem centralizadas em um ambiente colaborativo e rastreável.", screen: "Negociação · Colaboração · Rastreabilidade", movement: "Travelling entre comentários e versões.", video: "assets/video/09-sala-juridica.mp4", captions: "assets/video/09-sala-juridica.vtt", status: "Em produção" },
-      { id: "diligence", number: "10", title: "Due Diligence", duration: "00:08", line: "Informações relevantes da contraparte e evidências apoiam decisões mais seguras e documentadas.", screen: "Evidências · Contexto · Governança", movement: "Aproximação do painel de validação.", video: "assets/video/10-due-diligence.mp4", captions: "assets/video/10-due-diligence.vtt", status: "Em produção" },
-      { id: "assinatura", number: "11", title: "Aprovações e assinatura", duration: "00:08", line: "A versão correta segue para assinatura após as aprovações, com total rastreabilidade.", screen: "APROVADO → CONCLUÍDO", movement: "Aproximação sem cortes bruscos.", video: "assets/video/11-aprovacoes-assinatura.mp4", captions: "assets/video/11-aprovacoes-assinatura.vtt", status: "Em produção" },
-      { id: "contrato-vivo", number: "12", title: "O contrato vira gestão", duration: "00:08", line: "A assinatura é o início da gestão contínua de obrigações, prazos e compromissos.", screen: "Contrato Vivo", movement: "Calendário, alertas e obrigações orbitam o contrato.", video: "assets/video/12-contrato-vivo.mp4", captions: "assets/video/12-contrato-vivo.vtt", status: "Em produção" },
-      { id: "performance", number: "13", title: "Performance contratual", duration: "00:08", line: "Cada contrato possui seu próprio modelo de avaliação, acompanhando entregas, níveis de serviço e resultados.", screen: "4,8 estrelas · 94% SLA · 98% entregas", movement: "Foco cinematográfico nos indicadores.", video: "assets/video/13-performance.mp4", captions: "assets/video/13-performance.vtt", status: "Em produção" },
-      { id: "dossie", number: "14", title: "Dossiê auditável", duration: "00:08", line: "Cada decisão, documento, aprovação e evidência permanece registrada em um único histórico auditável.", screen: "Histórico · Evidências · Rastreabilidade", movement: "Convergência dos elementos para o dossiê.", video: "assets/video/14-dossie.mp4", captions: "assets/video/14-dossie.vtt", status: "Em produção" },
-      { id: "dashboard", number: "15", title: "Dashboard executivo", duration: "00:08", line: "Informações conectadas oferecem uma visão executiva da operação contratual em tempo real.", screen: "Governança · Transparência · Eficiência · Performance", movement: "Movimento lateral pelos indicadores.", video: "assets/video/15-dashboard.mp4", captions: "assets/video/15-dashboard.vtt", status: "Em produção" },
-      { id: "encerramento", number: "16", title: "Encerramento", duration: "00:08", line: "A DRATOS transforma contratos em governança, performance, transparência e decisões mais seguras.", screen: "Da requisição ao desempenho contratual", movement: "Travelling lento com o ecossistema conectado.", video: "assets/video/16-encerramento.mp4", captions: "assets/video/16-encerramento.vtt", status: "Em produção" }
+      { id: "abertura", number: "01", title: "Abertura", duration: "00:08", line: "Imagine transformar dados, contratos, aprovações e evidências em uma única jornada inteligente e totalmente rastreável.", screen: "ERP → Contrato → Aprovação → Assinatura → Governança", movement: "Dolly lento da esquerda para a direita.", video: "assets/video/01-abertura.mp4", status: "Em produção" },
+      { id: "caos", number: "02", title: "O caos invisível", duration: "00:08", line: "Em muitas empresas, os dados estão nos sistemas, mas os contratos continuam espalhados entre e-mails, planilhas e documentos.", screen: "Dados organizados. Contratos dispersos.", movement: "Aproximação cinematográfica e linhas quebradas.", video: "assets/video/02-caos-invisivel.mp4", status: "Em produção" },
+      { id: "custo", number: "03", title: "O custo oculto", duration: "00:08", line: "Versões paralelas, aprovações perdidas, prazos esquecidos e riscos difíceis de rastrear.", screen: "Retrabalho · Perda de visibilidade · Risco operacional", movement: "Órbita suave com alertas de atenção.", video: "assets/video/03-custo-oculto.mp4", status: "Em produção" },
+      { id: "nasce", number: "04", title: "Nasce a DRATOS", duration: "00:08", line: "Foi para transformar essa complexidade em uma jornada estruturada que nasceu a DRATOS.", screen: "Governança Contratual Inteligente", movement: "Travelling em direção ao hub conectado.", video: "assets/video/04-nasce-dratos.mp4", status: "Em produção" },
+      { id: "hub", number: "05", title: "O hub central", duration: "00:08", line: "A DRATOS conecta os dados que sua empresa já possui e transforma essas informações em uma jornada contratual integrada.", screen: "Conecte · Governe · Evolua", movement: "Abertura ampla do ecossistema.", video: "assets/video/05-hub-central.mp4", status: "Em produção" },
+      { id: "requisicao", number: "06", title: "Requisição contratual", duration: "00:08", line: "Tudo começa com uma requisição estruturada, reunindo informações, documentos e responsáveis.", screen: "Dados completos · Processo organizado · Menos retrabalho", movement: "Campos recebem validações progressivas.", video: "assets/video/06-requisicao.mp4", status: "Em produção" },
+      { id: "autoria", number: "07", title: "Autoria contratual", duration: "00:08", line: "Com os dados aprovados, a DRATOS gera uma minuta baseada em matrizes, cláusulas padronizadas e regras jurídicas.", screen: "Padronização · Velocidade · Governança", movement: "A requisição se transforma em contrato.", video: "assets/video/07-autoria.mp4", status: "Em produção" },
+      { id: "biblioteca", number: "08", title: "Biblioteca e playbooks", duration: "00:08", line: "O jurídico mantém o controle através de cláusulas aprovadas, playbooks e versões governadas.", screen: "Biblioteca Jurídica", movement: "Cláusulas são incorporadas à minuta.", video: "assets/video/08-biblioteca.mp4", status: "Em produção" },
+      { id: "sala", number: "09", title: "Sala Jurídica", duration: "00:08", line: "Todas as interações permanecem centralizadas em um ambiente colaborativo e rastreável.", screen: "Negociação · Colaboração · Rastreabilidade", movement: "Travelling entre comentários e versões.", video: "assets/video/09-sala-juridica.mp4", status: "Em produção" },
+      { id: "diligence", number: "10", title: "Due Diligence", duration: "00:08", line: "Informações relevantes da contraparte e evidências apoiam decisões mais seguras e documentadas.", screen: "Evidências · Contexto · Governança", movement: "Aproximação do painel de validação.", video: "assets/video/10-due-diligence.mp4", status: "Em produção" },
+      { id: "assinatura", number: "11", title: "Aprovações e assinatura", duration: "00:08", line: "A versão correta segue para assinatura após as aprovações, com total rastreabilidade.", screen: "APROVADO → CONCLUÍDO", movement: "Aproximação sem cortes bruscos.", video: "assets/video/11-aprovacoes-assinatura.mp4", status: "Em produção" },
+      { id: "contrato-vivo", number: "12", title: "Obrigações e monitoramento", duration: "00:08", line: "A assinatura é o início da gestão contínua de obrigações, prazos e compromissos.", screen: "Contrato Vivo", movement: "Calendário, alertas e obrigações orbitam o contrato.", video: "assets/video/12-contrato-vivo.mp4", status: "Em produção" },
+      { id: "performance", number: "13", title: "Performance contratual", duration: "00:08", line: "Cada contrato possui seu próprio modelo de avaliação, acompanhando entregas, níveis de serviço e resultados.", screen: "4,8 estrelas · 94% SLA · 98% entregas", movement: "Foco cinematográfico nos indicadores.", video: "assets/video/13-performance.mp4", status: "Em produção" },
+      { id: "dossie", number: "14", title: "Dossiê auditável", duration: "00:08", line: "Cada decisão, documento, aprovação e evidência permanece registrada em um único histórico auditável.", screen: "Histórico · Evidências · Rastreabilidade", movement: "Convergência dos elementos para o dossiê.", video: "assets/video/14-dossie.mp4", status: "Em produção" },
+      { id: "dashboard", number: "15", title: "Dashboard executivo", duration: "00:08", line: "Informações conectadas oferecem uma visão executiva da operação contratual em tempo real.", screen: "Governança · Transparência · Eficiência · Performance", movement: "Movimento lateral pelos indicadores.", video: "assets/video/15-dashboard.mp4", status: "Em produção" },
+      { id: "encerramento", number: "16", title: "Encerramento", duration: "00:08", line: "A DRATOS transforma contratos em governança, performance, transparência e decisões mais seguras.", screen: "Da requisição ao desempenho contratual", movement: "Travelling lento com o ecossistema conectado.", video: "assets/video/16-encerramento.mp4", status: "Em produção" }
     ]
   },
   sources: {
@@ -231,9 +236,9 @@ window.DRATOS_CONTENT.pt = {
   },
   videoLibrary: {
     eyebrow: "Demonstrações por funcionalidade",
-    title: "Veja a jornada acontecendo, etapa por etapa.",
-    text: "Vídeos curtos, apresentados por Helena, mostram a plataforma desde a visão geral até o dashboard executivo.",
-    sceneIndexes: [0, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+    title: "Veja as funcionalidades essenciais em ação.",
+    text: "Demonstrações objetivas mostram como cada etapa preserva contexto, decisão e evidência — sem painéis editoriais ou textos sobre o vídeo.",
+    sceneIndexes: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
   },
   access: {
     eyebrow: "Perfis e controle de acesso",
@@ -328,20 +333,17 @@ window.DRATOS_CONTENT.pt = {
     text: "Dados, decisões e performance em uma jornada verificável.",
     contactLabel: "Contato",
     contact: "contato@dratos.com.br",
-    links: [["Jornada", "#jornada"], ["Plataforma", "#plataforma"], ["Segurança", "#seguranca"], ["FAQ", "#faq"]],
+    links: [["Demonstrações", "#videos"], ["Plataforma", "#plataforma"], ["Segurança", "#seguranca"], ["FAQ", "#faq"]],
     copyright: "© 2026 DRATOS. Todos os direitos reservados.",
     privacy: "Privacidade",
     privacyNote: "Nesta demonstração, sem endpoint configurado, o formulário apenas prepara uma mensagem no cliente de e-mail do visitante. O envio só ocorre após confirmação da própria pessoa."
   },
   videoModal: {
     production: "Vídeo em produção",
-    productionText: "Este espaço está preparado para receber o vídeo, poster, legendas e transcript da cena.",
-    transcript: "Transcript",
-    sceneDirection: "Direção de cena"
+    productionText: "Este vídeo ainda não está disponível."
   },
   toast: {
     theme: "Tema atualizado.",
-    language: "Idioma atualizado.",
     copied: "Conteúdo copiado.",
     plan: "Plano selecionado para a conversa."
   }

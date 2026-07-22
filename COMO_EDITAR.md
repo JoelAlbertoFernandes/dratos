@@ -1,95 +1,60 @@
 # Como editar a landing page DRATOS
 
-Todo conteúdo comercial editável fica fora dos componentes:
+Todo conteúdo público está em `content/pt.js`. A landing page é exclusivamente PT-BR.
 
-- `content/pt.js` — português brasileiro e configuração principal;
-- `content/en.js` — tradução completa em inglês;
-- `content/es.js` — tradução completa em espanhol.
+## Conteúdo
 
-Ao mudar a estrutura de uma seção, replique a alteração nos três idiomas.
-
-## Textos e CTAs
-
-- Hero: `hero`.
+- Hero: `hero` e `completeVideo`.
 - Menu: `nav`.
-- Rótulos de botões: `actions`.
-- Seções: objetos como `problem`, `sources`, `performance` e `security`.
-- CTA final: `finalCta`.
+- Botões: `actions`.
+- Problema: `problem`.
+- Módulos: `platform.modules`.
+- Performance: `performance`.
+- Dossiê: `dossierSpotlight`.
+- Vídeos funcionais: `videoLibrary.sceneIndexes`.
+- Formulário e fallback: `form` e `settings`.
 - Rodapé e contato: `footer`.
 
-Não escreva texto comercial diretamente em `js/main.js`.
+Não coloque textos comerciais diretamente em `js/main.js`.
 
-## Logo e elemento gráfico
+## Marca e Hero
 
-- Logo oficial: `assets/brand/dratos-logo.png`.
-- Elemento oficial: `assets/brand/dratos-elemento.png`.
+- logo: `assets/brand/dratos-logo.png`;
+- elemento: `assets/brand/dratos-elemento.png`;
+- Hero: `assets/images/hero-helena-dratos.webp`.
 
-Os caminhos ficam em `assets` dentro de cada arquivo de conteúdo. Substitua apenas por versões oficiais, preserve a proporção e mantenha os nomes para evitar ajustes adicionais.
+Preserve proporção, nomes e dimensões. O Hero deve permanecer editorial, claro e integrado ao mockup executivo.
 
-## Imagens
+## Vídeos
 
-Coloque imagens em `assets/images/`, preferencialmente em AVIF ou WebP. Inclua o caminho no objeto `assets` ou na seção correspondente dos três idiomas. Informe dimensões no HTML gerado para evitar deslocamento de layout.
+As 16 cenas continuam em `journey.scenes` como catálogo técnico. Cada cena usa `title`, `duration`, `line`, `video`, `poster` e `status`.
 
-## Vídeos, poster, legenda e transcript
+Não adicione `<track>`, VTT, transcript ou direção de cena ao modal. O player deve continuar 16:9, sob demanda e sem autoplay.
 
-As 16 cenas ficam em `journey.scenes`. Cada cena contém:
+Os destaques públicos são definidos por `videoLibrary.sceneIndexes`. Mantenha somente Requisição, Autoria, Biblioteca, Sala Jurídica, Due Diligence, Aprovações e Assinatura, Obrigações, Performance, Dossiê e Dashboard.
 
-- `title` e `duration`;
-- `line` — transcript curto;
-- `movement` — direção de cena;
-- `screen` — texto de tela;
-- `video` — caminho do MP4;
-- `captions` — caminho do VTT;
-- `status` — “Em produção” ou “Disponível”;
-- `poster` — thumbnail real extraída do vídeo.
+Para regenerar o vídeo completo:
 
-Para publicar um vídeo:
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\gerar-video-completo.ps1
+```
 
-1. coloque o MP4 em `assets/video/` e o poster 16:9 em `assets/video/posters/`;
-2. confira `video` e `captions` em `content/pt.js`;
-3. traduza o VTT quando necessário e aponte o idioma correspondente;
-4. altere `status` para “Disponível”, `Available` e `Disponible`;
-5. use `assets/images/video-poster.svg` apenas como fallback global.
+## Tema
 
-Nenhum vídeo inicia automaticamente com som. O player é carregado somente após a interação do visitante.
+O tema é controlado por `DratosContent.toggleTheme()` e persistido em `localStorage` sob `dratos-theme`. Somente `[data-theme-toggle]` pode chamar essa função.
 
-## Formulário e endpoint
-
-Campos e mensagens ficam em `form`. A configuração fica em `settings`:
+## Formulário
 
 ```js
 settings: {
-  formEndpoint: "https://seu-endpoint.example/demos",
+  formEndpoint: "",
   mailtoFallback: "contato@dratos.com.br",
-  privacyUrl: "https://example.com/privacidade"
+  privacyUrl: "#privacidade"
 }
 ```
 
-Com `formEndpoint` vazio, o formulário prepara um `mailto:` para `contato@dratos.com.br`. O visitante revisa e confirma o envio no próprio cliente de e-mail. Para não usar esse fallback, deixe `mailtoFallback` vazio.
+Sem endpoint, o formulário apenas prepara um `mailto:`; não informe ao visitante que houve envio automático.
 
-## Planos, FAQ, módulos e integrações
+## Publicação
 
-- Planos: `plans.items`.
-- FAQ: `faq.items`.
-- Módulos: `platform.modules`.
-- Integrações: `integrations.items` e `integrations.totvs`.
-- Métricas demonstrativas: `hero.metrics`, `performance` e `dashboard.kpis`.
-
-Status recomendados: “Configurável”, “Em evolução”, “Disponível conforme integração” ou “Planejado”. Não transforme funcionalidades planejadas em promessas operacionais.
-
-## Nova integração
-
-1. adicione um item em `integrations.items` nos três idiomas;
-2. informe nome, tipo e status real;
-3. se houver detalhes, crie um objeto específico como `integrations.totvs`;
-4. não utilize logotipo de terceiro sem autorização.
-
-## Cores, temas e layout
-
-Tokens globais estão no início de `css/style.css`. O tema escuro usa `[data-theme="dark"]`. Componentes e breakpoints ficam no mesmo arquivo.
-
-## Canonical, sitemap e GitHub Pages
-
-1. defina `meta.canonical` nos três idiomas;
-2. substitua a URL de exemplo em `sitemap.xml` e `robots.txt`;
-3. publique a raiz do repositório em **Settings → Pages**.
+Canonical, robots e sitemap estão preparados para `https://fernandesjoel.github.io/Dratos/`. Se o repositório oficial mudar, atualize os três locais antes da publicação.

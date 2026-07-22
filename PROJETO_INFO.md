@@ -2,86 +2,56 @@
 
 ## Objetivo
 
-Apresentar a DRATOS como plataforma universal de governança contratual para empresas privadas, governo, estatais e operações reguladas. TOTVS RM aparece como integração inicial prioritária, sem dominar o posicionamento da marca.
+Apresentar a DRATOS como plataforma de governança contratual para empresas privadas, governo, estatais e operações reguladas. TOTVS RM permanece como integração inicial prioritária, sem limitar o posicionamento da plataforma.
 
 ## Arquitetura
 
-A landing page é uma aplicação estática, sem build ou dependências externas:
+A aplicação é estática, sem build e sem dependências de runtime:
 
 ```text
 index.html
-├── content/*.js
+├── content/pt.js
 ├── js/content-loader.js
 ├── js/main.js
 └── css/style.css
 ```
 
-`content-loader.js` seleciona idioma e tema, persiste preferências e atualiza metadados. `main.js` transforma o conteúdo em componentes sem manter textos comerciais próprios. A renderização é integral no cliente e usa âncoras, por isso não exige fallback de rotas no GitHub Pages.
+`content-loader.js` aplica PT-BR, metadados e tema. `main.js` renderiza os componentes. Os caminhos relativos funcionam no subdiretório do GitHub Pages.
 
 ## Componentes
 
 - header fixo e menu responsivo;
-- hero com mockup executivo;
-- problema e transformação antes/depois;
-- carrossel narrativo das 16 cenas;
-- mapa de fontes de dados;
+- Hero cinematográfico com Helena e mockup executivo;
+- diagrama “Quatro rupturas críticas”;
+- comparação antes/depois;
+- fontes de dados e conectores;
 - explorador de 15 módulos;
-- painel e vídeo destacado de Performance;
-- Dossiê Auditável entre Performance e Dashboard;
-- dashboard executivo;
+- Performance, Dossiê e Dashboard;
 - integrações e caso TOTVS RM;
-- perfis, segurança e arquitetura;
-- setor público e regulados;
-- planos, Founding Clients, FAQ e CTA final;
-- biblioteca de demonstrações por funcionalidade;
-- modal de vídeo e formulário de demonstração.
+- dez demonstrações por funcionalidade;
+- perfis, segurança, setor público, planos, Founding Clients, FAQ e CTA;
+- modal limpo de vídeo e modal de formulário.
 
-## Conteúdo e idiomas
+## Tema
 
-PT-BR é o idioma padrão. Inglês e espanhol possuem conteúdo completo para todas as áreas visíveis. Ativos, configurações técnicas e dados que não requerem tradução são herdados da configuração-base. A preferência é salva em `localStorage`.
-
-## Temas
-
-O modo claro é predominante. O modo escuro é opcional e usa tokens CSS próprios. A preferência é persistida. A folha respeita `prefers-reduced-motion`.
+O modo claro é predominante e o escuro opcional. A preferência fica em `localStorage`. Apenas o botão dedicado chama `toggleTheme()`; os demais cliques não renderizam nem alteram o tema.
 
 ## Vídeos
 
-Os 16 vídeos reais possuem MP4, VTT, poster individual, título, duração, transcript, direção e status. O player usa moldura premium, proporção 16:9, `preload="metadata"`, controles nativos e nunca inicia automaticamente com som. Caso um arquivo futuro não exista, o fallback visual permanece disponível.
+Os 16 MP4s individuais permanecem preservados. O vídeo `dratos-apresentacao-completa.mp4` reúne as cenas na ordem oficial. Os players são 16:9, usam controles nativos, não iniciam automaticamente e não carregam `<track>`, VTT ou transcript visual.
 
-## Formulário
+## Formulário e contato
 
-Campos HTML nativos fornecem validação. Sem endpoint, o formulário abre um `mailto:` endereçado a `contato@dratos.com.br`, e o usuário confirma o envio no próprio cliente de e-mail. Quando configurado, o envio usa `POST` JSON. Segurança, consentimento, rate limiting e retenção devem ser implementados no backend de produção.
-
-## SEO
-
-- title e description localizados;
-- Open Graph e Twitter Card;
-- canonical configurável;
-- JSON-LD `Organization`;
-- `robots.txt`, `sitemap.xml` e manifest;
-- headings semânticos e conteúdo navegável.
+O contato oficial é `contato@dratos.com.br`. Sem endpoint, o formulário abre um `mailto:` e o visitante confirma o envio. Com endpoint, o payload é JSON via `POST`.
 
 ## Acessibilidade
 
-- link de salto;
-- foco visível;
-- labels e validação de formulário;
-- diálogos com foco inicial, Escape e contenção de Tab;
-- controles com nomes acessíveis;
-- contraste e tema escuro;
-- movimento reduzido;
-- vídeos preparados para legendas e transcript.
+- link de salto e foco visível;
+- menu e controles nomeados;
+- diálogos com foco, contenção de Tab, `Esc`, clique externo e restauração de foco;
+- scroll lock durante modal;
+- suporte a movimento reduzido.
 
-## Performance
+## Publicação
 
-- zero bibliotecas de runtime;
-- imagens secundárias com lazy loading;
-- vídeos carregados apenas sob demanda;
-- animações em transform e opacity;
-- dimensões declaradas para assets;
-- CSS e JavaScript locais;
-- compatibilidade com cache estático do GitHub Pages.
-
-## Deploy
-
-Arquivos e links internos usam caminhos relativos. Antes de produção, configure canonical, sitemap, robots, endpoint do formulário, política de privacidade e vídeos definitivos.
+`.github/workflows/deploy-pages.yml` valida o código e publica um artefato estático. A URL preparada é `https://fernandesjoel.github.io/Dratos/`. A ativação depende de remote e conta GitHub oficialmente confirmados.
