@@ -1,67 +1,112 @@
-# DRATOS — Landing Page Institucional
+# DRATOS — Inteligência em Contratos
 
-Apresentação executiva interativa da plataforma DRATOS. A experiência percorre 20 camadas, do problema contratual à visão executiva, com RiskAI, Performance, Dossiê Auditável, integrações e governança.
+Landing page institucional da DRATOS, plataforma de governança contratual inteligente da Infinita-IA Labs.
 
-## Versão oficial
+## Site publicado
+
+- Endereço temporário: https://dratos-inteligencia-contratos.joelfernandes.chatgpt.site
+- Domínio oficial em configuração: https://dratos.com.br
+- Contato: contato@dratos.com.br
+
+## Proposta da landing page
+
+A página apresenta a jornada contratual da requisição ao dossiê auditável, conectando dados, pessoas, documentos, aprovações, obrigações, riscos e performance.
+
+Principais experiências:
+
+- hero cinematográfica com movimento sutil;
+- dashboard executivo com indicadores e gráficos;
+- alternância entre modos claro e escuro;
+- nove capacidades com cards interativos;
+- consulta simulada ao RiskAI com resposta executiva;
+- vídeo institucional organizado por capítulos;
+- segurança, governança e rastreabilidade enterprise;
+- integrações com ERP, TOTVS RM, compras, APIs e formulários;
+- dossiê auditável em linha do tempo;
+- formulário para solicitar demonstração.
+
+## Tecnologias
+
+- React 19
+- Next.js 16
+- TypeScript 5
+- Vinext e Vite
+- Cloudflare Workers
+- CSS responsivo e acessível
+- Drizzle ORM preparado para futura persistência D1
+
+## Estrutura principal
 
 ```text
-J:\Meu Drive\Dratos Landing-page\Demo Cliente TOTVS
+app/
+  layout.tsx          Metadados e estrutura global
+  page.tsx            Conteúdo e interações da landing page
+  globals.css         Sistema visual e responsividade
+public/
+  brand/              Logotipo e elemento gráfico
+  images/             Imagens cinematográficas da hero
+docs/
+  ARQUITETURA.md       Arquitetura e responsabilidades
+  CONTEUDO-E-SECOES.md Mapa completo da narrativa
+  PUBLICACAO.md        Publicação, domínio e DNS
+  MANUTENCAO.md        Guia para alterações futuras
+worker/                Entrada do Worker
+scripts/               Instalação, build e validação
+tests/                 Verificações do HTML renderizado
 ```
 
-Repositório: `https://github.com/JoelAlbertoFernandes/dratos`
+## Desenvolvimento local
 
-GitHub Pages: `https://joelalbertofernandes.github.io/dratos/`
+Pré-requisitos:
 
-## Executar localmente
+- Node.js 22.13 ou superior
+- npm
 
-```powershell
-python -m http.server 4173 --bind 127.0.0.1
+Instalação:
+
+```bash
+npm install
 ```
 
-Acesse `http://127.0.0.1:4173/`.
+Execução local:
 
-## Validar
-
-```powershell
-node --check content/pt.js
-node --check js/content-loader.js
-node --check js/main.js
-git diff --check
+```bash
+npm run dev
 ```
 
-Valide também tema, menu, RiskAI, consulta demonstrativa, modal, formulário, desktop, tablet, mobile e ausência de overflow horizontal.
+Build validado:
 
-## Design System
+```bash
+npm run build
+```
 
-`DesignsystemDratos.txt` é a referência oficial. A landing usa:
+Testes:
 
-- Deep Void `#0B0D10`;
-- Surface Tech `#161A22`;
-- Dratos Cyan `#3A96DD`;
-- Electric Glow `#60B2FA`;
-- Success Emerald `#10B981`;
-- Slate Gray `#94A3B8`;
-- Plus Jakarta Sans para títulos;
-- Inter para corpo e interface.
+```bash
+npm test
+```
 
-## Mídia
+## Edição rápida
 
-- `assets/video/dratos-apresentacao-completa.mp4`: único vídeo utilizado no runtime;
-- `assets/video/posters/dratos-apresentacao-completa.webp`: poster institucional;
-- `assets/images/video-frames/`: onze WebP extraídos do vídeo completo;
-- `assets/video/01-*.mp4` a `16-*.mp4`: arquivos preservados no repositório, sem carregamento ou publicação no artefato do Pages.
+- Textos, cards, perguntas RiskAI e capítulos do vídeo: `app/page.tsx`
+- Cores, temas, movimentos e responsividade: `app/globals.css`
+- Título, descrição e metadados: `app/layout.tsx`
+- Logos e imagens: `public/`
+- Configuração da hospedagem: `.openai/hosting.json`
 
-O vídeo usa `preload="none"`, abre somente sob demanda e não possui transcript, track ou autoplay.
+Leia [docs/MANUTENCAO.md](docs/MANUTENCAO.md) antes de alterações estruturais.
 
-## Estrutura
+## Segurança e operação
 
-- `index.html`: metadados, fontes e pontos de montagem;
-- `content/pt.js`: fonte única de conteúdo público em PT-BR;
-- `js/content-loader.js`: SEO e tema persistido;
-- `js/main.js`: renderização e interações;
-- `css/style.css`: Design System, camadas, motion e responsividade;
-- `.github/workflows/deploy-pages.yml`: validação e publicação estática.
+- Nenhuma senha ou token deve ser versionado.
+- O formulário de demonstração abre uma mensagem para `contato@dratos.com.br`.
+- O modo visual escolhido é salvo apenas no navegador do visitante.
+- A decisão sugerida pelo RiskAI permanece apresentada como humana, autorizada e rastreável.
 
-## Formulário
+## Histórico
 
-Sem backend, o formulário prepara uma mensagem para `contato@dratos.com.br`. Para envio direto, configure `settings.formEndpoint` e implemente consentimento, proteção contra abuso, retenção e segurança no backend.
+A landing page estática anterior permanece recuperável pelo histórico do GitHub anterior à migração de agosto de 2026. Os materiais de referência preservados estão em `docs/referencias/`.
+
+## Direitos
+
+© 2026 DRATOS · Infinita-IA Labs. Todos os direitos reservados.
