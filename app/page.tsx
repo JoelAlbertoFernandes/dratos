@@ -40,6 +40,8 @@ export default function Home() {
   const [flipped, setFlipped] = useState<string | null>(null);
   const [question, setQuestion] = useState("Performance de contratos");
   const [answerKey, setAnswerKey] = useState("performance");
+  const [submittingDemo, setSubmittingDemo] = useState(false);
+  const [demoStatus, setDemoStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -65,24 +67,30 @@ export default function Home() {
     setAnswerKey(value.includes("risco") ? "risco" : value.includes("obriga") || value.includes("venc") ? "obrigacoes" : "performance");
   }
 
-  function requestDemo(event: FormEvent<HTMLFormElement>) {
+  async function requestDemo(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const subject = "Solicitação de demonstração DRATOS";
-    const body = [
-      "Olá, equipe DRATOS!",
-      "",
-      `Nome: ${data.get("nome")}`,
-      `Empresa: ${data.get("empresa")}`,
-      `E-mail: ${data.get("email")}`,
-      `Telefone: ${data.get("telefone")}`,
-      `Interesse: ${data.get("interesse")}`,
-      `Data preferida: ${data.get("data")}`,
-      `Horário preferido: ${data.get("horario")}`,
-      "",
-      `Contexto: ${data.get("mensagem") || "Não informado"}`,
-    ].join("\n");
-    window.location.href = `mailto:contato@dratos.com.br?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    if (submittingDemo) return;
+
+    const form = event.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries());
+    setSubmittingDemo(true);
+    setDemoStatus(null);
+
+    try {
+      const response = await fetch("/api/demo", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const result = await response.json() as { message?: string };
+      if (!response.ok) throw new Error(result.message || "Não foi possível enviar agora. Tente novamente em instantes.");
+      form.reset();
+      setDemoStatus({ type: "success", message: result.message || "Solicitação enviada com sucesso. Em breve entraremos em contato." });
+    } catch (error) {
+      setDemoStatus({ type: "error", message: error instanceof Error ? error.message : "Não foi possível enviar agora. Tente novamente em instantes." });
+    } finally {
+      setSubmittingDemo(false);
+    }
   }
 
   function trackVideo() {
@@ -156,7 +164,7 @@ export default function Home() {
       <footer><img src="/brand/dratos-logo.png" alt="DRATOS"/><p>Governança contratual inteligente.</p><span>© 2026 DRATOS · Infinita-IA Labs</span></footer>
 
       {player && <div className="modal" role="dialog" aria-modal="true" aria-label="Vídeo institucional DRATOS" onClick={() => setPlayer(false)}><button className="close" onClick={() => setPlayer(false)} aria-label="Fechar vídeo">×</button><div className="player-shell" onClick={e => e.stopPropagation()}><div className="video-stage"><video ref={videoRef} controls autoPlay playsInline poster="https://dratos.com.br/assets/video/posters/dratos-apresentacao-completa.webp" onTimeUpdate={trackVideo}><source src="https://dratos.com.br/assets/video/dratos-apresentacao-completa.mp4" type="video/mp4"/></video><div className={transition ? "transition-fx show" : "transition-fx"} aria-hidden="true"><i/><b/><span/></div><div className={transition ? "chapter-overlay show" : "chapter-overlay"}><small>CAPÍTULO {chapters[chapter].index}</small><strong>{chapters[chapter].label}</strong><span/></div></div><div className="chapter-nav">{chapters.map((item,i)=><button key={item.time} className={i===chapter?"active":""} onClick={()=>{if(videoRef.current){videoRef.current.currentTime=item.time;videoRef.current.play();}}}><small>{item.index}</small><span>{item.label}</span></button>)}</div></div></div>}
-      {demo && <div className="modal demo-modal" role="dialog" aria-modal="true" aria-label="Agendar demonstração DRATOS" onClick={() => setDemo(false)}><button className="close" onClick={() => setDemo(false)} aria-label="Fechar formulário">×</button><div className="demo-shell" onClick={e => e.stopPropagation()}><div className="demo-intro"><p className="eyebrow"><span/> Demonstração personalizada</p><h2>Veja a DRATOS aplicada à sua operação.</h2><p>Conte-nos um pouco sobre sua empresa. Nossa equipe preparará uma conversa objetiva, orientada aos seus contratos, integrações e prioridades.</p><div className="demo-points"><span>✓ 30 minutos</span><span>✓ Sem compromisso</span><span>✓ Cenário personalizado</span></div></div><form onSubmit={requestDemo}><div className="form-row"><label>Nome completo<input name="nome" required autoComplete="name" placeholder="Como podemos chamar você?"/></label><label>Empresa<input name="empresa" required autoComplete="organization" placeholder="Nome da organização"/></label></div><div className="form-row"><label>E-mail corporativo<input name="email" type="email" required autoComplete="email" placeholder="voce@empresa.com.br"/></label><label>Telefone / WhatsApp<input name="telefone" required autoComplete="tel" placeholder="(19) 99999-9999"/></label></div><label>Principal interesse<select name="interesse" required defaultValue=""><option value="" disabled>Selecione uma opção</option><option>Gestão completa do ciclo contratual</option><option>RiskAI e análise de riscos</option><option>Obrigações e performance</option><option>Integração com TOTVS</option><option>Parceria estratégica</option></select></label><div className="form-row"><label>Data preferida<input name="data" type="date" required/></label><label>Horário preferido<select name="horario" required defaultValue=""><option value="" disabled>Selecione</option><option>09h às 12h</option><option>14h às 17h</option><option>Após 17h</option></select></label></div><label>Contexto ou desafio atual<textarea name="mensagem" rows={3} placeholder="Ex.: volume de contratos, principais dificuldades ou resultado esperado."/></label><button className="button primary form-submit" type="submit">Preparar solicitação <b>↗</b></button><small className="privacy-note">Ao continuar, seu aplicativo de e-mail abrirá com a solicitação pronta para envio à DRATOS.</small></form></div></div>}
+      {demo && <div className="modal demo-modal" role="dialog" aria-modal="true" aria-label="Agendar demonstração DRATOS" onClick={() => setDemo(false)}><button className="close" onClick={() => setDemo(false)} aria-label="Fechar formulário">×</button><div className="demo-shell" onClick={e => e.stopPropagation()}><div className="demo-intro"><p className="eyebrow"><span/> Demonstração personalizada</p><h2>Veja a DRATOS aplicada à sua operação.</h2><p>Conte-nos um pouco sobre sua empresa. Nossa equipe preparará uma conversa objetiva, orientada aos seus contratos, integrações e prioridades.</p><div className="demo-points"><span>✓ 30 minutos</span><span>✓ Sem compromisso</span><span>✓ Cenário personalizado</span></div></div><form onSubmit={requestDemo}><div className="form-row"><label>Nome completo<input name="nome" required autoComplete="name" placeholder="Como podemos chamar você?"/></label><label>Empresa<input name="empresa" required autoComplete="organization" placeholder="Nome da organização"/></label></div><div className="form-row"><label>E-mail corporativo<input name="email" type="email" required autoComplete="email" placeholder="voce@empresa.com.br"/></label><label>Telefone / WhatsApp<input name="telefone" required autoComplete="tel" placeholder="(19) 99999-9999"/></label></div><label>Principal interesse<select name="interesse" required defaultValue=""><option value="" disabled>Selecione uma opção</option><option>Gestão completa do ciclo contratual</option><option>RiskAI e análise de riscos</option><option>Obrigações e performance</option><option>Integração com TOTVS</option><option>Parceria estratégica</option></select></label><div className="form-row"><label>Data preferida<input name="data" type="date" required/></label><label>Horário preferido<select name="horario" required defaultValue=""><option value="" disabled>Selecione</option><option>09h às 12h</option><option>14h às 17h</option><option>Após 17h</option></select></label></div><label>Contexto ou desafio atual<textarea name="mensagem" rows={3} placeholder="Ex.: volume de contratos, principais dificuldades ou resultado esperado."/></label><label className="form-honeypot" aria-hidden="true">Website<input name="website" tabIndex={-1} autoComplete="off"/></label><button className="button primary form-submit" type="submit" disabled={submittingDemo}>{submittingDemo ? "Enviando..." : "Enviar solicitação"} <b>{submittingDemo ? "" : "↗"}</b></button>{demoStatus && <p className={`form-status ${demoStatus.type}`} role="status" aria-live="polite">{demoStatus.message}</p>}<small className="privacy-note">Seus dados serão usados exclusivamente para responder a esta solicitação.</small></form></div></div>}
     </main>
   );
 }
