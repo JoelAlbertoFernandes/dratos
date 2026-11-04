@@ -1,7 +1,14 @@
+import nodemailer from "nodemailer";
+
 type DemoEnvironment = {
-  RESEND_API_KEY?: string;
-  DEMO_REQUEST_RECIPIENT?: string;
+  HOSTINGER_SMTP_PASSWORD?: string;
 };
+
+type DemoTransport = {
+  sendMail(message: Record<string, unknown>): Promise<unknown>;
+};
+
+type DemoTransportFactory = (options: Record<string, unknown>) => DemoTransport;
 
 type DemoRequest = {
   nome?: unknown;
@@ -41,7 +48,9 @@ function validEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) && value.length <= 254;
 }
 
-export async function handleDemoRequest(request: Request, env: DemoEnvironment) {
+const defaultTransportFactory: DemoTransportFactory = (options) => nodemailer.createTransport(options);
+
+export async function handleDemoRequest(request: Request, env: DemoEnvironment, transportFactory = defaultTransportFactory) {
   if (request.method !== "POST") {
     return json({ ok: false, message: "Método não permitido." }, 405);
   }
@@ -78,9 +87,8 @@ export async function handleDemoRequest(request: Request, env: DemoEnvironment) 
     return json({ ok: false, message: "Confira os campos obrigatórios e tente novamente." }, 400);
   }
 
-  const apiKey = env.RESEND_API_KEY?.trim();
-  const recipient = env.DEMO_REQUEST_RECIPIENT?.trim();
-  if (!apiKey || !recipient || !validEmail(recipient)) {
+  const smtpPassword = env.HOSTINGER_SMTP_PASSWORD?.trim();
+  if (!smtpPassword) {
     console.error("Demo request endpoint is missing its e-mail configuration.");
     return json({ ok: false, message: "Não foi possível enviar agora. Tente novamente em instantes." }, 503);
   }
@@ -109,30 +117,35 @@ export async function handleDemoRequest(request: Request, env: DemoEnvironment) 
   }).map(([label, value]) => `<tr><th align="left" style="padding:8px 12px;border-bottom:1px solid #dbe7ee">${escapeHtml(label)}</th><td style="padding:8px 12px;border-bottom:1px solid #dbe7ee">${escapeHtml(value)}</td></tr>`).join("");
 
   try {
-    const response = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        authorization: `Bearer ${apiKey}`,
-        "content-type": "application/json",
+    const transporter = transportFactory({
+      host: "smtp.hostinger.com",
+      port: 465,
+      secure: true,
+      auth: {
+        user: "contato@dratos.com.br",
+        pass: smtpPassword,
       },
-      body: JSON.stringify({
-        from: "DRATOS <contato@dratos.com.br>",
-        to: [recipient],
-        reply_to: fields.email,
-        subject: `Solicitação de demonstração DRATOS — ${fields.empresa}`,
-        text: lines.join("\n"),
-        html: `<h1>Nova solicitação de demonstração</h1><table style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:14px">${rows}</table>`,
-      }),
+      tls: {
+        minVersion: "TLSv1.2",
+        servername: "smtp.hostinger.com",
+      },
+      connectionTimeout: 10_000,
+      greetingTimeout: 10_000,
+      socketTimeout: 20_000,
     });
 
-    if (!response.ok) {
-      console.error(`Resend rejected a demo request with status ${response.status}.`);
-      return json({ ok: false, message: "Não foi possível enviar agora. Tente novamente em instantes." }, 502);
-    }
+    await transporter.sendMail({
+      from: "DRATOS <contato@dratos.com.br>",
+      to: "contato@dratos.com.br",
+      replyTo: fields.email,
+      subject: `Solicitação de demonstração DRATOS — ${fields.empresa}`,
+      text: lines.join("\n"),
+      html: `<h1>Nova solicitação de demonstração</h1><table style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:14px">${rows}</table>`,
+    });
 
     return json({ ok: true, message: "Solicitação enviada com sucesso. Em breve entraremos em contato." });
   } catch {
-    console.error("Resend could not be reached while sending a demo request.");
+    console.error("SMTP could not send a demo request.");
     return json({ ok: false, message: "Não foi possível enviar agora. Tente novamente em instantes." }, 502);
   }
 }

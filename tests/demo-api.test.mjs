@@ -1,19 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-
-const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-workerUrl.searchParams.set("demo-test", `${process.pid}-${Date.now()}`);
-const { default: worker } = await import(workerUrl.href);
-
-const ctx = {
-  waitUntil() {},
-  passThroughOnException() {},
-};
+import { handleDemoRequest } from "../server/demo.ts";
 
 const baseEnv = {
-  ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) },
-  RESEND_API_KEY: "re_test_key",
-  DEMO_REQUEST_RECIPIENT: "internal@example.com",
+  HOSTINGER_SMTP_PASSWORD: "smtp-test-password",
 };
 
 const validPayload = {
@@ -28,63 +18,84 @@ const validPayload = {
   website: "",
 };
 
-test("POST /api/demo sends through Resend with client Reply-To", async () => {
-  const originalFetch = globalThis.fetch;
-  let resendRequest;
-  globalThis.fetch = async (input, init) => {
-    resendRequest = { input: String(input), init };
-    return Response.json({ id: "email_test" });
+function demoRequest(payload = validPayload) {
+  return new Request("http://localhost/api/demo", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+}
+
+test("POST /api/demo sends through Hostinger SMTP with client Reply-To", async () => {
+  let smtpOptions;
+  let message;
+  const transportFactory = (options) => {
+    smtpOptions = options;
+    return {
+      async sendMail(mail) {
+        message = mail;
+        return { messageId: "smtp-test" };
+      },
+    };
   };
 
-  try {
-    const response = await worker.fetch(new Request("http://localhost/api/demo", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(validPayload),
-    }), baseEnv, ctx);
+  const response = await handleDemoRequest(demoRequest(), baseEnv, transportFactory);
 
-    assert.equal(response.status, 200);
-    assert.equal((await response.json()).ok, true);
-    assert.equal(resendRequest.input, "https://api.resend.com/emails");
-    const message = JSON.parse(resendRequest.init.body);
-    assert.deepEqual(message.to, ["internal@example.com"]);
-    assert.equal(message.reply_to, validPayload.email);
-    assert.equal(message.from, "DRATOS <contato@dratos.com.br>");
-  } finally {
-    globalThis.fetch = originalFetch;
-  }
+  assert.equal(response.status, 200);
+  assert.equal((await response.json()).ok, true);
+  assert.equal(smtpOptions.host, "smtp.hostinger.com");
+  assert.equal(smtpOptions.port, 465);
+  assert.equal(smtpOptions.secure, true);
+  assert.equal(smtpOptions.auth.user, "contato@dratos.com.br");
+  assert.equal(smtpOptions.auth.pass, baseEnv.HOSTINGER_SMTP_PASSWORD);
+  assert.equal(message.to, "contato@dratos.com.br");
+  assert.equal(message.replyTo, validPayload.email);
+  assert.equal(message.from, "DRATOS <contato@dratos.com.br>");
+  assert.equal(message.subject, `Solicitação de demonstração DRATOS — ${validPayload.empresa}`);
 });
 
 test("POST /api/demo silently accepts the honeypot without sending", async () => {
-  const originalFetch = globalThis.fetch;
   let called = false;
-  globalThis.fetch = async () => {
-    called = true;
-    return Response.json({ id: "should-not-send" });
-  };
+  const response = await handleDemoRequest(
+    demoRequest({ ...validPayload, website: "https://spam.example" }),
+    baseEnv,
+    () => {
+      called = true;
+      return { sendMail: async () => ({}) };
+    },
+  );
 
-  try {
-    const response = await worker.fetch(new Request("http://localhost/api/demo", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ ...validPayload, website: "https://spam.example" }),
-    }), baseEnv, ctx);
-
-    assert.equal(response.status, 200);
-    assert.equal((await response.json()).ok, true);
-    assert.equal(called, false);
-  } finally {
-    globalThis.fetch = originalFetch;
-  }
+  assert.equal(response.status, 200);
+  assert.equal((await response.json()).ok, true);
+  assert.equal(called, false);
 });
 
 test("POST /api/demo rejects invalid customer data", async () => {
-  const response = await worker.fetch(new Request("http://localhost/api/demo", {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({ ...validPayload, email: "invalid" }),
-  }), baseEnv, ctx);
+  const response = await handleDemoRequest(demoRequest({ ...validPayload, email: "invalid" }), baseEnv);
 
   assert.equal(response.status, 400);
   assert.equal((await response.json()).ok, false);
+});
+
+test("POST /api/demo rejects missing SMTP configuration", async () => {
+  const response = await handleDemoRequest(demoRequest(), {});
+  const body = await response.json();
+
+  assert.equal(response.status, 503);
+  assert.equal(body.ok, false);
+  assert.equal(body.message, "Não foi possível enviar agora. Tente novamente em instantes.");
+});
+
+test("POST /api/demo handles SMTP failures without exposing credentials", async () => {
+  const response = await handleDemoRequest(
+    demoRequest(),
+    baseEnv,
+    () => ({ sendMail: async () => { throw new Error("SMTP rejected credentials"); } }),
+  );
+  const body = await response.json();
+
+  assert.equal(response.status, 502);
+  assert.equal(body.ok, false);
+  assert.equal(body.message, "Não foi possível enviar agora. Tente novamente em instantes.");
+  assert.equal(JSON.stringify(body).includes(baseEnv.HOSTINGER_SMTP_PASSWORD), false);
 });
