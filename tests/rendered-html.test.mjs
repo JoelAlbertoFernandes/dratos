@@ -1,10 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-const developmentPreviewMeta =
-  /<meta(?=[^>]*\bname=["']codex-preview["'])(?=[^>]*\bcontent=["']development["'])[^>]*>/i;
-
-test("renders development preview metadata", async () => {
+test("renders the DRATOS landing page", async () => {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
@@ -29,5 +26,22 @@ test("renders development preview metadata", async () => {
     response.headers.get("content-type") ?? "",
     /^text\/html\b/i,
   );
-  assert.match(await response.text(), developmentPreviewMeta);
+  const html = await response.text();
+  assert.match(
+    html,
+    /<title>DRATOS \| Governança Contratual Inteligente<\/title>/i,
+  );
+  assert.match(
+    html,
+    /href="#plataforma"[\s\S]*Plataforma[\s\S]*href="#dashboard"[\s\S]*Dashboard[\s\S]*href="#due-diligence"[\s\S]*Due Diligence[\s\S]*href="#rastreabilidade"[\s\S]*Rastreabilidade[\s\S]*href="#performance"[\s\S]*Performance[\s\S]*href="#seguranca"[\s\S]*Segurança/i,
+  );
+  assert.ok(html.indexOf("Veja a jornada") < html.indexOf('id="desafios"'));
+  assert.match(html, /id="plataforma"/i);
+  assert.match(html, /id="dashboard"/i);
+  assert.match(html, /id="due-diligence"/i);
+  assert.match(html, /id="rastreabilidade"/i);
+  assert.match(html, /dratos-due-diligence\.webp/i);
+  assert.match(html, /dratos-platform-structured\.webp/i);
+  assert.match(html, /dratos-traceability\.webp/i);
+  assert.doesNotMatch(html, /id="(?:riskai|visibilidade)"/i);
 });

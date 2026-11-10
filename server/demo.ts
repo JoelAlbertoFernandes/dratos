@@ -1,14 +1,6 @@
-import nodemailer from "nodemailer";
-
 type DemoEnvironment = {
-  HOSTINGER_SMTP_PASSWORD?: string;
+  HOSTINGER_MAIL_API_TOKEN?: string;
 };
-
-type DemoTransport = {
-  sendMail(message: Record<string, unknown>): Promise<unknown>;
-};
-
-type DemoTransportFactory = (options: Record<string, unknown>) => DemoTransport;
 
 type DemoRequest = {
   nome?: unknown;
@@ -22,10 +14,39 @@ type DemoRequest = {
   website?: unknown;
 };
 
+type MailboxCache = { resourceId?: string };
+type DemoDependencies = {
+  fetch?: typeof fetch;
+  mailboxCache?: MailboxCache;
+};
+
+type HostingerErrorBody = { code?: unknown };
+type HostingerMeBody = {
+  data?: {
+    mailboxes?: Array<{ resourceId?: unknown; address?: unknown }>;
+  };
+};
+
+const HOSTINGER_MAIL_API = "https://api.mail.hostinger.com";
+const MAILBOX_ADDRESS = "contato@dratos.com.br";
+const MAX_PAYLOAD_BYTES = 20_000;
+const MAIL_API_TIMEOUT_MS = 10_000;
+const defaultMailboxCache: MailboxCache = {};
 const jsonHeaders = {
   "content-type": "application/json; charset=utf-8",
   "cache-control": "no-store",
 };
+
+class MailApiError extends Error {
+  status: number;
+  code: string;
+
+  constructor(status: number, code: string, message = "Hostinger Mail API request failed") {
+    super(message);
+    this.status = status;
+    this.code = code;
+  }
+}
 
 function json(body: Record<string, unknown>, status = 200) {
   return new Response(JSON.stringify(body), { status, headers: jsonHeaders });
@@ -48,21 +69,74 @@ function validEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) && value.length <= 254;
 }
 
-const defaultTransportFactory: DemoTransportFactory = (options) => nodemailer.createTransport(options);
+async function errorCode(response: Response) {
+  try {
+    const body = await response.json() as HostingerErrorBody;
+    return typeof body.code === "string" ? body.code.slice(0, 120) : "UNKNOWN";
+  } catch {
+    return "UNKNOWN";
+  }
+}
 
-export async function handleDemoRequest(request: Request, env: DemoEnvironment, transportFactory = defaultTransportFactory) {
+async function resolveMailboxResourceId(
+  token: string,
+  apiFetch: typeof fetch,
+  cache: MailboxCache,
+  signal: AbortSignal,
+) {
+  if (cache.resourceId) return cache.resourceId;
+
+  const response = await apiFetch(`${HOSTINGER_MAIL_API}/api/v1/me`, {
+    headers: {
+      accept: "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    signal,
+  });
+
+  if (!response.ok) {
+    throw new MailApiError(response.status, await errorCode(response));
+  }
+
+  const body = await response.json() as HostingerMeBody;
+  const mailbox = body.data?.mailboxes?.find((candidate) =>
+    typeof candidate.address === "string" &&
+    candidate.address.toLowerCase() === MAILBOX_ADDRESS &&
+    typeof candidate.resourceId === "string" &&
+    /^AC[A-Za-z0-9]+$/.test(candidate.resourceId)
+  );
+
+  if (!mailbox || typeof mailbox.resourceId !== "string") {
+    throw new MailApiError(404, "MAILBOX_NOT_AUTHORIZED");
+  }
+
+  cache.resourceId = mailbox.resourceId;
+  return mailbox.resourceId;
+}
+
+export async function handleDemoRequest(
+  request: Request,
+  env: DemoEnvironment,
+  dependencies: DemoDependencies = {},
+) {
   if (request.method !== "POST") {
     return json({ ok: false, message: "Método não permitido." }, 405);
   }
 
-  const contentLength = Number(request.headers.get("content-length") ?? "0");
-  if (contentLength > 20_000) {
+  let rawBody: string;
+  try {
+    rawBody = await request.text();
+  } catch {
+    return json({ ok: false, message: "Solicitação inválida." }, 400);
+  }
+
+  if (new TextEncoder().encode(rawBody).byteLength > MAX_PAYLOAD_BYTES) {
     return json({ ok: false, message: "Solicitação inválida." }, 413);
   }
 
   let payload: DemoRequest;
   try {
-    payload = await request.json() as DemoRequest;
+    payload = JSON.parse(rawBody) as DemoRequest;
   } catch {
     return json({ ok: false, message: "Solicitação inválida." }, 400);
   }
@@ -87,65 +161,84 @@ export async function handleDemoRequest(request: Request, env: DemoEnvironment, 
     return json({ ok: false, message: "Confira os campos obrigatórios e tente novamente." }, 400);
   }
 
-  const smtpPassword = env.HOSTINGER_SMTP_PASSWORD?.trim();
-  if (!smtpPassword) {
-    console.error("Demo request endpoint is missing its e-mail configuration.");
+  const token = env.HOSTINGER_MAIL_API_TOKEN?.trim();
+  if (!token) {
+    console.error("Demo request endpoint is missing its Hostinger Mail API configuration.");
     return json({ ok: false, message: "Não foi possível enviar agora. Tente novamente em instantes." }, 503);
   }
 
-  const lines = [
-    `Nome: ${fields.nome}`,
-    `Empresa: ${fields.empresa}`,
-    `E-mail: ${fields.email}`,
-    `Telefone: ${fields.telefone}`,
-    `Interesse: ${fields.interesse}`,
-    `Data preferida: ${fields.data}`,
-    `Horário preferido: ${fields.horario}`,
+  const textBody = [
+    "Nova solicitação de demonstração DRATOS",
     "",
-    `Contexto: ${fields.mensagem}`,
-  ];
+    "Nome completo:", fields.nome,
+    "",
+    "Empresa:", fields.empresa,
+    "",
+    "E-mail:", fields.email,
+    "",
+    "Telefone / WhatsApp:", fields.telefone,
+    "",
+    "Principal interesse:", fields.interesse,
+    "",
+    "Data preferida:", fields.data,
+    "",
+    "Horário preferido:", fields.horario,
+    "",
+    "Contexto ou desafio atual:", fields.mensagem,
+  ].join("\n");
 
   const rows = Object.entries({
-    Nome: fields.nome,
+    "Nome completo": fields.nome,
     Empresa: fields.empresa,
-    "E-mail": fields.email,
-    Telefone: fields.telefone,
-    Interesse: fields.interesse,
+    "E-mail do prospect — responda para este endereço": fields.email,
+    "Telefone / WhatsApp": fields.telefone,
+    "Principal interesse": fields.interesse,
     "Data preferida": fields.data,
     "Horário preferido": fields.horario,
-    Contexto: fields.mensagem,
+    "Contexto ou desafio atual": fields.mensagem,
   }).map(([label, value]) => `<tr><th align="left" style="padding:8px 12px;border-bottom:1px solid #dbe7ee">${escapeHtml(label)}</th><td style="padding:8px 12px;border-bottom:1px solid #dbe7ee">${escapeHtml(value)}</td></tr>`).join("");
 
-  try {
-    const transporter = transportFactory({
-      host: "smtp.hostinger.com",
-      port: 465,
-      secure: true,
-      auth: {
-        user: "contato@dratos.com.br",
-        pass: smtpPassword,
-      },
-      tls: {
-        minVersion: "TLSv1.2",
-        servername: "smtp.hostinger.com",
-      },
-      connectionTimeout: 10_000,
-      greetingTimeout: 10_000,
-      socketTimeout: 20_000,
-    });
+  const apiFetch = dependencies.fetch ?? fetch;
+  const cache = dependencies.mailboxCache ?? defaultMailboxCache;
+  const signal = AbortSignal.timeout(MAIL_API_TIMEOUT_MS);
 
-    await transporter.sendMail({
-      from: "DRATOS <contato@dratos.com.br>",
-      to: "contato@dratos.com.br",
-      replyTo: fields.email,
-      subject: `Solicitação de demonstração DRATOS — ${fields.empresa}`,
-      text: lines.join("\n"),
-      html: `<h1>Nova solicitação de demonstração</h1><table style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:14px">${rows}</table>`,
-    });
+  try {
+    const mailboxResourceId = await resolveMailboxResourceId(token, apiFetch, cache, signal);
+    const response = await apiFetch(
+      `${HOSTINGER_MAIL_API}/api/v1/mailboxes/${encodeURIComponent(mailboxResourceId)}/send`,
+      {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          authorization: `Bearer ${token}`,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          to: [MAILBOX_ADDRESS],
+          displayName: "DRATOS",
+          subject: `Solicitação de demonstração DRATOS — ${fields.empresa}`,
+          text: textBody,
+          html: `<h1>Nova solicitação de demonstração DRATOS</h1><table style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:14px">${rows}</table>`,
+        }),
+        signal,
+      },
+    );
+
+    if (response.status !== 204) {
+      if ([401, 403, 404].includes(response.status)) delete cache.resourceId;
+      throw new MailApiError(response.status, await errorCode(response));
+    }
 
     return json({ ok: true, message: "Solicitação enviada com sucesso. Em breve entraremos em contato." });
-  } catch {
-    console.error("SMTP could not send a demo request.");
-    return json({ ok: false, message: "Não foi possível enviar agora. Tente novamente em instantes." }, 502);
+  } catch (error) {
+    if (error instanceof MailApiError) {
+      console.error("Hostinger Mail API request failed.", { status: error.status, code: error.code });
+      const status = error.status === 429 || error.status >= 500 ? 503 : 502;
+      return json({ ok: false, message: "Não foi possível enviar agora. Tente novamente em instantes." }, status);
+    }
+
+    const timedOut = error instanceof Error && error.name === "TimeoutError";
+    console.error(timedOut ? "Hostinger Mail API request timed out." : "Hostinger Mail API request could not be completed.");
+    return json({ ok: false, message: "Não foi possível enviar agora. Tente novamente em instantes." }, timedOut ? 504 : 502);
   }
 }

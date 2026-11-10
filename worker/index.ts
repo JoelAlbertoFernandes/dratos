@@ -6,7 +6,7 @@ import { handleDemoRequest } from "../server/demo";
 interface Env {
   ASSETS: Fetcher;
   DB: D1Database;
-  HOSTINGER_SMTP_PASSWORD?: string;
+  HOSTINGER_MAIL_API_TOKEN?: string;
   IMAGES: {
     input(stream: ReadableStream): {
       transform(options: Record<string, unknown>): {
