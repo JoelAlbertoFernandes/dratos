@@ -163,7 +163,7 @@ export default function Home() {
           <h1>
             Contratos conectados.
             <br />
-            <em>Decisões seguras.</em>
+            <em>Decisões </em><span className="accent-orange">seguras.</span>
           </h1>
           <p className="lead">
             A DRATOS transforma dados dispersos, aprovações e obrigações em uma
@@ -291,7 +291,7 @@ export default function Home() {
           </p>
           <h2>
             Da operação contratual
-            <br /> à <em>visão executiva.</em>
+            <br /> à <em>visão </em><span className="accent-orange">executiva.</span>
           </h2>
           <p>
             A DRATOS transforma dados contratuais em indicadores, alertas e
@@ -405,7 +405,7 @@ export default function Home() {
 
       <section className="performance-section" id="performance" aria-label="Performance contratual na DRATOS">
         <div className="performance-heading">
-          <div><p className="eyebrow"><span /> Performance contratual</p><h2>Do contrato assinado<br /><em>ao resultado comprovado.</em></h2></div>
+          <div><p className="eyebrow"><span /> Performance contratual</p><h2>Do contrato assinado<br /><em>ao resultado </em><span className="accent-orange">comprovado.</span></h2></div>
           <p>Acompanhe o desempenho real de contratos, fornecedores e obrigações em uma leitura contínua, comparável e sustentada por evidências.</p>
         </div>
         <div className="performance-board">
@@ -536,7 +536,7 @@ export default function Home() {
           <h2>
             Cada contrato deixa
             <br />
-            <em>uma história verificável.</em>
+            <em>uma história </em><span className="accent-orange">verificável.</span>
           </h2>
           <p>
             Documentos, decisões, aprovações e evidências convergem em uma linha
