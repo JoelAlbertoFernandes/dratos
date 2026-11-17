@@ -360,3 +360,19 @@ h1,h2,h3,h4,h5,h6,.answer-question,.poster b,.chapter-overlay strong,.security-s
 
 /* Version 25 — restrained cinematic hero and editorial orange words */
 .accent-orange{color:var(--dratos-orange)}
+
+/* Version 26 — scoped hero motion, investigative dossier and header logo scale */
+.hero-cinemagraph{position:absolute;z-index:0;inset:0;width:100%;height:100%;border:0;object-fit:cover;object-position:58% center;filter:saturate(.88) brightness(.72);pointer-events:none}
+.hero-photo-fallback{display:none;animation:none!important;transform:none!important}
+[data-theme="light"] .hero-cinemagraph{filter:saturate(.76) brightness(1.06)}
+.due-diligence-dossier{align-self:center;overflow:hidden;border:1px solid rgba(113,199,240,.34);border-radius:16px;padding:24px;color:#eef8fd;background:linear-gradient(145deg,#0c293d,#071925);box-shadow:0 42px 90px rgba(0,0,0,.38),inset 0 1px rgba(255,255,255,.05)}
+.due-diligence-dossier-head{padding:2px 2px 18px;border-bottom:1px solid rgba(126,188,221,.16)}
+.due-diligence-visual{position:relative;margin:18px 0 0;overflow:hidden;border:1px solid rgba(111,197,239,.24);border-radius:12px;background:#06131d}
+.due-diligence-visual img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+.due-diligence-visual figcaption{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;padding:10px;background:rgba(4,16,25,.94)}
+.due-diligence-visual figcaption span{display:grid;place-items:center;min-height:36px;border:1px solid rgba(126,188,221,.18);border-radius:7px;color:#a7cede;background:rgba(12,38,55,.78);font-size:7px;font-weight:700;letter-spacing:.035em;line-height:1.35;text-align:center}
+.brand img{width:257px}
+@media(max-width:1400px) and (min-width:1001px){.brand img{width:195px}}
+@media(max-width:1000px){.brand img{width:228px}.hero-cinemagraph{object-position:62% center}}
+@media(max-width:650px){.brand img{width:195px}.hero-cinemagraph{object-position:60% center}.due-diligence-dossier{padding:15px;border-radius:13px}.due-diligence-dossier-head{align-items:flex-start;flex-direction:column;gap:8px}.due-diligence-visual figcaption{grid-template-columns:repeat(2,1fr)}.due-diligence-visual figcaption span:last-child{grid-column:1/-1}}
+@media(prefers-reduced-motion:reduce){.hero-cinemagraph{display:none}.hero-photo-fallback{display:block}}

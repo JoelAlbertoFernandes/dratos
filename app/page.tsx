@@ -12,14 +12,6 @@ const chapters = [
   { time: 148, label: "Decisão executiva", index: "07" },
 ];
 
-const dueDiligenceViews = {
-  Cadastral: "Identificação e informações cadastrais disponíveis nas fontes habilitadas.",
-  Societário: "Estruturas e relações societárias organizadas para apoiar a leitura da contraparte.",
-  Processos: "Registros processuais disponíveis reunidos com contexto e evidências.",
-  Reputacional: "Sinais reputacionais disponíveis apresentados de forma estruturada.",
-  Compliance: "Evidências e pontos de atenção para apoiar a análise de conformidade.",
-} as const;
-
 export default function Home() {
   const [menu, setMenu] = useState(false);
   const [player, setPlayer] = useState(false);
@@ -28,12 +20,10 @@ export default function Home() {
   const [transition, setTransition] = useState(false);
   const [videoError, setVideoError] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
-  const [analysisTarget, setAnalysisTarget] = useState("");
-  const [analysisFocus, setAnalysisFocus] = useState<keyof typeof dueDiligenceViews>("Cadastral");
-  const [analysisPulse, setAnalysisPulse] = useState(0);
   const [submittingDemo, setSubmittingDemo] = useState(false);
   const [demoStatus, setDemoStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     if (!player && !demo) return;
@@ -53,20 +43,28 @@ export default function Home() {
     document.documentElement.dataset.theme = initial;
   }, []);
 
+  useEffect(() => {
+    const motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
+    const syncHeroMotion = () => {
+      const video = heroVideoRef.current;
+      if (!video) return;
+      if (motionPreference.matches) {
+        video.pause();
+        video.currentTime = 0;
+      } else {
+        void video.play().catch(() => undefined);
+      }
+    };
+    syncHeroMotion();
+    motionPreference.addEventListener("change", syncHeroMotion);
+    return () => motionPreference.removeEventListener("change", syncHeroMotion);
+  }, []);
+
   function toggleTheme() {
     const next = theme === "dark" ? "light" : "dark";
     setTheme(next);
     localStorage.setItem("dratos-theme", next);
     document.documentElement.dataset.theme = next;
-  }
-
-  function startDueDiligence() {
-    setAnalysisPulse((current) => current + 1);
-  }
-
-  function chooseDueDiligenceFocus(focus: keyof typeof dueDiligenceViews) {
-    setAnalysisFocus(focus);
-    setAnalysisPulse((current) => current + 1);
   }
 
   async function requestDemo(event: FormEvent<HTMLFormElement>) {
@@ -153,7 +151,21 @@ export default function Home() {
       </header>
 
       <section className="hero" id="inicio">
-        <div className="hero-photo" aria-hidden="true" />
+        <div className="hero-photo hero-photo-fallback" aria-hidden="true" />
+        <video
+          ref={heroVideoRef}
+          className="hero-cinemagraph"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/images/dratos-hero-corporativa-v10.png"
+          aria-hidden="true"
+          tabIndex={-1}
+        >
+          <source src="/media/dratos-hero-cinemagraph-v26.mp4" type="video/mp4" />
+        </video>
         <div className="hero-overlay" aria-hidden="true" />
         <div className="hero-glow" />
         <div className="hero-copy">
@@ -339,67 +351,29 @@ export default function Home() {
             DRATOS organiza os dados disponíveis nas fontes e integrações
             habilitadas para dar mais contexto à decisão.
           </p>
-          <div className="ai-query">
-            <label htmlFor="due-diligence-target">Quem você quer analisar?</label>
-            <div>
-              <input
-                id="due-diligence-target"
-                value={analysisTarget}
-                onChange={(e) => setAnalysisTarget(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && startDueDiligence()}
-                placeholder="Empresa / CNPJ / CPF"
-              />
-              <button onClick={startDueDiligence}>Iniciar análise</button>
-            </div>
-            <p className="query-suggestions">
-              <span>Dimensões:</span>
-              {(Object.keys(dueDiligenceViews) as Array<keyof typeof dueDiligenceViews>).map((focus) => (
-                <button
-                  key={focus}
-                  className={analysisFocus === focus ? "active" : ""}
-                  onClick={() => chooseDueDiligenceFocus(focus)}
-                >
-                  {focus}
-                </button>
-              ))}
-            </p>
-          </div>
         </div>
-        <div className="answer-dashboard">
-          <div className="risk-head">
+        <div className="due-diligence-dossier">
+          <div className="risk-head due-diligence-dossier-head">
             <div>
               <span>◇</span>
               <b>Dossiê de contraparte</b>
             </div>
             <small>DEMONSTRAÇÃO CONCEITUAL</small>
           </div>
-          <div
-            key={analysisPulse}
-            className="answer-result due-diligence-result"
-            role="status"
-            aria-live="polite"
-          >
-            <p className="answer-question">{analysisTarget.trim() || "Empresa / CNPJ / CPF"}</p>
-            <div className="due-diligence-focus">
-              <small>DIMENSÃO SELECIONADA</small>
-              <strong>{analysisFocus}</strong>
-              <p>{dueDiligenceViews[analysisFocus]}</p>
-            </div>
-            <div className="evidence-row">
-              <span>Cadastro</span>
-              <span>Relações</span>
-              <span>Evidências</span>
-            </div>
-            <small className="concept-note">Interface ilustrativa. Nenhuma consulta real é realizada nesta demonstração.</small>
-          </div>
-          <div className="riskai-product">
+          <figure className="due-diligence-visual">
             <img
-              src="/media/showcase/dratos-due-diligence.webp"
-              alt="Ilustração conceitual de um dossiê corporativo de Due Diligence com evidências e relações societárias"
+              src="/media/showcase/dratos-due-diligence-v26.png"
+              alt="Dossiê corporativo de Due Diligence com documentos, evidências, vínculos societários, compliance e sinais de risco"
               loading="lazy"
             />
-            <span>CADASTRO · RELAÇÕES · EVIDÊNCIAS</span>
-          </div>
+            <figcaption>
+              <span>Cadastro</span>
+              <span>Relações societárias</span>
+              <span>Evidências</span>
+              <span>Compliance</span>
+              <span>Risco</span>
+            </figcaption>
+          </figure>
         </div>
       </section>
 

@@ -40,7 +40,9 @@ test("renders the DRATOS landing page", async () => {
   assert.match(html, /id="dashboard"/i);
   assert.match(html, /id="due-diligence"/i);
   assert.match(html, /id="rastreabilidade"/i);
-  assert.match(html, /dratos-due-diligence\.webp/i);
+  assert.match(html, /dratos-due-diligence-v26\.png/i);
+  assert.match(html, /dratos-hero-cinemagraph-v26\.mp4/i);
+  assert.doesNotMatch(html, /Quem você quer analisar\?|Iniciar análise|Empresa \/ CNPJ \/ CPF/i);
   assert.match(html, /dratos-platform-structured\.webp/i);
   assert.match(html, /dratos-traceability\.webp/i);
   assert.doesNotMatch(html, /id="(?:riskai|visibilidade)"/i);
